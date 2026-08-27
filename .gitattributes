@@ -22,3 +22,11 @@
 *.webm filter=lfs diff=lfs merge=lfs -text
 *.fbx filter=lfs diff=lfs merge=lfs -text
 *.mb filter=lfs diff=lfs merge=lfs -text
+
+* text=auto
+
+*.unity  eol=lf
+*.prefab eol=lf
+*.meta   eol=lf
+*.asset  eol=lf
+
