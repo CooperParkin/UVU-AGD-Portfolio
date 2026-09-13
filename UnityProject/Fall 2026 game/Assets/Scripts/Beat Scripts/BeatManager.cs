@@ -43,6 +43,7 @@ public class BeatManager : MonoBehaviour
     public float Bpm => bpm;
     public int CurrentBeat => beatCount;
     public bool IsRunning => isRunning;
+    public double StartDspTime { get; private set; }
 
     private void Awake()
     {
@@ -75,6 +76,7 @@ public class BeatManager : MonoBehaviour
         beatCount = 0;
 
         double startDspTime = AudioSettings.dspTime + startOffsetSeconds;
+        StartDspTime = startDspTime;
 
         if (musicSource != null)
         {

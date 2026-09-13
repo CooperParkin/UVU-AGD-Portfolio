@@ -1113,7 +1113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BeatEventTrigger
   triggerEveryNBeats: 2
-  beatOffset: 1
+  beatOffset: 2
   OnTrigger:
     m_PersistentCalls:
       m_Calls:
@@ -1358,7 +1358,7 @@ Transform:
   m_GameObject: {fileID: 517717528}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.42, y: 0, z: 0}
+  m_LocalPosition: {x: -6.49, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2326,7 +2326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BeatManager
   bpm: 104
   musicSource: {fileID: 704531582}
-  startOffsetSeconds: 0
+  startOffsetSeconds: 0.25
   playOnStart: 1
   OnBeat:
     m_PersistentCalls:
