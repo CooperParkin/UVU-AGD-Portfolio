@@ -39,4 +39,16 @@ public class HeartPickup : MonoBehaviour, IZoneInteractable
 
         Destroy(gameObject);
     }
+
+    public void OnLeftAction()
+    {
+        // Left/right currently have no special behavior for hearts:
+        // just destroy it with no healing.
+        Destroy(gameObject);
+    }
+
+    public void OnRightAction()
+    {
+        Destroy(gameObject);
+    }
 }

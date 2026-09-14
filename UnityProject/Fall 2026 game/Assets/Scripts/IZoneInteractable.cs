@@ -10,4 +10,10 @@ public interface IZoneInteractable
 
     /// <summary>Called when the player presses/swipes Down while this object is in the zone.</summary>
     void OnDownAction();
+
+    /// <summary>Called when the player presses/swipes Left while this object is in the zone.</summary>
+    void OnLeftAction();
+
+    /// <summary>Called when the player presses/swipes Right while this object is in the zone.</summary>
+    void OnRightAction();
 }

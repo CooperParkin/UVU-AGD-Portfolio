@@ -65,6 +65,26 @@ public class HitZone : MonoBehaviour
         return true;
     }
 
+    /// <summary>Calls OnLeftAction() on whatever's currently in the zone. Returns true if something was there.</summary>
+    public bool TryLeft()
+    {
+        IZoneInteractable target = GetCurrentTarget();
+        if (target == null) return false;
+
+        target.OnLeftAction();
+        return true;
+    }
+
+    /// <summary>Calls OnRightAction() on whatever's currently in the zone. Returns true if something was there.</summary>
+    public bool TryRight()
+    {
+        IZoneInteractable target = GetCurrentTarget();
+        if (target == null) return false;
+
+        target.OnRightAction();
+        return true;
+    }
+
     private IZoneInteractable GetCurrentTarget()
     {
         // Clean up any destroyed/null entries before checking.

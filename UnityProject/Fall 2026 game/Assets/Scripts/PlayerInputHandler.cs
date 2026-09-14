@@ -6,30 +6,32 @@ using Finger = UnityEngine.InputSystem.EnhancedTouch.Finger;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 /// <summary>
-/// Handles the only two player actions: Up and Down. Reads keyboard arrow
-/// keys via the New Input System, and swipe up/down via touch (with proper
-/// per-finger tracking for multi-touch). Routes either input to the single
-/// universal HitZone.
+/// Handles the player's four directional actions: Up, Down, Left, Right.
+/// Reads keyboard arrow keys via the New Input System, and swipes via touch
+/// (with proper per-finger tracking for multi-touch). Routes whichever
+/// direction was input to the single universal HitZone.
 ///
-/// Up and Down requests are collected for the whole frame from every
-/// source (keyboard, every finger) and resolved once at the end of the
-/// frame: if both were requested, neither fires. This prevents cheesing
-/// a single zone target with a simultaneous up+down input, whether from
-/// two keys, two fingers, or a mix of both.
+/// All directions requested in a frame (from keyboard, every finger, or a
+/// mix) are collected and resolved once at the end of the frame: only if
+/// exactly one direction was requested does it fire. Two or more
+/// simultaneous directions cancel each other out, closing off cheesing a
+/// single zone target with multiple inputs at once.
 ///
 /// Requires the Input System package, and Project Settings > Player >
 /// Active Input Handling set to "Input System Package (New)" or "Both".
 /// </summary>
 public class PlayerInputHandler : MonoBehaviour
 {
+    private enum SwipeDirection { None, Up, Down, Left, Right }
+
     [Header("Zone")]
     [SerializeField] private HitZone zone;
 
     [Header("Swipe Settings")]
-    [Tooltip("Minimum vertical distance (in pixels) a touch must move to count as a swipe.")]
+    [Tooltip("Minimum distance (in pixels) a touch must move to count as a swipe.")]
     [SerializeField] private float minSwipeDistance = 50f;
-    [Tooltip("How much more vertical than horizontal movement is required, to avoid diagonal swipes misfiring.")]
-    [SerializeField] private float verticalDominanceRatio = 1.5f;
+    [Tooltip("How much more the dominant axis must move than the other axis, to avoid diagonal swipes misfiring.")]
+    [SerializeField] private float axisDominanceRatio = 1.5f;
 
     // Tracks each finger's start position independently by finger index,
     // so simultaneous multi-touch swipes don't clobber each other's data.
@@ -39,6 +41,8 @@ public class PlayerInputHandler : MonoBehaviour
     // in LateUpdate after everything for the frame has been gathered.
     private bool upRequested;
     private bool downRequested;
+    private bool leftRequested;
+    private bool rightRequested;
 
     private void OnEnable()
     {
@@ -64,36 +68,33 @@ public class PlayerInputHandler : MonoBehaviour
     {
         // Resolve once per frame, after keyboard (Update) and any touch
         // events for this frame have all had a chance to set their flags.
-        if (upRequested && downRequested)
+        int requestCount = (upRequested ? 1 : 0) + (downRequested ? 1 : 0)
+                          + (leftRequested ? 1 : 0) + (rightRequested ? 1 : 0);
+
+        if (requestCount == 1)
         {
-            // Simultaneous input from any combination of sources: ignore both.
+            if (upRequested) zone?.TryUp();
+            else if (downRequested) zone?.TryDown();
+            else if (leftRequested) zone?.TryLeft();
+            else if (rightRequested) zone?.TryRight();
         }
-        else if (upRequested)
-        {
-            zone?.TryUp();
-        }
-        else if (downRequested)
-        {
-            zone?.TryDown();
-        }
+        // requestCount == 0: nothing happened. requestCount > 1: conflicting
+        // simultaneous input, ignore all of it.
 
         upRequested = false;
         downRequested = false;
+        leftRequested = false;
+        rightRequested = false;
     }
 
     private void HandleKeyboardInput()
     {
         if (Keyboard.current == null) return;
 
-        if (Keyboard.current.upArrowKey.wasPressedThisFrame)
-        {
-            upRequested = true;
-        }
-
-        if (Keyboard.current.downArrowKey.wasPressedThisFrame)
-        {
-            downRequested = true;
-        }
+        if (Keyboard.current.upArrowKey.wasPressedThisFrame) upRequested = true;
+        if (Keyboard.current.downArrowKey.wasPressedThisFrame) downRequested = true;
+        if (Keyboard.current.leftArrowKey.wasPressedThisFrame) leftRequested = true;
+        if (Keyboard.current.rightArrowKey.wasPressedThisFrame) rightRequested = true;
     }
 
     private void HandleFingerDown(Finger finger)
@@ -109,19 +110,37 @@ public class PlayerInputHandler : MonoBehaviour
         }
         fingerStartPositions.Remove(finger.index);
 
-        Vector2 endPos = finger.screenPosition;
-        Vector2 delta = endPos - startPos;
+        Vector2 delta = finger.screenPosition - startPos;
+        SwipeDirection direction = ClassifySwipe(delta);
 
-        if (Mathf.Abs(delta.y) < minSwipeDistance) return;
-        if (Mathf.Abs(delta.y) < Mathf.Abs(delta.x) * verticalDominanceRatio) return;
+        switch (direction)
+        {
+            case SwipeDirection.Up: upRequested = true; break;
+            case SwipeDirection.Down: downRequested = true; break;
+            case SwipeDirection.Left: leftRequested = true; break;
+            case SwipeDirection.Right: rightRequested = true; break;
+        }
+    }
 
-        if (delta.y > 0f)
+    private SwipeDirection ClassifySwipe(Vector2 delta)
+    {
+        float absX = Mathf.Abs(delta.x);
+        float absY = Mathf.Abs(delta.y);
+
+        bool verticalDominant = absY > absX * axisDominanceRatio;
+        bool horizontalDominant = absX > absY * axisDominanceRatio;
+
+        if (verticalDominant && absY >= minSwipeDistance)
         {
-            upRequested = true;
+            return delta.y > 0f ? SwipeDirection.Up : SwipeDirection.Down;
         }
-        else
+
+        if (horizontalDominant && absX >= minSwipeDistance)
         {
-            downRequested = true;
+            return delta.x > 0f ? SwipeDirection.Right : SwipeDirection.Left;
         }
+
+        // Too short, or too diagonal to confidently classify.
+        return SwipeDirection.None;
     }
 }
