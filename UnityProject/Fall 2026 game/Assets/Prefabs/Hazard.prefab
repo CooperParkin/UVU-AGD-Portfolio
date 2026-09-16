@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 2819377367821499022}
   - component: {fileID: 6323341873314306673}
   - component: {fileID: 5531117390800463914}
+  - component: {fileID: 1632284249318504088}
   - component: {fileID: 7391590636579432756}
-  - component: {fileID: -1475729236051947643}
   m_Layer: 0
-  m_Name: Heart
+  m_Name: Hazard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +69,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 05af376fbffdc2b4999a7eff6015e331, type: 2}
+  - {fileID: 2100000, guid: 66598c227f2ac4940aea42413155f65c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -114,6 +114,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1632284249318504088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8731475555280379874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc7939fd1fac6c448d243782940d52e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HazardPickup
+  damageAmount: 1
 --- !u!114 &7391590636579432756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,16 +142,3 @@ MonoBehaviour:
   speed: 5
   destroyPastX: 1
   destroyXThreshold: -12
---- !u!114 &-1475729236051947643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8731475555280379874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3410d7759b1c61d4990c78a0f9c6ad29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HeartPickup
-  healAmount: 1

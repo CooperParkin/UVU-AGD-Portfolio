@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -57,12 +58,25 @@ public class BeatManager : MonoBehaviour
         RecalculateSecPerBeat();
     }
 
+    [Header("Startup Stabilization")]
+    [Tooltip("Real-time delay (seconds, unaffected by Time.timeScale) before the beat clock starts. Makes the lead-in identical every time the scene loads — first launch or a mid-game reset — rather than depending on how long any startup hitch happens to last.")]
+    [SerializeField] private float startupStabilizationDelay = 0.1f;
+
     private void Start()
     {
         if (playOnStart)
         {
-            StartClock();
+            StartCoroutine(StartClockAfterStabilization());
         }
+    }
+
+    private System.Collections.IEnumerator StartClockAfterStabilization()
+    {
+        // A fixed real-time wait (not frame-based) so this is reproducible
+        // every time: identical on the very first play and on every scene
+        // reload afterward, regardless of whether a hitch happens to occur.
+        yield return new WaitForSecondsRealtime(startupStabilizationDelay);
+        StartClock();
     }
 
     private void RecalculateSecPerBeat()
@@ -108,14 +122,19 @@ public class BeatManager : MonoBehaviour
     {
         if (!isRunning) return;
 
-        // Compare against the absolute audio clock rather than accumulating
-        // Time.deltaTime, so timing never drifts even over a long song.
-        // The while loop (not "if") covers rare frame hitches that skip a beat.
-        while (AudioSettings.dspTime >= nextBeatDspTime)
+        double now = AudioSettings.dspTime;
+        if (now >= nextBeatDspTime)
         {
+            // If a startup hitch or frame stall meant more than one beat's
+            // worth of time passed, catch beatCount up but only invoke
+            // OnBeat once for the current beat, instead of bursting through
+            // every missed beat in this one frame.
+            double missedBeats = Math.Floor((now - nextBeatDspTime) / secPerBeat) + 1;
+            beatCount += (int)missedBeats - 1;
+
             OnBeat?.Invoke(beatCount);
             beatCount++;
-            nextBeatDspTime += secPerBeat;
+            nextBeatDspTime += missedBeats * secPerBeat;
         }
     }
 }

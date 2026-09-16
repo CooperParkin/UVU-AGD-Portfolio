@@ -91,10 +91,23 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (Keyboard.current == null) return;
 
-        if (Keyboard.current.upArrowKey.wasPressedThisFrame) upRequested = true;
-        if (Keyboard.current.downArrowKey.wasPressedThisFrame) downRequested = true;
-        if (Keyboard.current.leftArrowKey.wasPressedThisFrame) leftRequested = true;
-        if (Keyboard.current.rightArrowKey.wasPressedThisFrame) rightRequested = true;
+        bool isGameOver = GameOverManager.Instance != null && GameOverManager.Instance.IsGameOver;
+
+        if (!isGameOver)
+        {
+            if (Keyboard.current.upArrowKey.wasPressedThisFrame) upRequested = true;
+            if (Keyboard.current.downArrowKey.wasPressedThisFrame) downRequested = true;
+            if (Keyboard.current.leftArrowKey.wasPressedThisFrame) leftRequested = true;
+            if (Keyboard.current.rightArrowKey.wasPressedThisFrame) rightRequested = true;
+        }
+
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            if (isGameOver)
+            {
+                GameOverManager.Instance.RestartScene();
+            }
+        }
     }
 
     private void HandleFingerDown(Finger finger)
@@ -109,6 +122,8 @@ public class PlayerInputHandler : MonoBehaviour
             return;
         }
         fingerStartPositions.Remove(finger.index);
+
+        if (GameOverManager.Instance != null && GameOverManager.Instance.IsGameOver) return;
 
         Vector2 delta = finger.screenPosition - startPos;
         SwipeDirection direction = ClassifySwipe(delta);
