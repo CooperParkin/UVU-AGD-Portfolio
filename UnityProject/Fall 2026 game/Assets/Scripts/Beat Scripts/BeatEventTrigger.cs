@@ -75,10 +75,7 @@ public class BeatEventTrigger : MonoBehaviour
         // If real time has already passed since the intended first trigger
         // (e.g. a startup hitch, or enabling mid-song), snap forward to the
         // most recent interval boundary that's already due — not one cycle
-        // further. This lands on exactly one well-defined moment for
-        // Update() to fire, rather than leaving it stale (which could let
-        // a jagged hitch cause two fires close together) or skipping an
-        // extra cycle (which would delay the legitimate first trigger).
+        // further.
         double now = AudioSettings.dspTime;
         double elapsed = now - nextTriggerDspTime;
         if (elapsed > 0)

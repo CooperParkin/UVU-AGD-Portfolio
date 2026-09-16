@@ -1113,7 +1113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BeatEventTrigger
   triggerEveryNBeats: 2
-  beatOffset: 0
+  beatOffset: 2
   OnTrigger:
     m_PersistentCalls:
       m_Calls:
@@ -2721,7 +2721,7 @@ MonoBehaviour:
   OnBeat:
     m_PersistentCalls:
       m_Calls: []
-  startupStabilizationDelay: 0.1
+  startupStabilizationDelay: 1
 --- !u!4 &1602393012
 Transform:
   m_ObjectHideFlags: 0

@@ -72,10 +72,25 @@ public class BeatManager : MonoBehaviour
 
     private System.Collections.IEnumerator StartClockAfterStabilization()
     {
-        // A fixed real-time wait (not frame-based) so this is reproducible
-        // every time: identical on the very first play and on every scene
-        // reload afterward, regardless of whether a hitch happens to occur.
+        // Baseline real-time wait first.
         yield return new WaitForSecondsRealtime(startupStabilizationDelay);
+
+        // Then actively wait for several consecutive fast/stable frames.
+        // A fixed delay alone isn't enough — a hitch can land right after
+        // it ends (as seen in testing: the frame immediately after
+        // StartClock() ran took ~0.5 real seconds on its own). Requiring
+        // consecutive stable frames means we only anchor the beat grid once
+        // the engine has actually settled, regardless of when exactly a
+        // stall happens to occur.
+        const int stableFramesNeeded = 5;
+        const float maxAcceptableFrameTime = 0.05f; // 50ms (i.e. faster than 20fps)
+        int stableCount = 0;
+        while (stableCount < stableFramesNeeded)
+        {
+            yield return null;
+            stableCount = Time.unscaledDeltaTime <= maxAcceptableFrameTime ? stableCount + 1 : 0;
+        }
+
         StartClock();
     }
 
