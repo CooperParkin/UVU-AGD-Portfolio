@@ -15,13 +15,14 @@ MonoBehaviour:
   topLane:
     prefabPool:
     - {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
-    spawnChance: 0.3
+    spawnChance: 0.15
   middleLane:
     prefabPool:
     - {fileID: 8731475555280379874, guid: 428cb0a5531c4c0468e7a5e0420830e8, type: 3}
+    - {fileID: 8731475555280379874, guid: dac0ee958be4b364e88aeb6ce873e454, type: 3}
     spawnChance: 0.5
   bottomLane:
     prefabPool:
     - {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
-    spawnChance: 0.3
-  beatsPerSpawnCheck: 2
+    spawnChance: 0.15
+  beatsPerSpawnCheck: 1
