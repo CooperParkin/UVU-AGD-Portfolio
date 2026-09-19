@@ -2,14 +2,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
+/// A single prefab option within a lane's pool, with a relative weight
+/// controlling how often it's picked compared to the pool's other options.
+/// </summary>
+[System.Serializable]
+public class WeightedPrefab
+{
+    public GameObject prefab;
+
+    [Min(0.01f)]
+    [Tooltip("Relative likelihood of this prefab being picked vs. others in the same pool. E.g. a weight of 3 is picked 3x as often as a weight of 1. Not a percentage — only relative to the other weights in this pool.")]
+    public float weight = 1f;
+}
+
+/// <summary>
 /// Rules for one lane's random spawning in endless mode: which prefabs can
-/// appear there, and how often something spawns at all.
+/// appear there (each with its own relative weight), and how often
+/// something spawns at all.
 /// </summary>
 [System.Serializable]
 public class LanePool
 {
-    [Tooltip("Prefabs that can randomly spawn in this lane. Leave empty to never spawn anything here (e.g. a lane you don't want active in this endless config).")]
-    public List<GameObject> prefabPool = new List<GameObject>();
+    [Tooltip("Weighted prefab options for this lane. Leave empty to never spawn anything here (e.g. a lane you don't want active in this endless config).")]
+    public List<WeightedPrefab> prefabPool = new List<WeightedPrefab>();
 
     [Range(0f, 1f)]
     [Tooltip("Chance (0-1) that this lane spawns something at each spawn check. Lower values create more gaps/empty lanes.")]

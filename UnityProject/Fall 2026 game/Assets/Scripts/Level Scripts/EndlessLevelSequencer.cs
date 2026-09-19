@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -88,7 +89,43 @@ public class EndlessLevelSequencer : MonoBehaviour
         if (lane == null || lane.prefabPool == null || lane.prefabPool.Count == 0) return;
         if (UnityEngine.Random.value > lane.spawnChance) return;
 
-        GameObject prefab = lane.prefabPool[UnityEngine.Random.Range(0, lane.prefabPool.Count)];
+        GameObject prefab = PickWeightedPrefab(lane.prefabPool);
+        if (prefab == null) return;
+
         BeatSyncUtility.SpawnSynced(prefab, spawnPoint, arrivalLineTransform, beatsLeadTime);
+    }
+
+    private GameObject PickWeightedPrefab(List<WeightedPrefab> pool)
+    {
+        float totalWeight = 0f;
+        foreach (WeightedPrefab entry in pool)
+        {
+            if (entry.prefab != null)
+            {
+                totalWeight += Mathf.Max(0f, entry.weight);
+            }
+        }
+
+        if (totalWeight <= 0f) return null;
+
+        float roll = UnityEngine.Random.value * totalWeight;
+        float cumulative = 0f;
+        foreach (WeightedPrefab entry in pool)
+        {
+            if (entry.prefab == null) continue;
+
+            cumulative += Mathf.Max(0f, entry.weight);
+            if (roll <= cumulative)
+            {
+                return entry.prefab;
+            }
+        }
+
+        // Fallback for floating-point edge cases at the boundary.
+        for (int i = pool.Count - 1; i >= 0; i--)
+        {
+            if (pool[i].prefab != null) return pool[i].prefab;
+        }
+        return null;
     }
 }
