@@ -92,8 +92,9 @@ public class PlayerInputHandler : MonoBehaviour
         if (Keyboard.current == null) return;
 
         bool isGameOver = GameOverManager.Instance != null && GameOverManager.Instance.IsGameOver;
+        bool isPaused = PauseManager.Instance != null && PauseManager.Instance.IsPaused;
 
-        if (!isGameOver)
+        if (!isGameOver && !isPaused)
         {
             if (Keyboard.current.upArrowKey.wasPressedThisFrame) upRequested = true;
             if (Keyboard.current.downArrowKey.wasPressedThisFrame) downRequested = true;
@@ -107,6 +108,14 @@ public class PlayerInputHandler : MonoBehaviour
             {
                 GameOverManager.Instance.RestartScene();
             }
+        }
+
+        // Pause toggling is allowed regardless of pause state (so you can
+        // un-pause), but not during game over — spacebar/restart is the
+        // only valid action there.
+        if (Keyboard.current.escapeKey.wasPressedThisFrame && !isGameOver)
+        {
+            PauseManager.Instance?.TogglePause();
         }
     }
 
@@ -123,7 +132,9 @@ public class PlayerInputHandler : MonoBehaviour
         }
         fingerStartPositions.Remove(finger.index);
 
-        if (GameOverManager.Instance != null && GameOverManager.Instance.IsGameOver) return;
+        bool isGameOver = GameOverManager.Instance != null && GameOverManager.Instance.IsGameOver;
+        bool isPaused = PauseManager.Instance != null && PauseManager.Instance.IsPaused;
+        if (isGameOver || isPaused) return;
 
         Vector2 delta = finger.screenPosition - startPos;
         SwipeDirection direction = ClassifySwipe(delta);

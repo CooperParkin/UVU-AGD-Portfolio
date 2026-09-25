@@ -44,7 +44,7 @@ public class EndlessLevelSequencer : MonoBehaviour
             if (!isScheduled) return;
         }
 
-        double now = AudioSettings.dspTime;
+        double now = PauseManager.CurrentDspTime;
         if (now >= nextCheckDspTime)
         {
             PerformSpawnCheck();
@@ -66,7 +66,7 @@ public class EndlessLevelSequencer : MonoBehaviour
 
         nextCheckDspTime = BeatManager.Instance.StartDspTime + (beatOffset * secPerBeat);
 
-        double now = AudioSettings.dspTime;
+        double now = PauseManager.CurrentDspTime;
         double elapsed = now - nextCheckDspTime;
         if (elapsed > 0)
         {

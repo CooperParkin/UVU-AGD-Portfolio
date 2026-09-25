@@ -23,6 +23,8 @@ MonoBehaviour:
       weight: 3
     - prefab: {fileID: 8731475555280379874, guid: dac0ee958be4b364e88aeb6ce873e454, type: 3}
       weight: 1
+    - prefab: {fileID: 8731475555280379874, guid: 5025dc124b32b8f47a7132018dbd3572, type: 3}
+      weight: 1
     spawnChance: 0.5
   bottomLane:
     prefabPool:

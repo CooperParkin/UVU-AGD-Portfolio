@@ -65,7 +65,7 @@ public class LevelSequencer : MonoBehaviour
         if (sortedEntries == null || nextEntryIndex >= sortedEntries.Count) return;
 
         double secPerBeat = 60.0 / BeatManager.Instance.Bpm;
-        double now = AudioSettings.dspTime;
+        double now = PauseManager.CurrentDspTime;
 
         // Fire every entry that's due. Unlike a repeating BeatEventTrigger,
         // these are unique, hand-placed level entries, not an interval to

@@ -45,7 +45,7 @@ public class BeatEventTrigger : MonoBehaviour
             if (!isScheduled) return;
         }
 
-        double now = AudioSettings.dspTime;
+        double now = PauseManager.CurrentDspTime;
         if (now >= nextTriggerDspTime)
         {
             OnTrigger?.Invoke();
@@ -76,7 +76,7 @@ public class BeatEventTrigger : MonoBehaviour
         // (e.g. a startup hitch, or enabling mid-song), snap forward to the
         // most recent interval boundary that's already due — not one cycle
         // further.
-        double now = AudioSettings.dspTime;
+        double now = PauseManager.CurrentDspTime;
         double elapsed = now - nextTriggerDspTime;
         if (elapsed > 0)
         {

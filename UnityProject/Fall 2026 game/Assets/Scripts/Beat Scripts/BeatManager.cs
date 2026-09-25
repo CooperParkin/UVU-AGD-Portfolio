@@ -104,13 +104,13 @@ public class BeatManager : MonoBehaviour
     {
         beatCount = 0;
 
-        double startDspTime = AudioSettings.dspTime + startOffsetSeconds;
+        double startDspTime = PauseManager.CurrentDspTime + startOffsetSeconds;
         StartDspTime = startDspTime;
 
         if (musicSource != null)
         {
             musicSource.Stop();
-            musicSource.PlayScheduled(startDspTime);
+            musicSource.PlayScheduled(AudioSettings.dspTime + startOffsetSeconds);
         }
 
         nextBeatDspTime = startDspTime;
@@ -121,6 +121,24 @@ public class BeatManager : MonoBehaviour
     public void StopClock()
     {
         isRunning = false;
+    }
+
+    /// <summary>Pauses the music in place (preserving playback position). Called by PauseManager.</summary>
+    public void PauseMusic()
+    {
+        if (musicSource != null && musicSource.isPlaying)
+        {
+            musicSource.Pause();
+        }
+    }
+
+    /// <summary>Resumes the music from where it was paused. Called by PauseManager.</summary>
+    public void ResumeMusic()
+    {
+        if (musicSource != null)
+        {
+            musicSource.UnPause();
+        }
     }
 
     /// <summary>
@@ -137,7 +155,7 @@ public class BeatManager : MonoBehaviour
     {
         if (!isRunning) return;
 
-        double now = AudioSettings.dspTime;
+        double now = PauseManager.CurrentDspTime;
         if (now >= nextBeatDspTime)
         {
             // If a startup hitch or frame stall meant more than one beat's
