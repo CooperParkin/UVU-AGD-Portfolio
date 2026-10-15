@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Finger = UnityEngine.InputSystem.EnhancedTouch.Finger;
@@ -26,6 +27,12 @@ public class PlayerInputHandler : MonoBehaviour
 
     [Header("Zone")]
     [SerializeField] private HitZone zone;
+
+    [Header("Input Events")]
+    [Tooltip("Fired when a clean Up input is accepted (key or swipe), whether or not anything is in the zone. Wire Animator.SetTrigger here.")]
+    public UnityEvent OnUpInput;
+    [Tooltip("Fired when a clean Down input is accepted (key or swipe), whether or not anything is in the zone. Wire Animator.SetTrigger here.")]
+    public UnityEvent OnDownInput;
 
     [Header("Swipe Settings")]
     [Tooltip("Minimum distance (in pixels) a touch must move to count as a swipe.")]
@@ -73,8 +80,16 @@ public class PlayerInputHandler : MonoBehaviour
 
         if (requestCount == 1)
         {
-            if (upRequested) zone?.TryUp();
-            else if (downRequested) zone?.TryDown();
+            if (upRequested)
+            {
+                OnUpInput?.Invoke();
+                zone?.TryUp();
+            }
+            else if (downRequested)
+            {
+                OnDownInput?.Invoke();
+                zone?.TryDown();
+            }
             else if (leftRequested) zone?.TryLeft();
             else if (rightRequested) zone?.TryRight();
         }
