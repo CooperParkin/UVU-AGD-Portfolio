@@ -970,6 +970,8 @@ MonoBehaviour:
   animator: {fileID: 161810757}
   rollUpTrigger: RollUp
   rollDownTrigger: RollDown
+  deflectTrigger: Deflect
+  collectTrigger: Collect
 --- !u!1 &227939787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1735,6 +1737,36 @@ MonoBehaviour:
       - m_Target: {fileID: 161810759}
         m_TargetAssemblyTypeName: FlipAnimator, Assembly-CSharp
         m_MethodName: FlipDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnLeftInput:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 161810759}
+        m_TargetAssemblyTypeName: FlipAnimator, Assembly-CSharp
+        m_MethodName: Collect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnRightInput:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 161810759}
+        m_TargetAssemblyTypeName: FlipAnimator, Assembly-CSharp
+        m_MethodName: Deflect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

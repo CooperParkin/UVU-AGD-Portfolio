@@ -33,6 +33,10 @@ public class PlayerInputHandler : MonoBehaviour
     public UnityEvent OnUpInput;
     [Tooltip("Fired when a clean Down input is accepted (key or swipe), whether or not anything is in the zone. Wire Animator.SetTrigger here.")]
     public UnityEvent OnDownInput;
+    [Tooltip("Fired when a clean Left input is accepted (key or swipe), whether or not anything is in the zone. Wire FlipAnimator.Collect here.")]
+    public UnityEvent OnLeftInput;
+    [Tooltip("Fired when a clean Right input is accepted (key or swipe), whether or not anything is in the zone. Wire FlipAnimator.Deflect here.")]
+    public UnityEvent OnRightInput;
 
     [Header("Swipe Settings")]
     [Tooltip("Minimum distance (in pixels) a touch must move to count as a swipe.")]
@@ -90,8 +94,16 @@ public class PlayerInputHandler : MonoBehaviour
                 OnDownInput?.Invoke();
                 zone?.TryDown();
             }
-            else if (leftRequested) zone?.TryLeft();
-            else if (rightRequested) zone?.TryRight();
+            else if (leftRequested)
+            {
+                OnLeftInput?.Invoke();
+                zone?.TryLeft();
+            }
+            else if (rightRequested)
+            {
+                OnRightInput?.Invoke();
+                zone?.TryRight();
+            }
         }
         // requestCount == 0: nothing happened. requestCount > 1: conflicting
         // simultaneous input, ignore all of it.
