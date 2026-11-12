@@ -1,10 +1,11 @@
 //Maya ASCII 2027 scene
 //Name: finalEnvironment.ma
-//Last modified: Thu, Nov 12, 2026 12:04:40 PM
+//Last modified: Thu, Nov 12, 2026 12:32:16 PM
 //Codeset: 1252
 requires maya "2027";
 requires "stereoCamera" "10.0";
-requires -nodeType "aiStandardSurface" "mtoa" "5.6.2";
+requires -nodeType "aiOptions" -nodeType "aiAOVDriver" -nodeType "aiAOVFilter" -nodeType "aiStandardSurface"
+		 -nodeType "aiImagerDenoiserOidn" "mtoa" "5.6.2";
 requires -nodeType "UsdDefaultSettings" -dataType "pxrUsdStageData" "mayaUsdPlugin" "0.37.0";
 requires "stereoCamera" "10.0";
 currentUnit -l centimeter -a degree -t film;
@@ -13,11 +14,11 @@ fileInfo "product" "Maya 2027";
 fileInfo "version" "2027";
 fileInfo "cutIdentifier" "202607171511-52c21617ee";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26300)";
-fileInfo "UUID" "2556954E-418A-410E-9F34-B0878A8C9C79";
+fileInfo "UUID" "6E2E4416-4789-9945-75CF-80B8BCB727C7";
 createNode transform -s -n "persp";
 	rename -uid "E5D05D66-40FB-E41E-C445-0BAC7D9DC665";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" -0.44206577007004505 12.602017033916622 20.669216638307706 ;
+	setAttr ".t" -type "double3" -0.32816040577128985 12.553173871289626 18.340252194525114 ;
 	setAttr ".r" -type "double3" -1.1999999999998852 -1082.7999999999204 -6.2194460266011363e-18 ;
 	setAttr ".rpt" -type "double3" 2.9490376880552761e-16 1.9837694053666645e-17 -1.490481182766709e-16 ;
 createNode camera -s -n "perspShape" -p "persp";
@@ -25,7 +26,7 @@ createNode camera -s -n "perspShape" -p "persp";
 	setAttr -k off ".v" no;
 	setAttr ".rnd" no;
 	setAttr ".fl" 34.999999999999979;
-	setAttr ".coi" 13.999803333654805;
+	setAttr ".coi" 11.667543599629669;
 	setAttr ".ow" 11.736210945873493;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
@@ -59889,8 +59890,8 @@ createNode mesh -n "flameShape1" -p "|chandelier|chandelierPieces3|chandelierPie
 	setAttr ".hfd" -type "dataPolyComponent" Index_Data Face 0 ;
 createNode lightLinker -s -n "lightLinker1";
 	rename -uid "B69C61E8-4C38-0D12-222A-F6AD0BE823B2";
-	setAttr -s 8 ".lnk";
-	setAttr -s 8 ".slnk";
+	setAttr -s 9 ".lnk";
+	setAttr -s 9 ".slnk";
 createNode UsdDefaultSettings -n "UsdDefaultRenderSettings";
 	rename -uid "12E2A29F-49A4-0BEE-D2F7-DB9176758756";
 	setAttr ".srl" -type "string" "#usda 1.0\n(\n    renderSettingsPrimPath = \"/Render/SceneRenderSettings\"\n)\n\ndef Scope \"Render\"\n{\n    def RenderSettings \"SceneRenderSettings\"\n    {\n        custom string adskUsd:externalCamera = \"|persp\" (\n            displayName = \"External Camera\"\n        )\n        rel products = </Render/BeautyProduct>\n    }\n\n    def RenderVar \"color\"\n    {\n        uniform string sourceName = \"color\"\n    }\n\n    def RenderProduct \"BeautyProduct\"\n    {\n        rel orderedVars = </Render/color>\n        token productName = \"./default.png\"\n    }\n}\n\n";
@@ -60081,7 +60082,6 @@ createNode materialInfo -n "materialInfo4";
 createNode shadingEngine -n "standardSurface1SG";
 	rename -uid "59800251-488F-D7FE-3991-1F8835E06550";
 	setAttr ".ihi" 0;
-	setAttr -s 16 ".dsm";
 	setAttr ".ro" yes;
 createNode materialInfo -n "materialInfo5";
 	rename -uid "06352253-478C-C17A-4148-3685277714AA";
@@ -60157,6 +60157,114 @@ createNode groupParts -n "groupParts1";
 	rename -uid "76661EF2-426A-95AD-FF05-8EBDF025BB46";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "f[0:369]";
+createNode aiOptions -s -n "defaultArnoldRenderOptions";
+	rename -uid "07B47073-429A-7D76-43ED-F7B513F550AC";
+	setAttr ".version" -type "string" "5.6.2";
+createNode aiAOVFilter -s -n "defaultArnoldFilter";
+	rename -uid "A146EC15-4FA3-74D3-7119-A7971C26EAE9";
+	setAttr ".ai_translator" -type "string" "gaussian";
+createNode aiAOVDriver -s -n "defaultArnoldDriver";
+	rename -uid "FA058B7C-44A9-8AFD-67CF-5C81C7D9C61F";
+	setAttr ".ai_translator" -type "string" "exr";
+createNode aiAOVDriver -s -n "defaultArnoldDisplayDriver";
+	rename -uid "FF553E64-4952-8C61-9292-69B4DA2F2204";
+	setAttr ".ai_translator" -type "string" "maya";
+	setAttr ".output_mode" 0;
+createNode aiImagerDenoiserOidn -s -n "defaultArnoldDenoiser";
+	rename -uid "0CFAAFBA-4293-01D4-A1DE-7C88CE365CDD";
+createNode openPBRSurface -n "chandelierMat";
+	rename -uid "915E2B0B-4548-C848-3705-6CAB6C69FF66";
+createNode shadingEngine -n "openPBRSurface3SG";
+	rename -uid "DBC8F670-4D64-59CB-6ECD-A789E2EEC9AF";
+	setAttr ".ihi" 0;
+	setAttr -s 51 ".dsm";
+	setAttr ".ro" yes;
+createNode materialInfo -n "materialInfo7";
+	rename -uid "947A1D72-4556-E85C-525B-888942740006";
+createNode file -n "chandelier_standardSurface1_BaseColor_1";
+	rename -uid "2A7FC4CE-46CC-B20B-A9F0-DF9A733E2609";
+	setAttr ".ftn" -type "string" "C:/Users/coope/Documents/AGD UVU Main Repository/UVU-AGD-Portfolio/UnityProject/UnityProjectTest/Assets/Maya//textureMaps/chandelier/chandelier_standardSurface1_BaseColor.png";
+	setAttr ".cs" -type "string" "sRGB Encoded Rec.709 (sRGB)";
+createNode place2dTexture -n "place2dTexture11";
+	rename -uid "C4FDAB44-4924-FAC9-15DD-6193BBA06847";
+createNode file -n "chandelier_standardSurface1_Emissive_1";
+	rename -uid "0313EDA0-42C4-9712-E4EE-6C8468B2EB21";
+	setAttr ".ftn" -type "string" "C:/Users/coope/Documents/AGD UVU Main Repository/UVU-AGD-Portfolio/UnityProject/UnityProjectTest/Assets/Maya//textureMaps/chandelier/chandelier_standardSurface1_Emissive.png";
+	setAttr ".cs" -type "string" "sRGB Encoded Rec.709 (sRGB)";
+createNode place2dTexture -n "place2dTexture12";
+	rename -uid "D36D8079-4626-BFF5-4D1F-6EB8D1E535BC";
+createNode file -n "chandelier_standardSurface1_Height_1";
+	rename -uid "A74DA135-44B5-8358-61BF-49BDE7680183";
+	setAttr ".ftn" -type "string" "C:/Users/coope/Documents/AGD UVU Main Repository/UVU-AGD-Portfolio/UnityProject/UnityProjectTest/Assets/Maya//textureMaps/chandelier/chandelier_standardSurface1_Height.png";
+	setAttr ".cs" -type "string" "sRGB Encoded Rec.709 (sRGB)";
+createNode place2dTexture -n "place2dTexture13";
+	rename -uid "5DDD0AAE-4324-D098-4AF1-89BBB8B6CCD3";
+createNode file -n "chandelier_standardSurface1_Metallic_1";
+	rename -uid "E844D1FD-4A9E-A9FA-FD1C-B099F3DFEC1A";
+	setAttr ".ftn" -type "string" "C:/Users/coope/Documents/AGD UVU Main Repository/UVU-AGD-Portfolio/UnityProject/UnityProjectTest/Assets/Maya//textureMaps/chandelier/chandelier_standardSurface1_Metallic.png";
+	setAttr ".cs" -type "string" "sRGB Encoded Rec.709 (sRGB)";
+createNode place2dTexture -n "place2dTexture14";
+	rename -uid "8C9EFE35-4FEB-F0DA-791F-9C83746BE740";
+createNode file -n "chandelier_standardSurface1_Normal_1";
+	rename -uid "815EBB90-42BD-7CFD-1434-6B9594EB305C";
+	setAttr ".ftn" -type "string" "C:/Users/coope/Documents/AGD UVU Main Repository/UVU-AGD-Portfolio/UnityProject/UnityProjectTest/Assets/Maya//textureMaps/chandelier/chandelier_standardSurface1_Normal.png";
+	setAttr ".cs" -type "string" "sRGB Encoded Rec.709 (sRGB)";
+createNode place2dTexture -n "place2dTexture15";
+	rename -uid "ED115448-47BB-6FA1-4757-CFA894B87F64";
+createNode file -n "chandelier_standardSurface1_Roughness_1";
+	rename -uid "8E713194-4524-893F-87A7-D69433C9D5F2";
+	setAttr ".ftn" -type "string" "C:/Users/coope/Documents/AGD UVU Main Repository/UVU-AGD-Portfolio/UnityProject/UnityProjectTest/Assets/Maya//textureMaps/chandelier/chandelier_standardSurface1_Roughness.png";
+	setAttr ".cs" -type "string" "sRGB Encoded Rec.709 (sRGB)";
+createNode place2dTexture -n "place2dTexture16";
+	rename -uid "3539463A-4D96-6CDE-AE02-0CBEF5E3261B";
+createNode nodeGraphEditorInfo -n "hyperShadePrimaryNodeEditorSavedTabsInfo";
+	rename -uid "0E2D8AA8-43D4-3E08-E84D-67AE371E4713";
+	setAttr ".tgi[0].tn" -type "string" "Untitled_1";
+	setAttr ".tgi[0].vl" -type "double2" -243.67010892729596 -1446.316336647327 ;
+	setAttr ".tgi[0].vh" -type "double2" 2126.8211014270337 -107.86426830095488 ;
+	setAttr -s 14 ".tgi[0].ni";
+	setAttr ".tgi[0].ni[0].x" 2472.023681640625;
+	setAttr ".tgi[0].ni[0].y" -398.89410400390625;
+	setAttr ".tgi[0].ni[0].nvs" 1923;
+	setAttr ".tgi[0].ni[1].x" 2693.452392578125;
+	setAttr ".tgi[0].ni[1].y" -398.89410400390625;
+	setAttr ".tgi[0].ni[1].nvs" 1923;
+	setAttr ".tgi[0].ni[2].x" 2029.1666259765625;
+	setAttr ".tgi[0].ni[2].y" -398.89410400390625;
+	setAttr ".tgi[0].ni[2].nvs" 1923;
+	setAttr ".tgi[0].ni[3].x" 2250.59521484375;
+	setAttr ".tgi[0].ni[3].y" -398.89410400390625;
+	setAttr ".tgi[0].ni[3].nvs" 1923;
+	setAttr ".tgi[0].ni[4].x" -92.4481201171875;
+	setAttr ".tgi[0].ni[4].y" -626.17840576171875;
+	setAttr ".tgi[0].ni[4].nvs" 1923;
+	setAttr ".tgi[0].ni[5].x" 128.98045349121094;
+	setAttr ".tgi[0].ni[5].y" -626.17840576171875;
+	setAttr ".tgi[0].ni[5].nvs" 1923;
+	setAttr ".tgi[0].ni[6].x" 922.0238037109375;
+	setAttr ".tgi[0].ni[6].y" -398.89410400390625;
+	setAttr ".tgi[0].ni[6].nvs" 1923;
+	setAttr ".tgi[0].ni[7].x" 1143.452392578125;
+	setAttr ".tgi[0].ni[7].y" -398.89410400390625;
+	setAttr ".tgi[0].ni[7].nvs" 1923;
+	setAttr ".tgi[0].ni[8].x" 1364.8809814453125;
+	setAttr ".tgi[0].ni[8].y" -398.89410400390625;
+	setAttr ".tgi[0].ni[8].nvs" 1923;
+	setAttr ".tgi[0].ni[9].x" 700.59521484375;
+	setAttr ".tgi[0].ni[9].y" -398.89410400390625;
+	setAttr ".tgi[0].ni[9].nvs" 1923;
+	setAttr ".tgi[0].ni[10].x" 1586.3095703125;
+	setAttr ".tgi[0].ni[10].y" -398.89410400390625;
+	setAttr ".tgi[0].ni[10].nvs" 1923;
+	setAttr ".tgi[0].ni[11].x" 1807.738037109375;
+	setAttr ".tgi[0].ni[11].y" -398.89410400390625;
+	setAttr ".tgi[0].ni[11].nvs" 1923;
+	setAttr ".tgi[0].ni[12].x" 627.85711669921875;
+	setAttr ".tgi[0].ni[12].y" -624.40472412109375;
+	setAttr ".tgi[0].ni[12].nvs" 1971;
+	setAttr ".tgi[0].ni[13].x" 930.95233154296875;
+	setAttr ".tgi[0].ni[13].y" -633.92852783203125;
+	setAttr ".tgi[0].ni[13].nvs" 1923;
 select -ne :time1;
 	setAttr ".o" 0;
 select -ne :hardwareRenderingGlobals;
@@ -60167,17 +60275,17 @@ select -ne :hardwareRenderingGlobals;
 	setAttr ".fprt" yes;
 	setAttr ".rtfm" 1;
 select -ne :renderPartition;
-	setAttr -s 8 ".st";
+	setAttr -s 9 ".st";
 select -ne :renderGlobalsList1;
 select -ne :defaultShaderList1;
-	setAttr -s 11 ".s";
+	setAttr -s 12 ".s";
 select -ne :postProcessList1;
 	setAttr -s 2 ".p";
 select -ne :defaultRenderUtilityList1;
-	setAttr -s 11 ".u";
+	setAttr -s 17 ".u";
 select -ne :defaultRenderingList1;
 select -ne :defaultTextureList1;
-	setAttr -s 10 ".tx";
+	setAttr -s 16 ".tx";
 select -ne :standardSurface1;
 	setAttr ".bc" -type "float3" 0.40000001 0.40000001 0.40000001 ;
 	setAttr ".sr" 0.5;
@@ -60185,7 +60293,7 @@ select -ne :openPBR_shader1;
 	setAttr ".bc" -type "float3" 0.40000001 0.40000001 0.40000001 ;
 	setAttr ".sr" 0.5;
 select -ne :initialShadingGroup;
-	setAttr -s 47 ".dsm";
+	setAttr -s 12 ".dsm";
 	setAttr ".ro" yes;
 	setAttr -s 11 ".gn";
 select -ne :initialParticleSE;
@@ -60264,6 +60372,7 @@ relationship "link" ":lightLinker1" "bookCoverSG1.message" ":defaultLightSet.mes
 relationship "link" ":lightLinker1" "Sink_PrepSG.message" ":defaultLightSet.message";
 relationship "link" ":lightLinker1" "standardSurface1SG.message" ":defaultLightSet.message";
 relationship "link" ":lightLinker1" "Sink_PrepSG1.message" ":defaultLightSet.message";
+relationship "link" ":lightLinker1" "openPBRSurface3SG.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" "bookPagesSG.message" ":defaultLightSet.message";
@@ -60272,6 +60381,7 @@ relationship "shadowLink" ":lightLinker1" "bookCoverSG1.message" ":defaultLightS
 relationship "shadowLink" ":lightLinker1" "Sink_PrepSG.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" "standardSurface1SG.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" "Sink_PrepSG1.message" ":defaultLightSet.message";
+relationship "shadowLink" ":lightLinker1" "openPBRSurface3SG.message" ":defaultLightSet.message";
 connectAttr "layerManager.dli[0]" "defaultLayer.id";
 connectAttr "renderLayerManager.rlmi[0]" "defaultRenderLayer.rlid";
 connectAttr "layerManager.dli[1]" "blockout.id";
@@ -60430,38 +60540,6 @@ connectAttr "Sink_PrepSG.msg" "materialInfo4.sg";
 connectAttr "openPBRSurface1.msg" "materialInfo4.m";
 connectAttr "Sink_Prep_openPBRSurfaceNEW_BaseColor_1.msg" "materialInfo4.t" -na;
 connectAttr ":standardSurface1.oc" "standardSurface1SG.ss";
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece1|chandelierPiece1|chandelierPiece1Shape.iog" "standardSurface1SG.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece11|chandelierPiece1|chandelierPiece1Shape.iog" "standardSurface1SG.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece12|chandelierPiece1|chandelierPiece1Shape.iog" "standardSurface1SG.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece13|chandelierPiece1|chandelierPiece1Shape.iog" "standardSurface1SG.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece14|chandelierPiece1|chandelierPiece1Shape.iog" "standardSurface1SG.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece15|chandelierPiece1|chandelierPiece1Shape.iog" "standardSurface1SG.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece16|chandelierPiece1|chandelierPiece1Shape.iog" "standardSurface1SG.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece17|chandelierPiece1|chandelierPiece1Shape.iog" "standardSurface1SG.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece18|chandelierPiece1|chandelierPiece1Shape.iog" "standardSurface1SG.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece19|chandelierPiece1|chandelierPiece1Shape.iog" "standardSurface1SG.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece20|chandelierPiece1|chandelierPiece1Shape.iog" "standardSurface1SG.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece21|chandelierPiece1|chandelierPiece1Shape.iog" "standardSurface1SG.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece22|chandelierPiece1|chandelierPiece1Shape.iog" "standardSurface1SG.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece23|chandelierPiece1|chandelierPiece1Shape.iog" "standardSurface1SG.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece24|chandelierPiece1|chandelierPiece1Shape.iog" "standardSurface1SG.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece25|chandelierPiece1|chandelierPiece1Shape.iog" "standardSurface1SG.dsm"
-		 -na;
 connectAttr "standardSurface1SG.msg" "materialInfo5.sg";
 connectAttr ":standardSurface1.msg" "materialInfo5.m";
 connectAttr "Sink_Prep_openPBRSurfaceNEW_Metallic_2.oa" "openPBRSurface2.m";
@@ -60540,17 +60618,319 @@ connectAttr "groupParts1.og" "polyAutoProj1.ip";
 connectAttr "bookshelfShape.wm" "polyAutoProj1.mp";
 connectAttr "polySurfaceShape5.o" "groupParts1.ig";
 connectAttr "groupId38.id" "groupParts1.gi";
+connectAttr ":defaultArnoldDenoiser.msg" ":defaultArnoldRenderOptions.imagers" -na
+		;
+connectAttr ":defaultArnoldDisplayDriver.msg" ":defaultArnoldRenderOptions.drivers"
+		 -na;
+connectAttr ":defaultArnoldFilter.msg" ":defaultArnoldRenderOptions.filt";
+connectAttr ":defaultArnoldDriver.msg" ":defaultArnoldRenderOptions.drvr";
+connectAttr "chandelierMat.oc" "openPBRSurface3SG.ss";
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece25|flame1|flameShape1.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece25|candle1|candle1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece25|chandelierPiece1|chandelierPiece1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece24|flame1|flameShape1.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece24|candle1|candle1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece24|chandelierPiece1|chandelierPiece1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece23|flame1|flameShape1.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece23|candle1|candle1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece23|chandelierPiece1|chandelierPiece1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece22|flame1|flameShape1.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece22|candle1|candle1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece22|chandelierPiece1|chandelierPiece1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece21|flame1|flameShape1.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece21|candle1|candle1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece21|chandelierPiece1|chandelierPiece1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece20|flame1|flameShape1.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece20|candle1|candle1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece20|chandelierPiece1|chandelierPiece1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece19|flame1|flameShape1.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece19|candle1|candle1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece19|chandelierPiece1|chandelierPiece1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece18|flame1|flameShape1.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece18|candle1|candle1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces3|chandelierPiece18|chandelierPiece1|chandelierPiece1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece17|flame1|flameShape1.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece17|candle1|candle1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece17|chandelierPiece1|chandelierPiece1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece16|flame1|flameShape1.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece16|candle1|candle1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece16|chandelierPiece1|chandelierPiece1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece15|flame1|flameShape1.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece15|candle1|candle1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece15|chandelierPiece1|chandelierPiece1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece14|flame1|flameShape1.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece14|candle1|candle1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece14|chandelierPiece1|chandelierPiece1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece13|flame1|flameShape1.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece13|candle1|candle1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece13|chandelierPiece1|chandelierPiece1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece12|flame1|flameShape1.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece12|candle1|candle1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece12|chandelierPiece1|chandelierPiece1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece11|flame1|flameShape1.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece11|candle1|candle1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece11|chandelierPiece1|chandelierPiece1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece1|flame1|flameShape1.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece1|candle1|candle1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "|chandelier|chandelierPieces1|chandelierPiece1|chandelierPiece1|chandelierPiece1Shape.iog" "openPBRSurface3SG.dsm"
+		 -na;
+connectAttr "chandelierRingShape3.iog" "openPBRSurface3SG.dsm" -na;
+connectAttr "chandelierRingShape2.iog" "openPBRSurface3SG.dsm" -na;
+connectAttr "chanelierRingShape1.iog" "openPBRSurface3SG.dsm" -na;
+connectAttr "openPBRSurface3SG.msg" "materialInfo7.sg";
+connectAttr "chandelierMat.msg" "materialInfo7.m";
+connectAttr ":defaultColorMgtGlobals.cme" "chandelier_standardSurface1_BaseColor_1.cme"
+		;
+connectAttr ":defaultColorMgtGlobals.cfe" "chandelier_standardSurface1_BaseColor_1.cmcf"
+		;
+connectAttr ":defaultColorMgtGlobals.cfp" "chandelier_standardSurface1_BaseColor_1.cmcp"
+		;
+connectAttr ":defaultColorMgtGlobals.wsn" "chandelier_standardSurface1_BaseColor_1.ws"
+		;
+connectAttr "place2dTexture11.c" "chandelier_standardSurface1_BaseColor_1.c";
+connectAttr "place2dTexture11.tf" "chandelier_standardSurface1_BaseColor_1.tf";
+connectAttr "place2dTexture11.rf" "chandelier_standardSurface1_BaseColor_1.rf";
+connectAttr "place2dTexture11.mu" "chandelier_standardSurface1_BaseColor_1.mu";
+connectAttr "place2dTexture11.mv" "chandelier_standardSurface1_BaseColor_1.mv";
+connectAttr "place2dTexture11.s" "chandelier_standardSurface1_BaseColor_1.s";
+connectAttr "place2dTexture11.wu" "chandelier_standardSurface1_BaseColor_1.wu";
+connectAttr "place2dTexture11.wv" "chandelier_standardSurface1_BaseColor_1.wv";
+connectAttr "place2dTexture11.re" "chandelier_standardSurface1_BaseColor_1.re";
+connectAttr "place2dTexture11.of" "chandelier_standardSurface1_BaseColor_1.of";
+connectAttr "place2dTexture11.r" "chandelier_standardSurface1_BaseColor_1.ro";
+connectAttr "place2dTexture11.n" "chandelier_standardSurface1_BaseColor_1.n";
+connectAttr "place2dTexture11.vt1" "chandelier_standardSurface1_BaseColor_1.vt1"
+		;
+connectAttr "place2dTexture11.vt2" "chandelier_standardSurface1_BaseColor_1.vt2"
+		;
+connectAttr "place2dTexture11.vt3" "chandelier_standardSurface1_BaseColor_1.vt3"
+		;
+connectAttr "place2dTexture11.vc1" "chandelier_standardSurface1_BaseColor_1.vc1"
+		;
+connectAttr "place2dTexture11.o" "chandelier_standardSurface1_BaseColor_1.uv";
+connectAttr "place2dTexture11.ofs" "chandelier_standardSurface1_BaseColor_1.fs";
+connectAttr ":defaultColorMgtGlobals.cme" "chandelier_standardSurface1_Emissive_1.cme"
+		;
+connectAttr ":defaultColorMgtGlobals.cfe" "chandelier_standardSurface1_Emissive_1.cmcf"
+		;
+connectAttr ":defaultColorMgtGlobals.cfp" "chandelier_standardSurface1_Emissive_1.cmcp"
+		;
+connectAttr ":defaultColorMgtGlobals.wsn" "chandelier_standardSurface1_Emissive_1.ws"
+		;
+connectAttr "place2dTexture12.c" "chandelier_standardSurface1_Emissive_1.c";
+connectAttr "place2dTexture12.tf" "chandelier_standardSurface1_Emissive_1.tf";
+connectAttr "place2dTexture12.rf" "chandelier_standardSurface1_Emissive_1.rf";
+connectAttr "place2dTexture12.mu" "chandelier_standardSurface1_Emissive_1.mu";
+connectAttr "place2dTexture12.mv" "chandelier_standardSurface1_Emissive_1.mv";
+connectAttr "place2dTexture12.s" "chandelier_standardSurface1_Emissive_1.s";
+connectAttr "place2dTexture12.wu" "chandelier_standardSurface1_Emissive_1.wu";
+connectAttr "place2dTexture12.wv" "chandelier_standardSurface1_Emissive_1.wv";
+connectAttr "place2dTexture12.re" "chandelier_standardSurface1_Emissive_1.re";
+connectAttr "place2dTexture12.of" "chandelier_standardSurface1_Emissive_1.of";
+connectAttr "place2dTexture12.r" "chandelier_standardSurface1_Emissive_1.ro";
+connectAttr "place2dTexture12.n" "chandelier_standardSurface1_Emissive_1.n";
+connectAttr "place2dTexture12.vt1" "chandelier_standardSurface1_Emissive_1.vt1";
+connectAttr "place2dTexture12.vt2" "chandelier_standardSurface1_Emissive_1.vt2";
+connectAttr "place2dTexture12.vt3" "chandelier_standardSurface1_Emissive_1.vt3";
+connectAttr "place2dTexture12.vc1" "chandelier_standardSurface1_Emissive_1.vc1";
+connectAttr "place2dTexture12.o" "chandelier_standardSurface1_Emissive_1.uv";
+connectAttr "place2dTexture12.ofs" "chandelier_standardSurface1_Emissive_1.fs";
+connectAttr ":defaultColorMgtGlobals.cme" "chandelier_standardSurface1_Height_1.cme"
+		;
+connectAttr ":defaultColorMgtGlobals.cfe" "chandelier_standardSurface1_Height_1.cmcf"
+		;
+connectAttr ":defaultColorMgtGlobals.cfp" "chandelier_standardSurface1_Height_1.cmcp"
+		;
+connectAttr ":defaultColorMgtGlobals.wsn" "chandelier_standardSurface1_Height_1.ws"
+		;
+connectAttr "place2dTexture13.c" "chandelier_standardSurface1_Height_1.c";
+connectAttr "place2dTexture13.tf" "chandelier_standardSurface1_Height_1.tf";
+connectAttr "place2dTexture13.rf" "chandelier_standardSurface1_Height_1.rf";
+connectAttr "place2dTexture13.mu" "chandelier_standardSurface1_Height_1.mu";
+connectAttr "place2dTexture13.mv" "chandelier_standardSurface1_Height_1.mv";
+connectAttr "place2dTexture13.s" "chandelier_standardSurface1_Height_1.s";
+connectAttr "place2dTexture13.wu" "chandelier_standardSurface1_Height_1.wu";
+connectAttr "place2dTexture13.wv" "chandelier_standardSurface1_Height_1.wv";
+connectAttr "place2dTexture13.re" "chandelier_standardSurface1_Height_1.re";
+connectAttr "place2dTexture13.of" "chandelier_standardSurface1_Height_1.of";
+connectAttr "place2dTexture13.r" "chandelier_standardSurface1_Height_1.ro";
+connectAttr "place2dTexture13.n" "chandelier_standardSurface1_Height_1.n";
+connectAttr "place2dTexture13.vt1" "chandelier_standardSurface1_Height_1.vt1";
+connectAttr "place2dTexture13.vt2" "chandelier_standardSurface1_Height_1.vt2";
+connectAttr "place2dTexture13.vt3" "chandelier_standardSurface1_Height_1.vt3";
+connectAttr "place2dTexture13.vc1" "chandelier_standardSurface1_Height_1.vc1";
+connectAttr "place2dTexture13.o" "chandelier_standardSurface1_Height_1.uv";
+connectAttr "place2dTexture13.ofs" "chandelier_standardSurface1_Height_1.fs";
+connectAttr ":defaultColorMgtGlobals.cme" "chandelier_standardSurface1_Metallic_1.cme"
+		;
+connectAttr ":defaultColorMgtGlobals.cfe" "chandelier_standardSurface1_Metallic_1.cmcf"
+		;
+connectAttr ":defaultColorMgtGlobals.cfp" "chandelier_standardSurface1_Metallic_1.cmcp"
+		;
+connectAttr ":defaultColorMgtGlobals.wsn" "chandelier_standardSurface1_Metallic_1.ws"
+		;
+connectAttr "place2dTexture14.c" "chandelier_standardSurface1_Metallic_1.c";
+connectAttr "place2dTexture14.tf" "chandelier_standardSurface1_Metallic_1.tf";
+connectAttr "place2dTexture14.rf" "chandelier_standardSurface1_Metallic_1.rf";
+connectAttr "place2dTexture14.mu" "chandelier_standardSurface1_Metallic_1.mu";
+connectAttr "place2dTexture14.mv" "chandelier_standardSurface1_Metallic_1.mv";
+connectAttr "place2dTexture14.s" "chandelier_standardSurface1_Metallic_1.s";
+connectAttr "place2dTexture14.wu" "chandelier_standardSurface1_Metallic_1.wu";
+connectAttr "place2dTexture14.wv" "chandelier_standardSurface1_Metallic_1.wv";
+connectAttr "place2dTexture14.re" "chandelier_standardSurface1_Metallic_1.re";
+connectAttr "place2dTexture14.of" "chandelier_standardSurface1_Metallic_1.of";
+connectAttr "place2dTexture14.r" "chandelier_standardSurface1_Metallic_1.ro";
+connectAttr "place2dTexture14.n" "chandelier_standardSurface1_Metallic_1.n";
+connectAttr "place2dTexture14.vt1" "chandelier_standardSurface1_Metallic_1.vt1";
+connectAttr "place2dTexture14.vt2" "chandelier_standardSurface1_Metallic_1.vt2";
+connectAttr "place2dTexture14.vt3" "chandelier_standardSurface1_Metallic_1.vt3";
+connectAttr "place2dTexture14.vc1" "chandelier_standardSurface1_Metallic_1.vc1";
+connectAttr "place2dTexture14.o" "chandelier_standardSurface1_Metallic_1.uv";
+connectAttr "place2dTexture14.ofs" "chandelier_standardSurface1_Metallic_1.fs";
+connectAttr ":defaultColorMgtGlobals.cme" "chandelier_standardSurface1_Normal_1.cme"
+		;
+connectAttr ":defaultColorMgtGlobals.cfe" "chandelier_standardSurface1_Normal_1.cmcf"
+		;
+connectAttr ":defaultColorMgtGlobals.cfp" "chandelier_standardSurface1_Normal_1.cmcp"
+		;
+connectAttr ":defaultColorMgtGlobals.wsn" "chandelier_standardSurface1_Normal_1.ws"
+		;
+connectAttr "place2dTexture15.c" "chandelier_standardSurface1_Normal_1.c";
+connectAttr "place2dTexture15.tf" "chandelier_standardSurface1_Normal_1.tf";
+connectAttr "place2dTexture15.rf" "chandelier_standardSurface1_Normal_1.rf";
+connectAttr "place2dTexture15.mu" "chandelier_standardSurface1_Normal_1.mu";
+connectAttr "place2dTexture15.mv" "chandelier_standardSurface1_Normal_1.mv";
+connectAttr "place2dTexture15.s" "chandelier_standardSurface1_Normal_1.s";
+connectAttr "place2dTexture15.wu" "chandelier_standardSurface1_Normal_1.wu";
+connectAttr "place2dTexture15.wv" "chandelier_standardSurface1_Normal_1.wv";
+connectAttr "place2dTexture15.re" "chandelier_standardSurface1_Normal_1.re";
+connectAttr "place2dTexture15.of" "chandelier_standardSurface1_Normal_1.of";
+connectAttr "place2dTexture15.r" "chandelier_standardSurface1_Normal_1.ro";
+connectAttr "place2dTexture15.n" "chandelier_standardSurface1_Normal_1.n";
+connectAttr "place2dTexture15.vt1" "chandelier_standardSurface1_Normal_1.vt1";
+connectAttr "place2dTexture15.vt2" "chandelier_standardSurface1_Normal_1.vt2";
+connectAttr "place2dTexture15.vt3" "chandelier_standardSurface1_Normal_1.vt3";
+connectAttr "place2dTexture15.vc1" "chandelier_standardSurface1_Normal_1.vc1";
+connectAttr "place2dTexture15.o" "chandelier_standardSurface1_Normal_1.uv";
+connectAttr "place2dTexture15.ofs" "chandelier_standardSurface1_Normal_1.fs";
+connectAttr ":defaultColorMgtGlobals.cme" "chandelier_standardSurface1_Roughness_1.cme"
+		;
+connectAttr ":defaultColorMgtGlobals.cfe" "chandelier_standardSurface1_Roughness_1.cmcf"
+		;
+connectAttr ":defaultColorMgtGlobals.cfp" "chandelier_standardSurface1_Roughness_1.cmcp"
+		;
+connectAttr ":defaultColorMgtGlobals.wsn" "chandelier_standardSurface1_Roughness_1.ws"
+		;
+connectAttr "place2dTexture16.c" "chandelier_standardSurface1_Roughness_1.c";
+connectAttr "place2dTexture16.tf" "chandelier_standardSurface1_Roughness_1.tf";
+connectAttr "place2dTexture16.rf" "chandelier_standardSurface1_Roughness_1.rf";
+connectAttr "place2dTexture16.mu" "chandelier_standardSurface1_Roughness_1.mu";
+connectAttr "place2dTexture16.mv" "chandelier_standardSurface1_Roughness_1.mv";
+connectAttr "place2dTexture16.s" "chandelier_standardSurface1_Roughness_1.s";
+connectAttr "place2dTexture16.wu" "chandelier_standardSurface1_Roughness_1.wu";
+connectAttr "place2dTexture16.wv" "chandelier_standardSurface1_Roughness_1.wv";
+connectAttr "place2dTexture16.re" "chandelier_standardSurface1_Roughness_1.re";
+connectAttr "place2dTexture16.of" "chandelier_standardSurface1_Roughness_1.of";
+connectAttr "place2dTexture16.r" "chandelier_standardSurface1_Roughness_1.ro";
+connectAttr "place2dTexture16.n" "chandelier_standardSurface1_Roughness_1.n";
+connectAttr "place2dTexture16.vt1" "chandelier_standardSurface1_Roughness_1.vt1"
+		;
+connectAttr "place2dTexture16.vt2" "chandelier_standardSurface1_Roughness_1.vt2"
+		;
+connectAttr "place2dTexture16.vt3" "chandelier_standardSurface1_Roughness_1.vt3"
+		;
+connectAttr "place2dTexture16.vc1" "chandelier_standardSurface1_Roughness_1.vc1"
+		;
+connectAttr "place2dTexture16.o" "chandelier_standardSurface1_Roughness_1.uv";
+connectAttr "place2dTexture16.ofs" "chandelier_standardSurface1_Roughness_1.fs";
+connectAttr "place2dTexture16.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[0].dn"
+		;
+connectAttr "chandelier_standardSurface1_Roughness_1.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[1].dn"
+		;
+connectAttr "place2dTexture15.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[2].dn"
+		;
+connectAttr "chandelier_standardSurface1_Normal_1.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[3].dn"
+		;
+connectAttr "place2dTexture11.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[4].dn"
+		;
+connectAttr "chandelier_standardSurface1_BaseColor_1.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[5].dn"
+		;
+connectAttr "chandelier_standardSurface1_Emissive_1.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[6].dn"
+		;
+connectAttr "place2dTexture13.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[7].dn"
+		;
+connectAttr "chandelier_standardSurface1_Height_1.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[8].dn"
+		;
+connectAttr "place2dTexture12.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[9].dn"
+		;
+connectAttr "place2dTexture14.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[10].dn"
+		;
+connectAttr "chandelier_standardSurface1_Metallic_1.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[11].dn"
+		;
+connectAttr "chandelierMat.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[12].dn"
+		;
+connectAttr "openPBRSurface3SG.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[13].dn"
+		;
 connectAttr "bookPagesSG.pa" ":renderPartition.st" -na;
 connectAttr "bookCoverSG.pa" ":renderPartition.st" -na;
 connectAttr "bookCoverSG1.pa" ":renderPartition.st" -na;
 connectAttr "Sink_PrepSG.pa" ":renderPartition.st" -na;
 connectAttr "standardSurface1SG.pa" ":renderPartition.st" -na;
 connectAttr "Sink_PrepSG1.pa" ":renderPartition.st" -na;
+connectAttr "openPBRSurface3SG.pa" ":renderPartition.st" -na;
 connectAttr "white.msg" ":defaultShaderList1.s" -na;
 connectAttr "bookGreen.msg" ":defaultShaderList1.s" -na;
 connectAttr "texturedMaterial.msg" ":defaultShaderList1.s" -na;
 connectAttr "openPBRSurface1.msg" ":defaultShaderList1.s" -na;
 connectAttr "openPBRSurface2.msg" ":defaultShaderList1.s" -na;
+connectAttr "chandelierMat.msg" ":defaultShaderList1.s" -na;
 connectAttr "place2dTexture1.msg" ":defaultRenderUtilityList1.u" -na;
 connectAttr "place2dTexture2.msg" ":defaultRenderUtilityList1.u" -na;
 connectAttr "place2dTexture3.msg" ":defaultRenderUtilityList1.u" -na;
@@ -60562,6 +60942,12 @@ connectAttr "place2dTexture7.msg" ":defaultRenderUtilityList1.u" -na;
 connectAttr "place2dTexture8.msg" ":defaultRenderUtilityList1.u" -na;
 connectAttr "place2dTexture9.msg" ":defaultRenderUtilityList1.u" -na;
 connectAttr "place2dTexture10.msg" ":defaultRenderUtilityList1.u" -na;
+connectAttr "place2dTexture11.msg" ":defaultRenderUtilityList1.u" -na;
+connectAttr "place2dTexture12.msg" ":defaultRenderUtilityList1.u" -na;
+connectAttr "place2dTexture13.msg" ":defaultRenderUtilityList1.u" -na;
+connectAttr "place2dTexture14.msg" ":defaultRenderUtilityList1.u" -na;
+connectAttr "place2dTexture15.msg" ":defaultRenderUtilityList1.u" -na;
+connectAttr "place2dTexture16.msg" ":defaultRenderUtilityList1.u" -na;
 connectAttr "defaultRenderLayer.msg" ":defaultRenderingList1.r" -na;
 connectAttr "file2.msg" ":defaultTextureList1.tx" -na;
 connectAttr "file1.msg" ":defaultTextureList1.tx" -na;
@@ -60579,6 +60965,18 @@ connectAttr "Sink_Prep_openPBRSurfaceNEW_BaseColor_2.msg" ":defaultTextureList1.
 		 -na;
 connectAttr "Sink_Prep_openPBRSurfaceNEW_Roughness_2.msg" ":defaultTextureList1.tx"
 		 -na;
+connectAttr "chandelier_standardSurface1_BaseColor_1.msg" ":defaultTextureList1.tx"
+		 -na;
+connectAttr "chandelier_standardSurface1_Emissive_1.msg" ":defaultTextureList1.tx"
+		 -na;
+connectAttr "chandelier_standardSurface1_Height_1.msg" ":defaultTextureList1.tx"
+		 -na;
+connectAttr "chandelier_standardSurface1_Metallic_1.msg" ":defaultTextureList1.tx"
+		 -na;
+connectAttr "chandelier_standardSurface1_Normal_1.msg" ":defaultTextureList1.tx"
+		 -na;
+connectAttr "chandelier_standardSurface1_Roughness_1.msg" ":defaultTextureList1.tx"
+		 -na;
 connectAttr "groupId16.msg" ":initialShadingGroup.gn" -na;
 connectAttr "groupId28.msg" ":initialShadingGroup.gn" -na;
 connectAttr "groupId29.msg" ":initialShadingGroup.gn" -na;
@@ -60592,12 +60990,6 @@ connectAttr "groupId37.msg" ":initialShadingGroup.gn" -na;
 connectAttr "groupId38.msg" ":initialShadingGroup.gn" -na;
 connectAttr "floorShape.iog" ":initialShadingGroup.dsm" -na;
 connectAttr "northwallShape1.iog" ":initialShadingGroup.dsm" -na;
-connectAttr "chanelierRingShape1.iog" ":initialShadingGroup.dsm" -na;
-connectAttr "chandelierRingShape2.iog" ":initialShadingGroup.dsm" -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece1|candle1|candle1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece1|flame1|flameShape1.iog" ":initialShadingGroup.dsm"
-		 -na;
 connectAttr "stairsShape1.iog.og[0]" ":initialShadingGroup.dsm" -na;
 connectAttr "stairsShape2.iog.og[0]" ":initialShadingGroup.dsm" -na;
 connectAttr "tableShape2.iog.og[0]" ":initialShadingGroup.dsm" -na;
@@ -60608,65 +61000,4 @@ connectAttr "pCubeShape6.iog.og[0]" ":initialShadingGroup.dsm" -na;
 connectAttr "norhtwallShape3.iog.og[0]" ":initialShadingGroup.dsm" -na;
 connectAttr "pCubeShape3.iog.og[0]" ":initialShadingGroup.dsm" -na;
 connectAttr "bookshelfShape.iog.og[0]" ":initialShadingGroup.dsm" -na;
-connectAttr "chandelierRingShape3.iog" ":initialShadingGroup.dsm" -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece11|candle1|candle1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece11|flame1|flameShape1.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece12|candle1|candle1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece12|flame1|flameShape1.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece13|candle1|candle1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece13|flame1|flameShape1.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece14|candle1|candle1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece14|flame1|flameShape1.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece15|candle1|candle1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece15|flame1|flameShape1.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece16|candle1|candle1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece16|flame1|flameShape1.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece17|candle1|candle1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces1|chandelierPiece17|flame1|flameShape1.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece18|candle1|candle1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece18|flame1|flameShape1.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece19|candle1|candle1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece19|flame1|flameShape1.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece20|candle1|candle1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece20|flame1|flameShape1.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece21|candle1|candle1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece21|flame1|flameShape1.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece22|candle1|candle1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece22|flame1|flameShape1.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece23|candle1|candle1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece23|flame1|flameShape1.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece24|candle1|candle1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece24|flame1|flameShape1.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece25|candle1|candle1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|chandelier|chandelierPieces3|chandelierPiece25|flame1|flameShape1.iog" ":initialShadingGroup.dsm"
-		 -na;
 // End of finalEnvironment.ma
