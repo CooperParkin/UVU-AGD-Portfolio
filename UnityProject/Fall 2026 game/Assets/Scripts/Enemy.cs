@@ -10,4 +10,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int damageAmount = 1;
 
     public int DamageAmount => damageAmount;
+
+    /// <summary>True once this enemy has damaged a character. Prevents repeat hits now that enemies keep moving after reaching the zone.</summary>
+    public bool HasDealtDamage { get; private set; }
+
+    public void MarkDamageDealt()
+    {
+        HasDealtDamage = true;
+    }
 }

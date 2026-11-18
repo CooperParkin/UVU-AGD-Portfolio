@@ -2,7 +2,9 @@ using UnityEngine;
 
 /// <summary>
 /// Marks the end of a lane. For Top/Bottom, damages the corresponding
-/// character when an Enemy reaches it. For Middle, triggers game over when
+/// character when an Enemy reaches it (the enemy is NOT destroyed here —
+/// place a DespawnZone further along the lane to remove it). For Middle,
+/// triggers game over when
 /// a HazardPickup reaches it (i.e. the player let a hazard get all the way
 /// through without hitting it). Automatic on contact — no player input
 /// involved, unlike HitZone.
@@ -43,7 +45,7 @@ public class CharacterZone : MonoBehaviour
     private void HandleEnemyCollision(Collider other)
     {
         Enemy enemy = other.GetComponent<Enemy>();
-        if (enemy == null) return;
+        if (enemy == null || enemy.HasDealtDamage) return;
 
         CharacterHealth target = GetTargetCharacter();
         if (target != null)
@@ -55,7 +57,9 @@ public class CharacterZone : MonoBehaviour
             Debug.LogWarning("CharacterZone: No target CharacterHealth found via CharacterRegistry.");
         }
 
-        Destroy(other.gameObject);
+        // The enemy keeps moving after the hit; a separate DespawnZone
+        // removes it. Mark it so it can't deal damage a second time.
+        enemy.MarkDamageDealt();
     }
 
     private void HandleHazardCollision(Collider other)
