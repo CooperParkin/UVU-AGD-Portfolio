@@ -1,6 +1,6 @@
 //Maya ASCII 2027 scene
 //Name: finalEnvironment.ma
-//Last modified: Wed, Nov 18, 2026 10:56:31 PM
+//Last modified: Thu, Nov 19, 2026 10:25:31 AM
 //Codeset: 1252
 requires maya "2027";
 requires "stereoCamera" "10.0";
@@ -14,12 +14,12 @@ fileInfo "product" "Maya 2027";
 fileInfo "version" "2027";
 fileInfo "cutIdentifier" "202607171511-52c21617ee";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26300)";
-fileInfo "UUID" "DF51C423-4043-F2B8-0511-01AA0BDEDD26";
+fileInfo "UUID" "A2A4CD12-43E0-CBE6-4AF8-529550EF6387";
 createNode transform -s -n "persp";
 	rename -uid "E5D05D66-40FB-E41E-C445-0BAC7D9DC665";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 1.6401653744834959 7.0128566451216354 64.558171862529363 ;
-	setAttr ".r" -type "double3" -0.60000000001053233 -358.00000000018866 3.1079036820667269e-18 ;
+	setAttr ".t" -type "double3" 0.4804133535653653 12.478765268666521 53.41856514399101 ;
+	setAttr ".r" -type "double3" -13.800000000000932 -358.79999999990787 -2.4853534239701826e-17 ;
 	setAttr ".rp" -type "double3" 8.8817841970012523e-16 0 0 ;
 	setAttr ".rpt" -type "double3" 2.9351888920074199e-16 1.9837694053666633e-17 -9.9468662186601548e-17 ;
 createNode camera -s -n "perspShape" -p "persp";
@@ -27,12 +27,12 @@ createNode camera -s -n "perspShape" -p "persp";
 	setAttr -k off ".v" no;
 	setAttr ".rnd" no;
 	setAttr ".fl" 34.999999999999979;
-	setAttr ".coi" 64.610217917826589;
+	setAttr ".coi" 47.17486298966184;
 	setAttr ".ow" 11.736210945873493;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
-	setAttr ".tp" -type "double3" 6.1015332582964223 7.7673464666577452 -1.3148909554357289 ;
+	setAttr ".tp" -type "double3" 4.8999164942278224 9.4901327192783356 -1.2020152554387842 ;
 	setAttr ".hc" -type "string" "viewSet -p %camera";
 	setAttr ".ai_translator" -type "string" "perspective";
 createNode transform -s -n "top";
@@ -66116,9 +66116,10 @@ createNode transform -n "stairPlanks" -p "staircase";
 	setAttr ".sp" -type "double3" 6.6829037666320801 0 11.955490112304688 ;
 createNode transform -n "stairPlank" -p "|staircase|stairPlanks";
 	rename -uid "BC0FA56A-452B-5A6F-1D60-04BB4D7F08F6";
-	setAttr ".t" -type "double3" 10.015100751864585 0.98517605662345886 12.870470485693314 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" -180 0 0 ;
+	setAttr ".rp" -type "double3" 8.5990023612976074 0.58118191361427307 12.823894500732422 ;
+	setAttr ".rpt" -type "double3" 0 -1.13464793116691e-13 -4.9027448767446913e-13 ;
+	setAttr ".sp" -type "double3" 8.5990023612976074 0.58118191361427307 12.823894500732422 ;
 createNode mesh -n "stairPlankShape" -p "|staircase|stairPlanks|stairPlank";
 	rename -uid "0428E67B-44BF-42BD-AE76-9FBDA83EE6A8";
 	setAttr -k off ".v";
@@ -66157,6 +66158,15 @@ createNode mesh -n "stairPlankShape" -p "|staircase|stairPlanks|stairPlank";
 	setAttr ".dcc" -type "string" "Ambient+Diffuse";
 	setAttr ".covm[0]"  0 1 1;
 	setAttr ".cdvm[0]"  0 1 1;
+	setAttr -s 24 ".pt[0:23]" -type "float3"  10.0151 0.98517609 12.87047 
+		10.0151 0.98517609 12.87047 10.0151 0.98517609 12.87047 10.0151 0.98517609 12.87047 
+		10.0151 0.98517609 12.87047 10.0151 0.98517609 12.87047 10.0151 0.98517609 12.87047 
+		10.0151 0.98517609 12.87047 10.0151 0.98517609 12.87047 10.0151 0.98517609 12.87047 
+		10.0151 0.98517609 12.87047 10.0151 0.98517609 12.87047 10.0151 0.98517609 12.87047 
+		10.0151 0.98517609 12.87047 10.0151 0.98517609 12.87047 10.0151 0.98517609 12.87047 
+		10.0151 0.98517609 12.87047 10.0151 0.98517609 12.87047 10.0151 0.98517609 12.87047 
+		10.0151 0.98517609 12.87047 10.0151 0.98517609 12.87047 10.0151 0.98517609 12.87047 
+		10.0151 0.98517609 12.87047 10.0151 0.98517609 12.87047;
 	setAttr -s 24 ".vt[0:23]"  -3.31299686 -0.5 0.48080063 -3.31299686 -0.48080075 0.5
 		 -3.33219624 -0.48080075 0.48080063 0.5 -0.48080075 0.48080063 0.48080063 -0.48080075 0.5
 		 0.48080063 -0.5 0.48080063 -3.33219624 -0.3271876 0.48080063 -3.31299686 -0.3271876 0.5
@@ -66402,8 +66412,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase|stairPlanks|stairPlank1";
 createNode transform -n "stairPlank2" -p "|staircase|stairPlanks";
 	rename -uid "7DE49C9A-49D7-7406-D416-94AB0D412277";
 	setAttr ".t" -type "double3" 10.015100751864585 1.4703521132469177 12.099147281652787 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" -180 179.99999999999937 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 2.0872192862952943e-14 1.2545520178264269e-14 1.8493812476930385e-14 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank2Shape" -p "|staircase|stairPlanks|stairPlank2";
 	rename -uid "43CAF13D-47D0-B9CF-4442-36A20B692598";
 	setAttr -k off ".v";
@@ -66573,8 +66585,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase|stairPlanks|stairPlank2";
 createNode transform -n "stairPlank3" -p "|staircase|stairPlanks";
 	rename -uid "4568EC69-4383-C1F0-319C-9392F7369121";
 	setAttr ".t" -type "double3" 10.015100751864585 1.9555282592773438 11.327825031286576 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" -359.99999999999903 0 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 0 2.3314683517129471e-15 -1.2947976024690876e-14 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank3Shape" -p "|staircase|stairPlanks|stairPlank3";
 	rename -uid "066776DE-47D8-4A52-8027-62A91565E15F";
 	setAttr -k off ".v";
@@ -66744,8 +66758,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase|stairPlanks|stairPlank3";
 createNode transform -n "stairPlank4" -p "|staircase|stairPlanks";
 	rename -uid "A76EA4CD-4BF7-038E-9FB3-149637BCECC4";
 	setAttr ".t" -type "double3" 10.015100751864585 2.440704345703125 10.556502780920365 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" -180 179.99999999999937 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 2.0872192862952943e-14 1.2545520178264269e-14 1.8493812476930385e-14 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank4Shape" -p "|staircase|stairPlanks|stairPlank4";
 	rename -uid "91734258-42F1-A9D0-3F73-51938FF35890";
 	setAttr -k off ".v";
@@ -66915,8 +66931,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase|stairPlanks|stairPlank4";
 createNode transform -n "stairPlank5" -p "|staircase|stairPlanks";
 	rename -uid "C764B48F-4835-B4C6-BF95-D589774E163E";
 	setAttr ".t" -type "double3" 10.015100751864585 2.9258804321289062 9.7851805305541539 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" -179.99999999999937 0 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 0 2.1094237467877974e-15 -1.1532441668293814e-14 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank5Shape" -p "|staircase|stairPlanks|stairPlank5";
 	rename -uid "8EF2CC09-4CB5-309D-D763-A08953E54095";
 	setAttr -k off ".v";
@@ -67086,8 +67104,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase|stairPlanks|stairPlank5";
 createNode transform -n "stairPlank6" -p "|staircase|stairPlanks";
 	rename -uid "C854F796-4DAC-4C86-82EE-1489D61D4540";
 	setAttr ".t" -type "double3" 10.015100275027427 3.4110565185546875 9.013858280187943 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" -180 179.99999999999937 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 2.0872192862952943e-14 1.2545520178264269e-14 1.8493812476930385e-14 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank6Shape" -p "|staircase|stairPlanks|stairPlank6";
 	rename -uid "8A173374-4461-E719-A815-4AABEE4F2114";
 	setAttr -k off ".v";
@@ -67257,8 +67277,9 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase|stairPlanks|stairPlank6";
 createNode transform -n "stairPlank7" -p "|staircase|stairPlanks";
 	rename -uid "4518E7B7-44CF-92DD-7288-2BB5961A32C1";
 	setAttr ".t" -type "double3" 10.015100275027427 3.8962326049804688 8.2425355529845739 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 0 6.106226635438361e-15 -1.4613310561628623e-14 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank7Shape" -p "|staircase|stairPlanks|stairPlank7";
 	rename -uid "34D9D6DC-489F-1A66-84CB-BCB2590AB405";
 	setAttr -k off ".v";
@@ -67428,8 +67449,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase|stairPlanks|stairPlank7";
 createNode transform -n "stairPlank8" -p "|staircase|stairPlanks";
 	rename -uid "A9A2C38E-467E-15B7-32B4-D5920F809F74";
 	setAttr ".t" -type "double3" 10.015100275027427 4.38140869140625 7.4712128257812047 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" -359.99999999999977 179.99999999999937 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 2.5757174171303632e-14 1.0713652187632705e-14 2.3009372185356369e-14 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank8Shape" -p "|staircase|stairPlanks|stairPlank8";
 	rename -uid "D21E599F-4359-DFFC-74CA-05BFCF041BAC";
 	setAttr -k off ".v";
@@ -67599,8 +67622,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase|stairPlanks|stairPlank8";
 createNode transform -n "stairPlank9" -p "|staircase|stairPlanks";
 	rename -uid "E3866C2F-451D-00A8-B4C2-4B8D7A1DF063";
 	setAttr ".t" -type "double3" 10.015100275027427 4.8665847778320312 6.6998900985778356 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" -179.99999999999937 0 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 0 2.1094237467877974e-15 -1.1532441668293814e-14 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank9Shape" -p "|staircase|stairPlanks|stairPlank9";
 	rename -uid "B839153C-4720-871E-AFFC-AFBA977EBF32";
 	setAttr -k off ".v";
@@ -67770,8 +67795,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase|stairPlanks|stairPlank9";
 createNode transform -n "stairPlank10" -p "|staircase|stairPlanks";
 	rename -uid "0FDD9F56-45B7-DFDF-A269-7BA6B42E4424";
 	setAttr ".t" -type "double3" 10.015100275027427 5.3517608642578125 5.9285673713744664 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" -180 179.99999999999937 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 2.0872192862952943e-14 1.2545520178264269e-14 1.8493812476930385e-14 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank10Shape" -p "|staircase|stairPlanks|stairPlank10";
 	rename -uid "C55A8215-4C5E-ED13-FA94-C1BDA8FF5530";
 	setAttr -k off ".v";
@@ -67941,8 +67968,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase|stairPlanks|stairPlank10";
 createNode transform -n "stairPlank11" -p "|staircase|stairPlanks";
 	rename -uid "5C499366-4512-F13D-D18C-2EAF9C80F2AE";
 	setAttr ".t" -type "double3" 10.015100751864585 5.8369369506835938 5.1380447959960485 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" -179.99999999999937 0 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 0 2.1094237467877974e-15 -1.1532441668293814e-14 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank11Shape" -p "|staircase|stairPlanks|stairPlank11";
 	rename -uid "9FC10B69-42C4-24F9-7AC8-D781A6E45904";
 	setAttr -k off ".v";
@@ -68112,8 +68141,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase|stairPlanks|stairPlank11";
 createNode transform -n "stairPlank12" -p "|staircase|stairPlanks";
 	rename -uid "287A7655-43B4-D263-47B4-5FB247D35274";
 	setAttr ".t" -type "double3" 10.015100275027427 6.322113037109375 4.3859219169677282 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" -180 179.99999999999937 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 2.0872192862952943e-14 1.2545520178264269e-14 1.8493812476930385e-14 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank12Shape" -p "|staircase|stairPlanks|stairPlank12";
 	rename -uid "1979DED4-4045-FE0D-9BE9-108D7FBD3472";
 	setAttr -k off ".v";
@@ -68283,8 +68314,9 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase|stairPlanks|stairPlank12";
 createNode transform -n "stairPlank13" -p "|staircase|stairPlanks";
 	rename -uid "FB5F7371-429A-C5FB-3258-74A97C96E7A3";
 	setAttr ".t" -type "double3" 10.015100275027427 6.8072891235351562 3.614599189764359 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 0 7.5495165674510645e-15 -1.4446777107934849e-14 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank13Shape" -p "|staircase|stairPlanks|stairPlank13";
 	rename -uid "03EEC62A-42A8-FBF8-218F-EEABDDA9C9B6";
 	setAttr -k off ".v";
@@ -68454,8 +68486,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase|stairPlanks|stairPlank13";
 createNode transform -n "stairPlank14" -p "|staircase|stairPlanks";
 	rename -uid "AF8F7D81-4560-76FF-0FEE-4FBBE4B2F1CF";
 	setAttr ".t" -type "double3" 10.015100275027427 7.2924652099609375 2.8432762241424108 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" -180 179.99999999999937 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 2.0872192862952943e-14 1.2545520178264269e-14 1.8493812476930385e-14 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank14Shape" -p "|staircase|stairPlanks|stairPlank14";
 	rename -uid "583AD4F2-4155-84A1-B270-D1B06E284F5A";
 	setAttr -k off ".v";
@@ -68625,8 +68659,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase|stairPlanks|stairPlank14";
 createNode transform -n "stairPlank15" -p "|staircase|stairPlanks";
 	rename -uid "46AFC364-421D-7691-552B-57A4375C3AEA";
 	setAttr ".t" -type "double3" 10.015100275027427 7.7776412963867188 2.0719537353576207 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" -179.99999999999937 0 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 0 2.1094237467877974e-15 -1.1532441668293814e-14 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank15Shape" -p "|staircase|stairPlanks|stairPlank15";
 	rename -uid "97894D1F-4FD6-D440-5E5E-B1A0455BFE00";
 	setAttr -k off ".v";
@@ -68796,8 +68832,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase|stairPlanks|stairPlank15";
 createNode transform -n "stairPlank16" -p "|staircase|stairPlanks";
 	rename -uid "35664A79-4011-98D5-9916-71B7772A04DF";
 	setAttr ".t" -type "double3" 10.015100275027427 8.246586799621582 1.3264340972960973 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" 180 0 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 0 1.7541523789077473e-14 7.9103390504542404e-16 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank16Shape" -p "|staircase|stairPlanks|stairPlank16";
 	rename -uid "8D333F23-46EA-CB3A-5A4D-E7951ABF43D0";
 	setAttr -k off ".v";
@@ -68967,8 +69005,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase|stairPlanks|stairPlank16";
 createNode transform -n "stairPlank17" -p "|staircase|stairPlanks";
 	rename -uid "9CFE083C-41E7-A9F0-5985-E8BFFBA80CF1";
 	setAttr ".t" -type "double3" 10.015100275027427 8.246586799621582 0.23328252792964221 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 0.50000003814091443 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 0.50000003814091443 ;
+	setAttr ".r" -type "double3" 180 179.99999999999994 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 1.3766765505351941e-14 1.6986412276764895e-14 5.0498966815193012e-15 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank17Shape" -p "|staircase|stairPlanks|stairPlank17";
 	rename -uid "FAE69629-4D44-D2FC-DB7B-D2A56D1B1FEA";
 	setAttr -k off ".v";
@@ -69138,8 +69178,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase|stairPlanks|stairPlank17";
 createNode transform -n "stairPlank18" -p "|staircase|stairPlanks";
 	rename -uid "9F40667C-4F4F-1900-F7C1-7C98313C9831";
 	setAttr ".t" -type "double3" 10.015100275027427 8.246586799621582 -0.85986862420429944 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 0.50000003814091443 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 0.50000003814091443 ;
+	setAttr ".r" -type "double3" 359.9999999999996 0 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 0 2.2815083156046989e-14 2.2898349882893877e-15 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank18Shape" -p "|staircase|stairPlanks|stairPlank18";
 	rename -uid "4902AAE0-431C-C374-0C92-5698FECEC3CE";
 	setAttr -k off ".v";
@@ -69309,8 +69351,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase|stairPlanks|stairPlank18";
 createNode transform -n "stairPlank19" -p "|staircase|stairPlanks";
 	rename -uid "F74EA943-4C07-6E83-4635-33822F5408BA";
 	setAttr ".t" -type "double3" 10.015100275027427 8.246586799621582 -1.9530197763382411 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 0.50000003814091443 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 0.50000003814091443 ;
+	setAttr ".r" -type "double3" 180 179.99999999999994 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 1.4210854715202004e-14 1.7541523789077473e-14 6.0490974036819421e-15 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank19Shape" -p "|staircase|stairPlanks|stairPlank19";
 	rename -uid "AEED6D9E-4730-DFD0-AE40-E3849A6E2545";
 	setAttr -k off ".v";
@@ -69480,8 +69524,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase|stairPlanks|stairPlank19";
 createNode transform -n "stairPlank20" -p "|staircase|stairPlanks";
 	rename -uid "3A319C3E-4E79-8BFB-0977-27B01F603B01";
 	setAttr ".t" -type "double3" 10.015100275027427 8.246586799621582 -3.0461707496582484 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 0.50000003814091443 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 0.50000003814091443 ;
+	setAttr ".r" -type "double3" 0 179.99999999999994 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 1.9984014443252818e-14 1.6819878823071122e-14 1.4432899320127035e-15 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank20Shape" -p "|staircase|stairPlanks|stairPlank20";
 	rename -uid "DBC4B266-4881-2CAD-1025-6C947FE9F360";
 	setAttr -k off ".v";
@@ -72564,8 +72610,10 @@ createNode transform -n "stairPlanks" -p "staircase1";
 createNode transform -n "stairPlank" -p "|staircase1|stairPlanks";
 	rename -uid "4D706BC7-4711-ACFD-A5E6-F6836BB579AA";
 	setAttr ".t" -type "double3" 10.015100751864585 0.98517605662345886 12.870470485693314 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" 180 0 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 0 1.3322676295501878e-14 6.2450045135165055e-16 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlankShape" -p "|staircase1|stairPlanks|stairPlank";
 	rename -uid "70A2866C-4455-6CBD-D3D8-7282046F84FF";
 	setAttr -k off ".v";
@@ -72849,8 +72897,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase1|stairPlanks|stairPlank1";
 createNode transform -n "stairPlank2" -p "|staircase1|stairPlanks";
 	rename -uid "B9984E0C-4E94-E0C7-E54A-40A66DE5231D";
 	setAttr ".t" -type "double3" 10.015100751864585 1.4703521132469177 12.099147281652787 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" 180 179.99999999999994 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 1.7763568394002505e-14 1.2101430968414206e-14 1.5451298643476238e-14 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank2Shape" -p "|staircase1|stairPlanks|stairPlank2";
 	rename -uid "EFF6FE8B-4303-8BE6-770F-9C85582409B1";
 	setAttr -k off ".v";
@@ -73020,8 +73070,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase1|stairPlanks|stairPlank2";
 createNode transform -n "stairPlank3" -p "|staircase1|stairPlanks";
 	rename -uid "1E19ECE1-4694-C592-9A44-83812A6DCF6D";
 	setAttr ".t" -type "double3" 10.015100751864585 1.9555282592773438 11.327825031286576 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" 180 0 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 0 1.3322676295501878e-14 6.2450045135165055e-16 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank3Shape" -p "|staircase1|stairPlanks|stairPlank3";
 	rename -uid "39655622-4EE6-BCE5-DE17-6EA96558F8C8";
 	setAttr -k off ".v";
@@ -73191,8 +73243,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase1|stairPlanks|stairPlank3";
 createNode transform -n "stairPlank4" -p "|staircase1|stairPlanks";
 	rename -uid "CB36931A-4AE8-3769-0457-889737A90672";
 	setAttr ".t" -type "double3" 10.015100751864585 2.440704345703125 10.556502780920365 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" 359.99999999999909 0 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 0 1.5654144647214815e-14 2.7755575615630176e-16 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank4Shape" -p "|staircase1|stairPlanks|stairPlank4";
 	rename -uid "BD5DC26B-41D3-0534-433C-C68EE2DA4E9D";
 	setAttr -k off ".v";
@@ -73362,8 +73416,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase1|stairPlanks|stairPlank4";
 createNode transform -n "stairPlank5" -p "|staircase1|stairPlanks";
 	rename -uid "57429A60-4E11-51AD-6679-F7877EB40BC8";
 	setAttr ".t" -type "double3" 10.015100751864585 2.9258804321289062 9.7851805305541539 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" 0 179.99999999999994 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 1.4654943925052066e-14 1.4543921622589551e-14 1.7208456881689926e-15 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank5Shape" -p "|staircase1|stairPlanks|stairPlank5";
 	rename -uid "9CD2E5CF-42C0-3DD6-D84A-24AC4B98FFDB";
 	setAttr -k off ".v";
@@ -73533,8 +73589,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase1|stairPlanks|stairPlank5";
 createNode transform -n "stairPlank6" -p "|staircase1|stairPlanks";
 	rename -uid "6FE58AD6-4DEE-967B-96A2-5BAA3A4DA069";
 	setAttr ".t" -type "double3" 10.015100275027427 3.4110565185546875 9.013858280187943 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" 180 179.99999999999994 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 1.7763568394002505e-14 1.2101430968414206e-14 1.5451298643476238e-14 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank6Shape" -p "|staircase1|stairPlanks|stairPlank6";
 	rename -uid "C6E1E155-4506-F0D5-1D0E-AC8BAB08BAC9";
 	setAttr -k off ".v";
@@ -73704,8 +73762,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase1|stairPlanks|stairPlank6";
 createNode transform -n "stairPlank7" -p "|staircase1|stairPlanks";
 	rename -uid "CEF685CF-4042-6518-C6C6-329BC99E32D7";
 	setAttr ".t" -type "double3" 10.015100275027427 3.8962326049804688 8.2425355529845739 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" 359.9999999999996 0 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 0 1.4599432773820831e-14 9.5756735873919988e-16 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank7Shape" -p "|staircase1|stairPlanks|stairPlank7";
 	rename -uid "53F70B25-4EBF-F81C-93EE-D68E53F2D706";
 	setAttr -k off ".v";
@@ -73875,8 +73935,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase1|stairPlanks|stairPlank7";
 createNode transform -n "stairPlank8" -p "|staircase1|stairPlanks";
 	rename -uid "6E2B9997-4AC5-A49A-DDD7-06B320CCFD59";
 	setAttr ".t" -type "double3" 10.015100275027427 4.38140869140625 7.4712128257812047 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" 180 179.99999999999994 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 1.7763568394002505e-14 1.2101430968414206e-14 1.5451298643476238e-14 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank8Shape" -p "|staircase1|stairPlanks|stairPlank8";
 	rename -uid "AD8F0654-4E7E-DCD2-8A0A-40ADF98CC136";
 	setAttr -k off ".v";
@@ -74046,8 +74108,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase1|stairPlanks|stairPlank8";
 createNode transform -n "stairPlank9" -p "|staircase1|stairPlanks";
 	rename -uid "2866F789-4A2E-6680-A1BA-61BBCFACE8A6";
 	setAttr ".t" -type "double3" 10.015100275027427 4.8665847778320312 6.6998900985778356 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" 180 0 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 0 1.3322676295501878e-14 6.2450045135165055e-16 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank9Shape" -p "|staircase1|stairPlanks|stairPlank9";
 	rename -uid "14CA38B0-4918-4D40-BA46-CBAC00DF0805";
 	setAttr -k off ".v";
@@ -74217,8 +74281,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase1|stairPlanks|stairPlank9";
 createNode transform -n "stairPlank10" -p "|staircase1|stairPlanks";
 	rename -uid "854A2D59-4C48-D349-C204-998243B7328A";
 	setAttr ".t" -type "double3" 10.015100275027427 5.3517608642578125 5.9285673713744664 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" 180 179.99999999999994 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 1.7763568394002505e-14 1.2101430968414206e-14 1.5451298643476238e-14 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank10Shape" -p "|staircase1|stairPlanks|stairPlank10";
 	rename -uid "D2B49982-44FB-B0C1-E4D5-04950382FB0D";
 	setAttr -k off ".v";
@@ -74388,8 +74454,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase1|stairPlanks|stairPlank10"
 createNode transform -n "stairPlank11" -p "|staircase1|stairPlanks";
 	rename -uid "F4625407-4126-166B-ACDE-D0B978856CEB";
 	setAttr ".t" -type "double3" 10.015100453841528 5.8369369506835938 5.1380447959960485 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" 359.9999999999996 0 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 0 1.6375789613221081e-14 1.568190022283036e-15 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank11Shape" -p "|staircase1|stairPlanks|stairPlank11";
 	rename -uid "A66C8453-4EC3-E0E7-864A-169E8C2AB7B2";
 	setAttr -k off ".v";
@@ -74559,8 +74627,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase1|stairPlanks|stairPlank11"
 createNode transform -n "stairPlank12" -p "|staircase1|stairPlanks";
 	rename -uid "9CE948A1-4F5F-690B-7687-9EAF529AEBA2";
 	setAttr ".t" -type "double3" 10.015100275027427 6.322113037109375 4.3859219169677282 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" 180 179.99999999999994 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 1.7763568394002505e-14 1.2101430968414206e-14 1.5451298643476238e-14 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank12Shape" -p "|staircase1|stairPlanks|stairPlank12";
 	rename -uid "5B1010F7-4943-CCEA-6BC5-49BC8378E46F";
 	setAttr -k off ".v";
@@ -74730,8 +74800,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase1|stairPlanks|stairPlank12"
 createNode transform -n "stairPlank13" -p "|staircase1|stairPlanks";
 	rename -uid "587A626E-454C-C0CE-4320-F0AB1AD19AD8";
 	setAttr ".t" -type "double3" 10.015100275027427 6.8072891235351562 3.614599189764359 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" 180 0 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 0 1.3322676295501878e-14 6.2450045135165055e-16 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank13Shape" -p "|staircase1|stairPlanks|stairPlank13";
 	rename -uid "2014A4FD-43F1-00DF-0347-5CABA524DBBD";
 	setAttr -k off ".v";
@@ -74901,8 +74973,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase1|stairPlanks|stairPlank13"
 createNode transform -n "stairPlank14" -p "|staircase1|stairPlanks";
 	rename -uid "44FBD8AF-45F9-2D2E-5E63-20863D6D0C3B";
 	setAttr ".t" -type "double3" 10.015100275027427 7.2924652099609375 2.8432762241424108 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" 180 179.99999999999994 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 1.7763568394002505e-14 1.2101430968414206e-14 1.5451298643476238e-14 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank14Shape" -p "|staircase1|stairPlanks|stairPlank14";
 	rename -uid "648DA8AE-4009-7A49-012D-8ABB6C6A6301";
 	setAttr -k off ".v";
@@ -75072,8 +75146,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase1|stairPlanks|stairPlank14"
 createNode transform -n "stairPlank15" -p "|staircase1|stairPlanks";
 	rename -uid "3E4BEAF3-4526-8535-EC8F-DB9851665DC8";
 	setAttr ".t" -type "double3" 10.015100275027427 7.7776412963867188 2.0719537353576207 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" 180 0 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 0 1.3322676295501878e-14 6.2450045135165055e-16 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank15Shape" -p "|staircase1|stairPlanks|stairPlank15";
 	rename -uid "46747440-4630-3835-0117-49A8F11AB69D";
 	setAttr -k off ".v";
@@ -75243,8 +75319,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase1|stairPlanks|stairPlank15"
 createNode transform -n "stairPlank16" -p "|staircase1|stairPlanks";
 	rename -uid "4DC43A8A-4F91-59C9-E45A-B7B90413119B";
 	setAttr ".t" -type "double3" 10.015100275027427 8.246586799621582 1.3264340972960973 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 -0.59315153122554065 ;
+	setAttr ".r" -type "double3" -180 0 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 0 5.440092820663267e-15 -2.400857290751901e-15 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank16Shape" -p "|staircase1|stairPlanks|stairPlank16";
 	rename -uid "8DB61537-4E5B-BB24-31D9-ECBB774397EB";
 	setAttr -k off ".v";
@@ -75414,8 +75492,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase1|stairPlanks|stairPlank16"
 createNode transform -n "stairPlank17" -p "|staircase1|stairPlanks";
 	rename -uid "CE1E9C6D-48B1-E6D2-2462-FF86769CD45A";
 	setAttr ".t" -type "double3" 10.015100275027427 8.246586799621582 0.23328252792964221 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 0.50000003814091443 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 0.50000003814091443 ;
+	setAttr ".r" -type "double3" -359.99999999999977 179.99999999999994 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 1.9095836023552692e-14 1.4988010832439617e-15 1.0269562977782698e-14 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank17Shape" -p "|staircase1|stairPlanks|stairPlank17";
 	rename -uid "4E641249-4910-7B99-B082-969A4B49A66D";
 	setAttr -k off ".v";
@@ -75585,8 +75665,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase1|stairPlanks|stairPlank17"
 createNode transform -n "stairPlank18" -p "|staircase1|stairPlanks";
 	rename -uid "00463191-4333-F646-C6F4-8E9E8040520D";
 	setAttr ".t" -type "double3" 10.015100275027427 8.246586799621582 -0.85986862420429944 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 0.50000003814091443 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 0.50000003814091443 ;
+	setAttr ".r" -type "double3" -180 179.99999999999994 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 2.4424906541753444e-14 6.106226635438361e-15 7.9953155517461562e-15 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank18Shape" -p "|staircase1|stairPlanks|stairPlank18";
 	rename -uid "810D6027-4BC6-5BEC-DF4C-65A6BBF0E80E";
 	setAttr -k off ".v";
@@ -75756,8 +75838,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase1|stairPlanks|stairPlank18"
 createNode transform -n "stairPlank19" -p "|staircase1|stairPlanks";
 	rename -uid "8A91FAAC-4B20-2A97-E3BE-2295548E8CD0";
 	setAttr ".t" -type "double3" 10.015100275027427 8.246586799621582 -1.9530197763382411 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 0.50000003814091443 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 0.50000003814091443 ;
+	setAttr ".r" -type "double3" -180 0 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 0 5.440092820663267e-15 -2.400857290751901e-15 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank19Shape" -p "|staircase1|stairPlanks|stairPlank19";
 	rename -uid "B9D6EAF1-4C80-67FF-4D2A-74B966F6E6F5";
 	setAttr -k off ".v";
@@ -75927,8 +76011,10 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase1|stairPlanks|stairPlank19"
 createNode transform -n "stairPlank20" -p "|staircase1|stairPlanks";
 	rename -uid "79C88E51-4144-C276-5409-4BA5A8EA9DF1";
 	setAttr ".t" -type "double3" 10.015100275027427 8.246586799621582 -3.0461707496582484 ;
-	setAttr ".rp" -type "double3" -3.3321965083953469 -0.5 0.50000003814091443 ;
-	setAttr ".sp" -type "double3" -3.3321965083953469 -0.5 0.50000003814091443 ;
+	setAttr ".r" -type "double3" -180 179.99999999999994 0 ;
+	setAttr ".rp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
+	setAttr ".rpt" -type "double3" 2.4424906541753444e-14 6.106226635438361e-15 7.9953155517461562e-15 ;
+	setAttr ".sp" -type "double3" -1.4160981178283691 -0.40399417281150818 -0.046575546264648438 ;
 createNode mesh -n "stairPlank20Shape" -p "|staircase1|stairPlanks|stairPlank20";
 	rename -uid "893AB2B6-4FB1-B632-A76E-C48D48600437";
 	setAttr -k off ".v";
@@ -76096,9 +76182,9 @@ createNode mesh -n "polySurfaceShape9" -p "|staircase1|stairPlanks|stairPlank20"
 	setAttr ".pd[0]" -type "dataPolyComponent" Index_Data UV 0 ;
 	setAttr ".hfd" -type "dataPolyComponent" Index_Data Face 0 ;
 createNode lightLinker -s -n "lightLinker1";
-	rename -uid "6AF0E12A-4C8B-F062-67D8-1CB09FC7D459";
-	setAttr -s 13 ".lnk";
-	setAttr -s 13 ".slnk";
+	rename -uid "D8DF0472-4F61-02FF-AFA7-F49735E43D5D";
+	setAttr -s 14 ".lnk";
+	setAttr -s 14 ".slnk";
 createNode UsdDefaultSettings -n "UsdDefaultRenderSettings";
 	rename -uid "12E2A29F-49A4-0BEE-D2F7-DB9176758756";
 	setAttr ".srl" -type "string" "#usda 1.0\n(\n    renderSettingsPrimPath = \"/Render/SceneRenderSettings\"\n)\n\ndef Scope \"Render\"\n{\n    def RenderSettings \"SceneRenderSettings\"\n    {\n        custom string adskUsd:externalCamera = \"|persp\" (\n            displayName = \"External Camera\"\n        )\n        rel products = </Render/BeautyProduct>\n    }\n\n    def RenderVar \"color\"\n    {\n        uniform string sourceName = \"color\"\n    }\n\n    def RenderProduct \"BeautyProduct\"\n    {\n        rel orderedVars = </Render/color>\n        token productName = \"./default.png\"\n    }\n}\n\n";
@@ -76106,11 +76192,11 @@ createNode UsdDefaultSettings -n "UsdDefaultRenderSettings";
 	setAttr ".asp" -type "string" "UsdDefaultRenderSettings,/Render/SceneRenderSettings";
 lockNode -l 1 ;
 createNode shapeEditorManager -n "shapeEditorManager";
-	rename -uid "7346A665-4800-0FC0-2351-559B57A5D151";
+	rename -uid "22FD5B1E-478C-991D-5B96-DABE84577F08";
 createNode poseInterpolatorManager -n "poseInterpolatorManager";
-	rename -uid "8F0B7FF4-4999-5E0F-04DF-DE856317E372";
+	rename -uid "9BB1350C-47E3-C0F3-7C91-A0A34719BA7B";
 createNode displayLayerManager -n "layerManager";
-	rename -uid "6B5FC8E2-4658-4C77-D9D4-57AC753CE7E8";
+	rename -uid "EFBFAFBB-4FBB-5FBA-30C1-30A2766A1ECE";
 	setAttr ".cdl" 1;
 	setAttr -s 2 ".dli[1]"  1;
 	setAttr -s 2 ".dli";
@@ -76118,7 +76204,7 @@ createNode displayLayer -n "defaultLayer";
 	rename -uid "314C3DCD-4D89-8EA6-1D9F-1F8A1774C13F";
 	setAttr ".ufem" -type "stringArray" 0  ;
 createNode renderLayerManager -n "renderLayerManager";
-	rename -uid "E0A632F0-493D-7113-DC56-6F91057AD586";
+	rename -uid "DB00324F-47AE-D841-D728-8ABA5C03AC08";
 createNode renderLayer -n "defaultRenderLayer";
 	rename -uid "3B8D1A55-4E61-828E-1633-398CDDB97786";
 	setAttr ".g" yes;
@@ -76136,9 +76222,9 @@ createNode script -n "uiConfigurationScriptNode";
 		+ "            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n"
 		+ "            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n"
 		+ "            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -bluePencil 1\n            -greasePencils 0\n            -excludeObjectPreset \"All\" \n            -shadows 0\n            -captureSequenceNumber -1\n            -width 1\n            -height 1\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n            -pluginObjects \"mayaUsdProxyShapeBaseDisplayFilter\" 1 \n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Persp View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n"
-		+ "\t\tmodelPanel -edit -l (localizedPanelLabel(\"Persp View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"|persp\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 1\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n"
+		+ "\t\tmodelPanel -edit -l (localizedPanelLabel(\"Persp View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"|persp\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 1\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n"
 		+ "            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n"
-		+ "            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -bluePencil 1\n            -greasePencils 0\n            -excludeObjectPreset \"All\" \n            -shadows 0\n            -captureSequenceNumber -1\n            -width 1317\n            -height 864\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n"
+		+ "            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -bluePencil 1\n            -greasePencils 0\n            -excludeObjectPreset \"All\" \n            -shadows 0\n            -captureSequenceNumber -1\n            -width 1117\n            -height 864\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n"
 		+ "        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n            -pluginObjects \"mayaUsdProxyShapeBaseDisplayFilter\" 1 \n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"outlinerPanel\" (localizedPanelLabel(\"ToggledOutliner\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\toutlinerPanel -edit -l (localizedPanelLabel(\"ToggledOutliner\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        outlinerEditor -e \n            -docTag \"isolOutln_fromSeln\" \n            -showShapes 0\n            -showAssignedMaterials 0\n            -showTimeEditor 1\n            -showReferenceNodes 1\n            -showReferenceMembers 1\n            -showAttributes 0\n            -showConnected 0\n            -showAnimCurvesOnly 0\n            -showMuteInfo 0\n            -organizeByLayer 1\n            -organizeByClip 1\n            -showAnimLayerWeight 1\n            -autoExpandLayers 1\n"
 		+ "            -autoExpand 0\n            -showDagOnly 1\n            -showAssets 1\n            -showContainedOnly 1\n            -showPublishedAsConnected 0\n            -showParentContainers 0\n            -showContainerContents 1\n            -ignoreDagHierarchy 0\n            -expandConnections 0\n            -showUpstreamCurves 1\n            -showUnitlessCurves 1\n            -showCompounds 1\n            -showLeafs 1\n            -showNumericAttrsOnly 0\n            -highlightActive 1\n            -autoSelectNewObjects 0\n            -doNotSelectNewObjects 0\n            -dropIsParent 1\n            -transmitFilters 0\n            -setFilter \"defaultSetFilter\" \n            -showSetMembers 1\n            -allowMultiSelection 1\n            -alwaysToggleSelect 0\n            -directSelect 0\n            -isSet 0\n            -isSetMember 0\n            -showUfeItems 1\n            -displayMode \"DAG\" \n            -expandObjects 0\n            -setsIgnoreFilters 1\n            -containersIgnoreFilters 0\n            -editAttrName 0\n            -showAttrValues 0\n"
 		+ "            -highlightSecondary 0\n            -showUVAttrsOnly 0\n            -showTextureNodesOnly 0\n            -attrAlphaOrder \"default\" \n            -animLayerFilterOptions \"allAffecting\" \n            -sortOrder \"none\" \n            -longNames 0\n            -niceNames 1\n            -selectCommand \"print(\\\"\\\")\" \n            -showNamespace 1\n            -showPinIcons 0\n            -mapMotionTrails 0\n            -ignoreHiddenAttribute 0\n            -ignoreOutlinerColor 0\n            -renderFilterVisible 0\n            -renderFilterIndex 0\n            -selectionOrder \"chronological\" \n            -expandAttribute 0\n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"outlinerPanel\" (localizedPanelLabel(\"Outliner\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\toutlinerPanel -edit -l (localizedPanelLabel(\"Outliner\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        outlinerEditor -e \n"
@@ -76166,8 +76252,8 @@ createNode script -n "uiConfigurationScriptNode";
 		+ "                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -controllers 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -particleInstancers 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n"
 		+ "                -pluginShapes 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -bluePencil 1\n                -greasePencils 0\n                -excludeObjectPreset \"All\" \n                -shadows 0\n                -captureSequenceNumber -1\n                -width 0\n                -height 0\n                -sceneRenderFilter 0\n                -displayMode \"centerEye\" \n                -viewColor 0 0 0 1 \n                -useCustomBackground 1\n                $editorName;\n            stereoCameraView -e -viewSelected 0 $editorName;\n            stereoCameraView -e \n                -pluginObjects \"gpuCacheDisplayFilter\" 1 \n                -pluginObjects \"mayaUsdProxyShapeBaseDisplayFilter\" 1 \n                $editorName; };\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\tif ($useSceneConfig) {\n        string $configName = `getPanel -cwl (localizedPanelLabel(\"Current Layout\"))`;\n"
 		+ "        if (\"\" != $configName) {\n\t\t\tpanelConfiguration -edit -label (localizedPanelLabel(\"Current Layout\")) \n\t\t\t\t-userCreated false\n\t\t\t\t-defaultImage \"vacantCell.png\"\n\t\t\t\t-image \"\"\n\t\t\t\t-sc false\n\t\t\t\t-configString \"global string $gMainPane; paneLayout -e -cn \\\"single\\\" -ps 1 100 100 $gMainPane;\"\n\t\t\t\t-removeAllPanels\n\t\t\t\t-ap false\n\t\t\t\t\t(localizedPanelLabel(\"Persp View\")) \n\t\t\t\t\t\"modelPanel\"\n"
-		+ "\t\t\t\t\t\"$panelName = `modelPanel -unParent -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels `;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -cam `findStartUpCamera persp` \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 1\\n    -headsUpDisplay 1\\n    -holdOuts 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 0\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 32768\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -depthOfFieldPreview 1\\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -controllers 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -bluePencil 1\\n    -greasePencils 0\\n    -excludeObjectPreset \\\"All\\\" \\n    -shadows 0\\n    -captureSequenceNumber -1\\n    -width 1317\\n    -height 864\\n    -sceneRenderFilter 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName;\\nmodelEditor -e \\n    -pluginObjects \\\"gpuCacheDisplayFilter\\\" 1 \\n    -pluginObjects \\\"mayaUsdProxyShapeBaseDisplayFilter\\\" 1 \\n    $editorName\"\n"
-		+ "\t\t\t\t\t\"modelPanel -edit -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels  $panelName;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -cam `findStartUpCamera persp` \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 1\\n    -headsUpDisplay 1\\n    -holdOuts 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 0\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 32768\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -depthOfFieldPreview 1\\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -controllers 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -bluePencil 1\\n    -greasePencils 0\\n    -excludeObjectPreset \\\"All\\\" \\n    -shadows 0\\n    -captureSequenceNumber -1\\n    -width 1317\\n    -height 864\\n    -sceneRenderFilter 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName;\\nmodelEditor -e \\n    -pluginObjects \\\"gpuCacheDisplayFilter\\\" 1 \\n    -pluginObjects \\\"mayaUsdProxyShapeBaseDisplayFilter\\\" 1 \\n    $editorName\"\n"
+		+ "\t\t\t\t\t\"$panelName = `modelPanel -unParent -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels `;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -cam `findStartUpCamera persp` \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -holdOuts 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 1\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 32768\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -depthOfFieldPreview 1\\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -controllers 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -bluePencil 1\\n    -greasePencils 0\\n    -excludeObjectPreset \\\"All\\\" \\n    -shadows 0\\n    -captureSequenceNumber -1\\n    -width 1117\\n    -height 864\\n    -sceneRenderFilter 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName;\\nmodelEditor -e \\n    -pluginObjects \\\"gpuCacheDisplayFilter\\\" 1 \\n    -pluginObjects \\\"mayaUsdProxyShapeBaseDisplayFilter\\\" 1 \\n    $editorName\"\n"
+		+ "\t\t\t\t\t\"modelPanel -edit -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels  $panelName;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -cam `findStartUpCamera persp` \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -holdOuts 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 1\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 32768\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -depthOfFieldPreview 1\\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -controllers 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -bluePencil 1\\n    -greasePencils 0\\n    -excludeObjectPreset \\\"All\\\" \\n    -shadows 0\\n    -captureSequenceNumber -1\\n    -width 1117\\n    -height 864\\n    -sceneRenderFilter 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName;\\nmodelEditor -e \\n    -pluginObjects \\\"gpuCacheDisplayFilter\\\" 1 \\n    -pluginObjects \\\"mayaUsdProxyShapeBaseDisplayFilter\\\" 1 \\n    $editorName\"\n"
 		+ "\t\t\t\t$configName;\n\n            setNamedPanelLayout (localizedPanelLabel(\"Current Layout\"));\n        }\n\n        panelHistory -e -clear mainPanelHistory;\n        sceneUIReplacement -clear;\n\t}\n\n\ngrid -spacing 5 -size 12 -divisions 5 -displayAxes yes -displayGridLines yes -displayDivisionLines yes -displayPerspectiveLabels no -displayOrthographicLabels no -displayAxesBold yes -perspectiveLabelPosition axis -orthographicLabelPosition edge;\nviewManip -drawCompass 0 -compassAngle 0 -frontParameters \"\" -homeParameters \"\" -selectionLockParameters \"\";\n}\n");
 	setAttr ".st" 3;
 createNode script -n "sceneConfigurationScriptNode";
@@ -76225,7 +76311,7 @@ createNode place2dTexture -n "place2dTexture3";
 createNode bump2d -n "bump2d1";
 	rename -uid "E3E4455D-4AAD-4C30-3167-C8817A4A09C2";
 	setAttr ".bi" 1;
-	setAttr ".vc1" -type "float3" 0 9.9999997e-06 0 ;
+	setAttr ".vc1" -type "float3" 0 1.9999999e-05 0 ;
 	setAttr ".vc2" -type "float3" 9.9999997e-06 9.9999997e-06 0 ;
 createNode file -n "file4";
 	rename -uid "369FC980-4EFE-D556-2655-0FA3B65BBFFB";
@@ -76452,7 +76538,7 @@ createNode place2dTexture -n "place2dTexture25";
 createNode bump2d -n "bump2d2";
 	rename -uid "C3A21C47-4010-395E-F422-59AF481A96EB";
 	setAttr ".bi" 1;
-	setAttr ".vc1" -type "float3" 0 9.9999997e-06 0 ;
+	setAttr ".vc1" -type "float3" 0 1.9999999e-05 0 ;
 	setAttr ".vc2" -type "float3" 9.9999997e-06 9.9999997e-06 0 ;
 createNode file -n "file8";
 	rename -uid "CB26A4FD-41D1-7115-9958-5F8F408C8B52";
@@ -76480,57 +76566,80 @@ createNode shadingEngine -n "leg04SG";
 	setAttr ".ro" yes;
 createNode materialInfo -n "materialInfo11";
 	rename -uid "07ECAC95-4EB5-4DC5-CF44-7A85F938DE46";
+createNode openPBRSurface -n "stairsMat";
+	rename -uid "3BCDE715-4C32-E2DD-933F-F880E1205663";
+createNode shadingEngine -n "openPBRSurface5SG";
+	rename -uid "BD1212B1-4FAE-FF6E-F756-44A129C8DE95";
+	setAttr ".ihi" 0;
+	setAttr -s 79 ".dsm";
+	setAttr ".ro" yes;
+createNode materialInfo -n "materialInfo12";
+	rename -uid "C9222BDE-4FF9-207D-FF50-8DA52BFD848A";
+createNode file -n "stairs_openPBR_shader1_BaseColor_1";
+	rename -uid "9CCCAAF9-400E-9A29-6948-F8B7343319D7";
+	setAttr ".ftn" -type "string" "C:/Users/coope/Documents/AGD UVU Main Repository/UVU-AGD-Portfolio/UnityProject/UnityProjectTest/Assets/Maya//textureMaps/stairs/stairs_openPBR_shader1_BaseColor.png";
+	setAttr ".cs" -type "string" "sRGB Encoded Rec.709 (sRGB)";
+createNode place2dTexture -n "place2dTexture27";
+	rename -uid "470A47A2-4427-9996-10A2-08B9640DC0B0";
+createNode file -n "stairs_openPBR_shader1_Metallic_1";
+	rename -uid "B6AB13C6-4E54-2362-D1E4-C3969E7FDFB4";
+	setAttr ".ftn" -type "string" "C:/Users/coope/Documents/AGD UVU Main Repository/UVU-AGD-Portfolio/UnityProject/UnityProjectTest/Assets/Maya//textureMaps/stairs/stairs_openPBR_shader1_Metallic.png";
+	setAttr ".cs" -type "string" "Raw";
+createNode place2dTexture -n "place2dTexture28";
+	rename -uid "E42D5F3E-4749-FB32-50F8-9AB422B3B667";
+createNode file -n "stairs_openPBR_shader1_Normal_1";
+	rename -uid "E4E9F928-4713-1DD2-DC74-4499D80CBD29";
+	setAttr ".ftn" -type "string" "C:/Users/coope/Documents/AGD UVU Main Repository/UVU-AGD-Portfolio/UnityProject/UnityProjectTest/Assets/Maya//textureMaps/stairs/stairs_openPBR_shader1_Normal.png";
+	setAttr ".cs" -type "string" "sRGB Encoded Rec.709 (sRGB)";
+createNode place2dTexture -n "place2dTexture29";
+	rename -uid "AA494F15-41ED-56B9-58D8-E0B02EC59046";
+createNode file -n "stairs_openPBR_shader1_Roughness_1";
+	rename -uid "1F8EC05B-42B5-44CE-9379-498FAACF2868";
+	setAttr ".ftn" -type "string" "C:/Users/coope/Documents/AGD UVU Main Repository/UVU-AGD-Portfolio/UnityProject/UnityProjectTest/Assets/Maya//textureMaps/stairs/stairs_openPBR_shader1_Roughness.png";
+	setAttr ".cs" -type "string" "Raw";
+createNode place2dTexture -n "place2dTexture30";
+	rename -uid "15041D04-45F8-3605-58A8-E0973532BD2A";
+createNode aiNormalMap -n "aiNormalMap3";
+	rename -uid "8B80E6E9-4CFF-08B1-48D4-0498C1E14AB1";
 createNode nodeGraphEditorInfo -n "hyperShadePrimaryNodeEditorSavedTabsInfo";
-	rename -uid "85CE5C5F-487C-C988-7804-3CA61998F332";
+	rename -uid "BA72F447-443D-230E-176C-EEB3EE9759DC";
 	setAttr ".tgi[0].tn" -type "string" "Untitled_1";
-	setAttr ".tgi[0].vl" -type "double2" 2164.4951066066337 -2198.4646967140843 ;
-	setAttr ".tgi[0].vh" -type "double2" 4383.7902565150052 -722.86951725373092 ;
-	setAttr -s 15 ".tgi[0].ni";
-	setAttr ".tgi[0].ni[0].x" 3258.571533203125;
-	setAttr ".tgi[0].ni[0].y" -1472.857177734375;
-	setAttr ".tgi[0].ni[0].nvs" 1922;
-	setAttr ".tgi[0].ni[1].x" 2888.3935546875;
-	setAttr ".tgi[0].ni[1].y" -1567.9141845703125;
+	setAttr ".tgi[0].vl" -type "double2" 5079.9700372328061 -2824.8167807914788 ;
+	setAttr ".tgi[0].vh" -type "double2" 7696.0788894062071 -1347.681455878231 ;
+	setAttr -s 11 ".tgi[0].ni";
+	setAttr ".tgi[0].ni[0].x" 5685.974609375;
+	setAttr ".tgi[0].ni[0].y" -1835.660888671875;
+	setAttr ".tgi[0].ni[0].nvs" 1923;
+	setAttr ".tgi[0].ni[1].x" 5907.4033203125;
+	setAttr ".tgi[0].ni[1].y" -1835.660888671875;
 	setAttr ".tgi[0].ni[1].nvs" 1923;
-	setAttr ".tgi[0].ni[2].x" 2517.0595703125;
-	setAttr ".tgi[0].ni[2].y" -1428.0228271484375;
+	setAttr ".tgi[0].ni[2].x" 5502.80859375;
+	setAttr ".tgi[0].ni[2].y" -2359.2470703125;
 	setAttr ".tgi[0].ni[2].nvs" 1923;
-	setAttr ".tgi[0].ni[3].x" 2941.428466796875;
-	setAttr ".tgi[0].ni[3].y" -634.28570556640625;
+	setAttr ".tgi[0].ni[3].x" 5639.22119140625;
+	setAttr ".tgi[0].ni[3].y" -2182.09521484375;
 	setAttr ".tgi[0].ni[3].nvs" 1923;
-	setAttr ".tgi[0].ni[4].x" 2941.428466796875;
-	setAttr ".tgi[0].ni[4].y" -435.71429443359375;
+	setAttr ".tgi[0].ni[4].x" 5860.6494140625;
+	setAttr ".tgi[0].ni[4].y" -2182.09521484375;
 	setAttr ".tgi[0].ni[4].nvs" 1923;
-	setAttr ".tgi[0].ni[5].x" 3492.04345703125;
-	setAttr ".tgi[0].ni[5].y" -443.01535034179688;
-	setAttr ".tgi[0].ni[5].nvs" 1922;
-	setAttr ".tgi[0].ni[6].x" 2577.491455078125;
-	setAttr ".tgi[0].ni[6].y" -1577.4744873046875;
-	setAttr ".tgi[0].ni[6].nvs" 1923;
-	setAttr ".tgi[0].ni[7].x" 3228.571533203125;
-	setAttr ".tgi[0].ni[7].y" -1044.2857666015625;
-	setAttr ".tgi[0].ni[7].nvs" 1971;
-	setAttr ".tgi[0].ni[8].x" 3540;
-	setAttr ".tgi[0].ni[8].y" -1044.2857666015625;
+	setAttr ".tgi[0].ni[5].x" 6592.85693359375;
+	setAttr ".tgi[0].ni[5].y" -1852.857177734375;
+	setAttr ".tgi[0].ni[5].nvs" 1923;
+	setAttr ".tgi[0].ni[6].x" 6281.4287109375;
+	setAttr ".tgi[0].ni[6].y" -1852.857177734375;
+	setAttr ".tgi[0].ni[6].nvs" 1971;
+	setAttr ".tgi[0].ni[7].x" 5679.466796875;
+	setAttr ".tgi[0].ni[7].y" -2028.950927734375;
+	setAttr ".tgi[0].ni[7].nvs" 1923;
+	setAttr ".tgi[0].ni[8].x" 5900.8955078125;
+	setAttr ".tgi[0].ni[8].y" -2028.950927734375;
 	setAttr ".tgi[0].ni[8].nvs" 1923;
-	setAttr ".tgi[0].ni[9].x" 2756.841796875;
-	setAttr ".tgi[0].ni[9].y" -1400.4921875;
+	setAttr ".tgi[0].ni[9].x" 5724.23681640625;
+	setAttr ".tgi[0].ni[9].y" -2359.2470703125;
 	setAttr ".tgi[0].ni[9].nvs" 1923;
-	setAttr ".tgi[0].ni[10].x" 2776.46484375;
-	setAttr ".tgi[0].ni[10].y" -1088.4791259765625;
+	setAttr ".tgi[0].ni[10].x" 6003.61474609375;
+	setAttr ".tgi[0].ni[10].y" -2345.785888671875;
 	setAttr ".tgi[0].ni[10].nvs" 1923;
-	setAttr ".tgi[0].ni[11].x" 2782.258056640625;
-	setAttr ".tgi[0].ni[11].y" -1239.2418212890625;
-	setAttr ".tgi[0].ni[11].nvs" 1923;
-	setAttr ".tgi[0].ni[12].x" 2555.036376953125;
-	setAttr ".tgi[0].ni[12].y" -1088.4791259765625;
-	setAttr ".tgi[0].ni[12].nvs" 1923;
-	setAttr ".tgi[0].ni[13].x" 2560.82958984375;
-	setAttr ".tgi[0].ni[13].y" -1239.2418212890625;
-	setAttr ".tgi[0].ni[13].nvs" 1923;
-	setAttr ".tgi[0].ni[14].x" 2356.06298828125;
-	setAttr ".tgi[0].ni[14].y" -1577.4744873046875;
-	setAttr ".tgi[0].ni[14].nvs" 1923;
 select -ne :time1;
 	setAttr ".o" 1;
 	setAttr ".unw" 1;
@@ -76542,17 +76651,17 @@ select -ne :hardwareRenderingGlobals;
 	setAttr ".fprt" yes;
 	setAttr ".rtfm" 1;
 select -ne :renderPartition;
-	setAttr -s 13 ".st";
+	setAttr -s 14 ".st";
 select -ne :renderGlobalsList1;
 select -ne :defaultShaderList1;
-	setAttr -s 14 ".s";
+	setAttr -s 15 ".s";
 select -ne :postProcessList1;
 	setAttr -s 2 ".p";
 select -ne :defaultRenderUtilityList1;
-	setAttr -s 26 ".u";
+	setAttr -s 31 ".u";
 select -ne :defaultRenderingList1;
 select -ne :defaultTextureList1;
-	setAttr -s 22 ".tx";
+	setAttr -s 26 ".tx";
 select -ne :standardSurface1;
 	setAttr ".bc" -type "float3" 0.40000001 0.40000001 0.40000001 ;
 	setAttr ".sr" 0.5;
@@ -76560,7 +76669,7 @@ select -ne :openPBR_shader1;
 	setAttr ".bc" -type "float3" 0.40000001 0.40000001 0.40000001 ;
 	setAttr ".sr" 0.5;
 select -ne :initialShadingGroup;
-	setAttr -s 85 ".dsm";
+	setAttr -s 7 ".dsm";
 	setAttr ".ro" yes;
 	setAttr -s 6 ".gn";
 select -ne :initialParticleSE;
@@ -76630,6 +76739,7 @@ relationship "link" ":lightLinker1" "openPBRSurface4SG.message" ":defaultLightSe
 relationship "link" ":lightLinker1" "deskSG.message" ":defaultLightSet.message";
 relationship "link" ":lightLinker1" "leg01SG.message" ":defaultLightSet.message";
 relationship "link" ":lightLinker1" "leg04SG.message" ":defaultLightSet.message";
+relationship "link" ":lightLinker1" "openPBRSurface5SG.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" "bookPagesSG.message" ":defaultLightSet.message";
@@ -76643,6 +76753,7 @@ relationship "shadowLink" ":lightLinker1" "openPBRSurface4SG.message" ":defaultL
 relationship "shadowLink" ":lightLinker1" "deskSG.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" "leg01SG.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" "leg04SG.message" ":defaultLightSet.message";
+relationship "shadowLink" ":lightLinker1" "openPBRSurface5SG.message" ":defaultLightSet.message";
 connectAttr "layerManager.dli[0]" "defaultLayer.id";
 connectAttr "renderLayerManager.rlmi[0]" "defaultRenderLayer.rlid";
 connectAttr "layerManager.dli[1]" "blockout.id";
@@ -77300,35 +77411,294 @@ connectAttr "leg05Shape.iog" "leg04SG.dsm" -na;
 connectAttr "leg04SG.msg" "materialInfo11.sg";
 connectAttr "texturedMaterial1.msg" "materialInfo11.m";
 connectAttr "texturedMaterial1.msg" "materialInfo11.t" -na;
-connectAttr "leg06Shape.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[0].dn"
+connectAttr "stairs_openPBR_shader1_BaseColor_1.oc" "stairsMat.bc";
+connectAttr "stairs_openPBR_shader1_Metallic_1.oa" "stairsMat.m";
+connectAttr "stairs_openPBR_shader1_Roughness_1.oa" "stairsMat.sr";
+connectAttr "aiNormalMap3.out" "stairsMat.n";
+connectAttr "stairsMat.oc" "openPBRSurface5SG.ss";
+connectAttr "|staircase|stairPlanks|stairPlank10|stairPlank10Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlankVerts|stairPlankVert6|stairPlankVert6Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlanks|stairPlank12|stairPlank12Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlanks|stairPlank|stairPlankShape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlanks|stairPlank3|stairPlank3Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlanks|stairPlank9|stairPlank9Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlankVerts|stairPlankVert9|stairPlankVert9Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlanks|stairPlank17|stairPlank17Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlankVerts|stairPlankVert15|stairPlankVert15Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlanks|stairPlank13|stairPlank13Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlanks|stairPlank8|stairPlank8Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlankVerts|stairPlankVert|stairPlankVertShape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlanks|stairPlank8|stairPlank8Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlanks|stairPlank3|stairPlank3Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlankVerts|stairPlankVert14|stairPlankVert14Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlanks|stairPlank6|stairPlank6Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlanks|stairPlank5|stairPlank5Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlankVerts|stairPlankVert4|stairPlankVert4Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlankDiag1|stairPlankDiag1Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlanks|stairPlank18|stairPlank18Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlanks|stairPlank11|stairPlank11Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlankVerts|stairPlankVert10|stairPlankVert10Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlanks|stairPlank19|stairPlank19Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlankVerts|stairPlankVert11|stairPlankVert11Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlanks|stairPlank2|stairPlank2Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlanks|stairPlank20|stairPlank20Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlankDiag|stairPlankDiagShape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlankVerts|stairPlankVert13|stairPlankVert13Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlankVerts|stairPlankVert5|stairPlankVert5Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlanks|stairPlank16|stairPlank16Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlankVerts|stairPlankVert8|stairPlankVert8Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlanks|stairPlank12|stairPlank12Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlankVerts|stairPlankVert2|stairPlankVert2Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlanks|stairPlank10|stairPlank10Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlanks|stairPlank7|stairPlank7Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlanks|stairPlank7|stairPlank7Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlanks|stairPlank13|stairPlank13Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlanks|stairPlank14|stairPlank14Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlanks|stairPlank4|stairPlank4Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlanks|stairPlank16|stairPlank16Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlanks|stairPlank|stairPlankShape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlanks|stairPlank18|stairPlank18Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlanks|stairPlank6|stairPlank6Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlankVerts|stairPlankVert12|stairPlankVert12Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlankVerts|stairPlankVert12|stairPlankVert12Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlanks|stairPlank1|stairPlank1Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlankVerts|stairPlankVert7|stairPlankVert7Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlankVerts|stairPlankVert8|stairPlankVert8Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlankVerts|stairPlankVert5|stairPlankVert5Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlankVerts|stairPlankVert|stairPlankVertShape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlankVerts|stairPlankVert10|stairPlankVert10Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlankDiag|stairPlankDiagShape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlankVerts|stairPlankVert6|stairPlankVert6Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlanks|stairPlank4|stairPlank4Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlanks|stairPlank2|stairPlank2Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlanks|stairPlank17|stairPlank17Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlanks|stairPlank5|stairPlank5Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlankVerts|stairPlankVert13|stairPlankVert13Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlanks|stairPlank9|stairPlank9Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlanks|stairPlank14|stairPlank14Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlankVerts|stairPlankVert1|stairPlankVert1Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlankVerts|stairPlankVert3|stairPlankVert3Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlanks|stairPlank19|stairPlank19Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlankVerts|stairPlankVert15|stairPlankVert15Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlanks|stairPlank15|stairPlank15Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlanks|stairPlank20|stairPlank20Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlanks|stairPlank1|stairPlank1Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase1|stairPlanks|stairPlank15|stairPlank15Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlankVerts|stairPlankVert4|stairPlankVert4Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlankVerts|stairPlankVert7|stairPlankVert7Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlankDiag1|stairPlankDiag1Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlankVerts|stairPlankVert2|stairPlankVert2Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlankVerts|stairPlankVert9|stairPlankVert9Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlankVerts|stairPlankVert11|stairPlankVert11Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlankVerts|stairPlankVert14|stairPlankVert14Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlankVerts|stairPlankVert1|stairPlankVert1Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlanks|stairPlank11|stairPlank11Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "|staircase|stairPlankVerts|stairPlankVert3|stairPlankVert3Shape.iog" "openPBRSurface5SG.dsm"
+		 -na;
+connectAttr "openPBRSurface5SG.msg" "materialInfo12.sg";
+connectAttr "stairsMat.msg" "materialInfo12.m";
+connectAttr "stairs_openPBR_shader1_BaseColor_1.msg" "materialInfo12.t" -na;
+connectAttr ":defaultColorMgtGlobals.cme" "stairs_openPBR_shader1_BaseColor_1.cme"
 		;
-connectAttr "aiNormalMap2.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[1].dn"
+connectAttr ":defaultColorMgtGlobals.cfe" "stairs_openPBR_shader1_BaseColor_1.cmcf"
 		;
-connectAttr "place2dTexture22.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[2].dn"
+connectAttr ":defaultColorMgtGlobals.cfp" "stairs_openPBR_shader1_BaseColor_1.cmcp"
 		;
-connectAttr "leg06.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[3].dn"
+connectAttr ":defaultColorMgtGlobals.wsn" "stairs_openPBR_shader1_BaseColor_1.ws"
 		;
-connectAttr "leg05.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[4].dn"
+connectAttr "place2dTexture27.c" "stairs_openPBR_shader1_BaseColor_1.c";
+connectAttr "place2dTexture27.tf" "stairs_openPBR_shader1_BaseColor_1.tf";
+connectAttr "place2dTexture27.rf" "stairs_openPBR_shader1_BaseColor_1.rf";
+connectAttr "place2dTexture27.mu" "stairs_openPBR_shader1_BaseColor_1.mu";
+connectAttr "place2dTexture27.mv" "stairs_openPBR_shader1_BaseColor_1.mv";
+connectAttr "place2dTexture27.s" "stairs_openPBR_shader1_BaseColor_1.s";
+connectAttr "place2dTexture27.wu" "stairs_openPBR_shader1_BaseColor_1.wu";
+connectAttr "place2dTexture27.wv" "stairs_openPBR_shader1_BaseColor_1.wv";
+connectAttr "place2dTexture27.re" "stairs_openPBR_shader1_BaseColor_1.re";
+connectAttr "place2dTexture27.of" "stairs_openPBR_shader1_BaseColor_1.of";
+connectAttr "place2dTexture27.r" "stairs_openPBR_shader1_BaseColor_1.ro";
+connectAttr "place2dTexture27.n" "stairs_openPBR_shader1_BaseColor_1.n";
+connectAttr "place2dTexture27.vt1" "stairs_openPBR_shader1_BaseColor_1.vt1";
+connectAttr "place2dTexture27.vt2" "stairs_openPBR_shader1_BaseColor_1.vt2";
+connectAttr "place2dTexture27.vt3" "stairs_openPBR_shader1_BaseColor_1.vt3";
+connectAttr "place2dTexture27.vc1" "stairs_openPBR_shader1_BaseColor_1.vc1";
+connectAttr "place2dTexture27.o" "stairs_openPBR_shader1_BaseColor_1.uv";
+connectAttr "place2dTexture27.ofs" "stairs_openPBR_shader1_BaseColor_1.fs";
+connectAttr ":defaultColorMgtGlobals.cme" "stairs_openPBR_shader1_Metallic_1.cme"
 		;
-connectAttr "leg05Shape.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[5].dn"
+connectAttr ":defaultColorMgtGlobals.cfe" "stairs_openPBR_shader1_Metallic_1.cmcf"
 		;
-connectAttr "bookshelf_openPBR_shader1_Normal_1.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[6].dn"
+connectAttr ":defaultColorMgtGlobals.cfp" "stairs_openPBR_shader1_Metallic_1.cmcp"
 		;
-connectAttr "bookshelfMat.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[7].dn"
+connectAttr ":defaultColorMgtGlobals.wsn" "stairs_openPBR_shader1_Metallic_1.ws"
 		;
-connectAttr "openPBRSurface4SG.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[8].dn"
+connectAttr "place2dTexture28.c" "stairs_openPBR_shader1_Metallic_1.c";
+connectAttr "place2dTexture28.tf" "stairs_openPBR_shader1_Metallic_1.tf";
+connectAttr "place2dTexture28.rf" "stairs_openPBR_shader1_Metallic_1.rf";
+connectAttr "place2dTexture28.mu" "stairs_openPBR_shader1_Metallic_1.mu";
+connectAttr "place2dTexture28.mv" "stairs_openPBR_shader1_Metallic_1.mv";
+connectAttr "place2dTexture28.s" "stairs_openPBR_shader1_Metallic_1.s";
+connectAttr "place2dTexture28.wu" "stairs_openPBR_shader1_Metallic_1.wu";
+connectAttr "place2dTexture28.wv" "stairs_openPBR_shader1_Metallic_1.wv";
+connectAttr "place2dTexture28.re" "stairs_openPBR_shader1_Metallic_1.re";
+connectAttr "place2dTexture28.of" "stairs_openPBR_shader1_Metallic_1.of";
+connectAttr "place2dTexture28.r" "stairs_openPBR_shader1_Metallic_1.ro";
+connectAttr "place2dTexture28.n" "stairs_openPBR_shader1_Metallic_1.n";
+connectAttr "place2dTexture28.vt1" "stairs_openPBR_shader1_Metallic_1.vt1";
+connectAttr "place2dTexture28.vt2" "stairs_openPBR_shader1_Metallic_1.vt2";
+connectAttr "place2dTexture28.vt3" "stairs_openPBR_shader1_Metallic_1.vt3";
+connectAttr "place2dTexture28.vc1" "stairs_openPBR_shader1_Metallic_1.vc1";
+connectAttr "place2dTexture28.o" "stairs_openPBR_shader1_Metallic_1.uv";
+connectAttr "place2dTexture28.ofs" "stairs_openPBR_shader1_Metallic_1.fs";
+connectAttr ":defaultColorMgtGlobals.cme" "stairs_openPBR_shader1_Normal_1.cme";
+connectAttr ":defaultColorMgtGlobals.cfe" "stairs_openPBR_shader1_Normal_1.cmcf"
 		;
-connectAttr "bookshelf_openPBR_shader1_Roughness_1.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[9].dn"
+connectAttr ":defaultColorMgtGlobals.cfp" "stairs_openPBR_shader1_Normal_1.cmcp"
 		;
-connectAttr "bookshelf_openPBR_shader1_BaseColor_1.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[10].dn"
+connectAttr ":defaultColorMgtGlobals.wsn" "stairs_openPBR_shader1_Normal_1.ws";
+connectAttr "place2dTexture29.c" "stairs_openPBR_shader1_Normal_1.c";
+connectAttr "place2dTexture29.tf" "stairs_openPBR_shader1_Normal_1.tf";
+connectAttr "place2dTexture29.rf" "stairs_openPBR_shader1_Normal_1.rf";
+connectAttr "place2dTexture29.mu" "stairs_openPBR_shader1_Normal_1.mu";
+connectAttr "place2dTexture29.mv" "stairs_openPBR_shader1_Normal_1.mv";
+connectAttr "place2dTexture29.s" "stairs_openPBR_shader1_Normal_1.s";
+connectAttr "place2dTexture29.wu" "stairs_openPBR_shader1_Normal_1.wu";
+connectAttr "place2dTexture29.wv" "stairs_openPBR_shader1_Normal_1.wv";
+connectAttr "place2dTexture29.re" "stairs_openPBR_shader1_Normal_1.re";
+connectAttr "place2dTexture29.of" "stairs_openPBR_shader1_Normal_1.of";
+connectAttr "place2dTexture29.r" "stairs_openPBR_shader1_Normal_1.ro";
+connectAttr "place2dTexture29.n" "stairs_openPBR_shader1_Normal_1.n";
+connectAttr "place2dTexture29.vt1" "stairs_openPBR_shader1_Normal_1.vt1";
+connectAttr "place2dTexture29.vt2" "stairs_openPBR_shader1_Normal_1.vt2";
+connectAttr "place2dTexture29.vt3" "stairs_openPBR_shader1_Normal_1.vt3";
+connectAttr "place2dTexture29.vc1" "stairs_openPBR_shader1_Normal_1.vc1";
+connectAttr "place2dTexture29.o" "stairs_openPBR_shader1_Normal_1.uv";
+connectAttr "place2dTexture29.ofs" "stairs_openPBR_shader1_Normal_1.fs";
+connectAttr ":defaultColorMgtGlobals.cme" "stairs_openPBR_shader1_Roughness_1.cme"
 		;
-connectAttr "bookshelf_openPBR_shader1_Metallic_1.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[11].dn"
+connectAttr ":defaultColorMgtGlobals.cfe" "stairs_openPBR_shader1_Roughness_1.cmcf"
 		;
-connectAttr "place2dTexture17.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[12].dn"
+connectAttr ":defaultColorMgtGlobals.cfp" "stairs_openPBR_shader1_Roughness_1.cmcp"
 		;
-connectAttr "place2dTexture20.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[13].dn"
+connectAttr ":defaultColorMgtGlobals.wsn" "stairs_openPBR_shader1_Roughness_1.ws"
 		;
-connectAttr "place2dTexture21.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[14].dn"
+connectAttr "place2dTexture30.c" "stairs_openPBR_shader1_Roughness_1.c";
+connectAttr "place2dTexture30.tf" "stairs_openPBR_shader1_Roughness_1.tf";
+connectAttr "place2dTexture30.rf" "stairs_openPBR_shader1_Roughness_1.rf";
+connectAttr "place2dTexture30.mu" "stairs_openPBR_shader1_Roughness_1.mu";
+connectAttr "place2dTexture30.mv" "stairs_openPBR_shader1_Roughness_1.mv";
+connectAttr "place2dTexture30.s" "stairs_openPBR_shader1_Roughness_1.s";
+connectAttr "place2dTexture30.wu" "stairs_openPBR_shader1_Roughness_1.wu";
+connectAttr "place2dTexture30.wv" "stairs_openPBR_shader1_Roughness_1.wv";
+connectAttr "place2dTexture30.re" "stairs_openPBR_shader1_Roughness_1.re";
+connectAttr "place2dTexture30.of" "stairs_openPBR_shader1_Roughness_1.of";
+connectAttr "place2dTexture30.r" "stairs_openPBR_shader1_Roughness_1.ro";
+connectAttr "place2dTexture30.n" "stairs_openPBR_shader1_Roughness_1.n";
+connectAttr "place2dTexture30.vt1" "stairs_openPBR_shader1_Roughness_1.vt1";
+connectAttr "place2dTexture30.vt2" "stairs_openPBR_shader1_Roughness_1.vt2";
+connectAttr "place2dTexture30.vt3" "stairs_openPBR_shader1_Roughness_1.vt3";
+connectAttr "place2dTexture30.vc1" "stairs_openPBR_shader1_Roughness_1.vc1";
+connectAttr "place2dTexture30.o" "stairs_openPBR_shader1_Roughness_1.uv";
+connectAttr "place2dTexture30.ofs" "stairs_openPBR_shader1_Roughness_1.fs";
+connectAttr "stairs_openPBR_shader1_Normal_1.oc" "aiNormalMap3.input";
+connectAttr "place2dTexture27.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[0].dn"
+		;
+connectAttr "stairs_openPBR_shader1_BaseColor_1.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[1].dn"
+		;
+connectAttr "place2dTexture29.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[2].dn"
+		;
+connectAttr "place2dTexture30.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[3].dn"
+		;
+connectAttr "stairs_openPBR_shader1_Roughness_1.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[4].dn"
+		;
+connectAttr "openPBRSurface5SG.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[5].dn"
+		;
+connectAttr "stairsMat.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[6].dn"
+		;
+connectAttr "place2dTexture28.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[7].dn"
+		;
+connectAttr "stairs_openPBR_shader1_Metallic_1.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[8].dn"
+		;
+connectAttr "stairs_openPBR_shader1_Normal_1.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[9].dn"
+		;
+connectAttr "aiNormalMap3.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[10].dn"
 		;
 connectAttr "bookPagesSG.pa" ":renderPartition.st" -na;
 connectAttr "bookCoverSG.pa" ":renderPartition.st" -na;
@@ -77341,6 +77711,7 @@ connectAttr "openPBRSurface4SG.pa" ":renderPartition.st" -na;
 connectAttr "deskSG.pa" ":renderPartition.st" -na;
 connectAttr "leg01SG.pa" ":renderPartition.st" -na;
 connectAttr "leg04SG.pa" ":renderPartition.st" -na;
+connectAttr "openPBRSurface5SG.pa" ":renderPartition.st" -na;
 connectAttr "white.msg" ":defaultShaderList1.s" -na;
 connectAttr "bookGreen.msg" ":defaultShaderList1.s" -na;
 connectAttr "texturedMaterial.msg" ":defaultShaderList1.s" -na;
@@ -77349,6 +77720,7 @@ connectAttr "openPBRSurface2.msg" ":defaultShaderList1.s" -na;
 connectAttr "chandelierMat.msg" ":defaultShaderList1.s" -na;
 connectAttr "bookshelfMat.msg" ":defaultShaderList1.s" -na;
 connectAttr "texturedMaterial1.msg" ":defaultShaderList1.s" -na;
+connectAttr "stairsMat.msg" ":defaultShaderList1.s" -na;
 connectAttr "place2dTexture1.msg" ":defaultRenderUtilityList1.u" -na;
 connectAttr "place2dTexture2.msg" ":defaultRenderUtilityList1.u" -na;
 connectAttr "place2dTexture3.msg" ":defaultRenderUtilityList1.u" -na;
@@ -77375,6 +77747,11 @@ connectAttr "place2dTexture24.msg" ":defaultRenderUtilityList1.u" -na;
 connectAttr "place2dTexture25.msg" ":defaultRenderUtilityList1.u" -na;
 connectAttr "bump2d2.msg" ":defaultRenderUtilityList1.u" -na;
 connectAttr "place2dTexture26.msg" ":defaultRenderUtilityList1.u" -na;
+connectAttr "place2dTexture27.msg" ":defaultRenderUtilityList1.u" -na;
+connectAttr "place2dTexture28.msg" ":defaultRenderUtilityList1.u" -na;
+connectAttr "place2dTexture29.msg" ":defaultRenderUtilityList1.u" -na;
+connectAttr "place2dTexture30.msg" ":defaultRenderUtilityList1.u" -na;
+connectAttr "aiNormalMap3.msg" ":defaultRenderUtilityList1.u" -na;
 connectAttr "defaultRenderLayer.msg" ":defaultRenderingList1.r" -na;
 connectAttr "file2.msg" ":defaultTextureList1.tx" -na;
 connectAttr "file1.msg" ":defaultTextureList1.tx" -na;
@@ -77412,6 +77789,13 @@ connectAttr "file5.msg" ":defaultTextureList1.tx" -na;
 connectAttr "file6.msg" ":defaultTextureList1.tx" -na;
 connectAttr "file7.msg" ":defaultTextureList1.tx" -na;
 connectAttr "file8.msg" ":defaultTextureList1.tx" -na;
+connectAttr "stairs_openPBR_shader1_BaseColor_1.msg" ":defaultTextureList1.tx" -na
+		;
+connectAttr "stairs_openPBR_shader1_Metallic_1.msg" ":defaultTextureList1.tx" -na
+		;
+connectAttr "stairs_openPBR_shader1_Normal_1.msg" ":defaultTextureList1.tx" -na;
+connectAttr "stairs_openPBR_shader1_Roughness_1.msg" ":defaultTextureList1.tx" -na
+		;
 connectAttr "groupId16.msg" ":initialShadingGroup.gn" -na;
 connectAttr "groupId30.msg" ":initialShadingGroup.gn" -na;
 connectAttr "groupId34.msg" ":initialShadingGroup.gn" -na;
@@ -77425,160 +77809,4 @@ connectAttr "eastwallShape.iog.og[0]" ":initialShadingGroup.dsm" -na;
 connectAttr "pCubeShape6.iog.og[0]" ":initialShadingGroup.dsm" -na;
 connectAttr "norhtwallShape3.iog.og[0]" ":initialShadingGroup.dsm" -na;
 connectAttr "pCubeShape3.iog.og[0]" ":initialShadingGroup.dsm" -na;
-connectAttr "|staircase|stairPlanks|stairPlank|stairPlankShape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlankVerts|stairPlankVert|stairPlankVertShape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlankDiag|stairPlankDiagShape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlankDiag1|stairPlankDiag1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlanks|stairPlank1|stairPlank1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlankVerts|stairPlankVert1|stairPlankVert1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlankVerts|stairPlankVert2|stairPlankVert2Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlankVerts|stairPlankVert3|stairPlankVert3Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlankVerts|stairPlankVert4|stairPlankVert4Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlankVerts|stairPlankVert5|stairPlankVert5Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlankVerts|stairPlankVert6|stairPlankVert6Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlankVerts|stairPlankVert7|stairPlankVert7Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlankVerts|stairPlankVert8|stairPlankVert8Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlankVerts|stairPlankVert9|stairPlankVert9Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlankVerts|stairPlankVert10|stairPlankVert10Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlankVerts|stairPlankVert11|stairPlankVert11Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlankVerts|stairPlankVert12|stairPlankVert12Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlankVerts|stairPlankVert13|stairPlankVert13Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlankVerts|stairPlankVert14|stairPlankVert14Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlankVerts|stairPlankVert15|stairPlankVert15Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlanks|stairPlank2|stairPlank2Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlanks|stairPlank3|stairPlank3Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlanks|stairPlank4|stairPlank4Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlanks|stairPlank5|stairPlank5Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlanks|stairPlank6|stairPlank6Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlanks|stairPlank7|stairPlank7Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlanks|stairPlank8|stairPlank8Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlanks|stairPlank9|stairPlank9Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlanks|stairPlank10|stairPlank10Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlanks|stairPlank11|stairPlank11Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlanks|stairPlank12|stairPlank12Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlanks|stairPlank13|stairPlank13Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlanks|stairPlank14|stairPlank14Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlanks|stairPlank15|stairPlank15Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlanks|stairPlank16|stairPlank16Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlanks|stairPlank17|stairPlank17Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlanks|stairPlank18|stairPlank18Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlanks|stairPlank19|stairPlank19Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase|stairPlanks|stairPlank20|stairPlank20Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlankDiag|stairPlankDiagShape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlankDiag1|stairPlankDiag1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlankVerts|stairPlankVert|stairPlankVertShape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlankVerts|stairPlankVert1|stairPlankVert1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlankVerts|stairPlankVert2|stairPlankVert2Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlankVerts|stairPlankVert3|stairPlankVert3Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlankVerts|stairPlankVert4|stairPlankVert4Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlankVerts|stairPlankVert5|stairPlankVert5Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlankVerts|stairPlankVert6|stairPlankVert6Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlankVerts|stairPlankVert7|stairPlankVert7Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlankVerts|stairPlankVert8|stairPlankVert8Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlankVerts|stairPlankVert9|stairPlankVert9Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlankVerts|stairPlankVert10|stairPlankVert10Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlankVerts|stairPlankVert11|stairPlankVert11Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlankVerts|stairPlankVert12|stairPlankVert12Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlankVerts|stairPlankVert13|stairPlankVert13Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlankVerts|stairPlankVert14|stairPlankVert14Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlankVerts|stairPlankVert15|stairPlankVert15Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlanks|stairPlank|stairPlankShape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlanks|stairPlank1|stairPlank1Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlanks|stairPlank2|stairPlank2Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlanks|stairPlank3|stairPlank3Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlanks|stairPlank4|stairPlank4Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlanks|stairPlank5|stairPlank5Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlanks|stairPlank6|stairPlank6Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlanks|stairPlank7|stairPlank7Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlanks|stairPlank8|stairPlank8Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlanks|stairPlank9|stairPlank9Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlanks|stairPlank10|stairPlank10Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlanks|stairPlank11|stairPlank11Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlanks|stairPlank12|stairPlank12Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlanks|stairPlank13|stairPlank13Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlanks|stairPlank14|stairPlank14Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlanks|stairPlank15|stairPlank15Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlanks|stairPlank16|stairPlank16Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlanks|stairPlank17|stairPlank17Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlanks|stairPlank18|stairPlank18Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlanks|stairPlank19|stairPlank19Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
-connectAttr "|staircase1|stairPlanks|stairPlank20|stairPlank20Shape.iog" ":initialShadingGroup.dsm"
-		 -na;
 // End of finalEnvironment.ma
