@@ -19,7 +19,7 @@ MonoBehaviour:
     spawnChance: 0.15
   middleLane:
     prefabPool:
-    - prefab: {fileID: 8731475555280379874, guid: 428cb0a5531c4c0468e7a5e0420830e8, type: 3}
+    - prefab: {fileID: 1778477674210153887, guid: 7bcea7669932362459d11e17c0d4c742, type: 3}
       weight: 3
     - prefab: {fileID: 8731475555280379874, guid: dac0ee958be4b364e88aeb6ce873e454, type: 3}
       weight: 1

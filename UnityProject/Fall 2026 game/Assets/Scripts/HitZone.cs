@@ -87,8 +87,15 @@ public class HitZone : MonoBehaviour
 
     private IZoneInteractable GetCurrentTarget()
     {
-        // Clean up any destroyed/null entries before checking.
-        objectsInZone.RemoveAll(o => o == null || (o as MonoBehaviour) == null);
+        // Clean up any destroyed entries, and any whose component has been
+        // disabled. An object that has already been used but is still alive
+        // (like a heart mid-flight) disables itself, and shouldn't keep
+        // absorbing inputs meant for the next object in the zone.
+        objectsInZone.RemoveAll(o =>
+        {
+            MonoBehaviour behaviour = o as MonoBehaviour;
+            return behaviour == null || !behaviour.isActiveAndEnabled;
+        });
 
         if (objectsInZone.Count == 0) return null;
 
