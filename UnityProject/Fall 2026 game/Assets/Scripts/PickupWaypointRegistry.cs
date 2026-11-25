@@ -1,15 +1,22 @@
 using UnityEngine;
 
 /// <summary>
-/// Holds scene references to the four waypoints that pickups fly between,
-/// so spawned prefabs (which can't hold direct scene references) can look
-/// them up when needed. Same idea as CharacterRegistry.
+/// Holds scene references that spawned pickups fly to, so prefabs (which
+/// can't hold direct scene references) can look them up when needed. Same
+/// idea as CharacterRegistry.
 ///
-/// Up input path:   first stop B, final stop A
-/// Down input path: first stop D, final stop C
+/// Hearts:
+///   Up input path:   first stop B, final stop A
+///   Down input path: first stop D, final stop C
+///   Plus optional pods and full-health points.
+/// Coins and hazards:
+///   One exit point per input (up, down, left, right). A used coin or
+///   hazard flies to the point matching the input, then despawns.
 ///
 /// Put this on a GameObject in every scene that uses these pickups, and
-/// assign four empty GameObjects (or any Transforms) once in the Inspector.
+/// assign the Transforms once in the Inspector. Any slot can point at the
+/// same object as another (for example coins and hazards can share exit
+/// points).
 /// </summary>
 [DefaultExecutionOrder(-1000)]
 public class PickupWaypointRegistry : MonoBehaviour
@@ -25,10 +32,28 @@ public class PickupWaypointRegistry : MonoBehaviour
     [SerializeField] private Transform pointD;
 
     [Header("Pods (raised while a heart is in flight, optional)")]
-    [Tooltip("Raised when a heart is used with Up, released when it reaches point A.")]
+    [Tooltip("Raised when a heart is used with Up, released when it reaches point A (or is diverted).")]
     [SerializeField] private PodLift podUp;
-    [Tooltip("Raised when a heart is used with Down, released when it reaches point C.")]
+    [Tooltip("Raised when a heart is used with Down, released when it reaches point C (or is diverted).")]
     [SerializeField] private PodLift podDown;
+
+    [Header("Full health points (optional)")]
+    [Tooltip("An up-path heart goes here instead if the top character is at max health.")]
+    [SerializeField] private Transform fullUp;
+    [Tooltip("A down-path heart goes here instead if the bottom character is at max health.")]
+    [SerializeField] private Transform fullDown;
+
+    [Header("Coin exit points (a used coin flies to the one matching the input, then despawns)")]
+    [SerializeField] private Transform coinUpPoint;
+    [SerializeField] private Transform coinDownPoint;
+    [SerializeField] private Transform coinLeftPoint;
+    [SerializeField] private Transform coinRightPoint;
+
+    [Header("Hazard exit points (a used hazard flies to the one matching the input, then despawns)")]
+    [SerializeField] private Transform hazardUpPoint;
+    [SerializeField] private Transform hazardDownPoint;
+    [SerializeField] private Transform hazardLeftPoint;
+    [SerializeField] private Transform hazardRightPoint;
 
     public Transform PointA => pointA;
     public Transform PointB => pointB;
@@ -36,6 +61,18 @@ public class PickupWaypointRegistry : MonoBehaviour
     public Transform PointD => pointD;
     public PodLift PodUp => podUp;
     public PodLift PodDown => podDown;
+    public Transform FullUp => fullUp;
+    public Transform FullDown => fullDown;
+
+    public Transform CoinUpPoint => coinUpPoint;
+    public Transform CoinDownPoint => coinDownPoint;
+    public Transform CoinLeftPoint => coinLeftPoint;
+    public Transform CoinRightPoint => coinRightPoint;
+
+    public Transform HazardUpPoint => hazardUpPoint;
+    public Transform HazardDownPoint => hazardDownPoint;
+    public Transform HazardLeftPoint => hazardLeftPoint;
+    public Transform HazardRightPoint => hazardRightPoint;
 
     private void Awake()
     {

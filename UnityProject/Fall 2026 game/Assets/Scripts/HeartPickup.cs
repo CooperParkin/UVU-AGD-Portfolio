@@ -12,9 +12,16 @@ using UnityEngine;
 ///             under gravity.
 /// Left/Right: destroyed with no heal, as before.
 ///
-/// Waypoints and pods come from PickupWaypointRegistry, and characters from
-/// CharacterRegistry, so this works on a prefab spawned at runtime. Pods
-/// are optional: if none are assigned, the heart just flies.
+/// Full health divert: if the character this heart is heading for reaches
+/// max health at any point (including already being full when the input
+/// happens), the heart cancels its flight, releases its pod, and flies from
+/// wherever it is to the Full Up / Full Down point instead, with no heal.
+/// After arriving there it drops under gravity like normal. This only
+/// applies if the matching Full point is assigned in the registry.
+///
+/// Waypoints, pods, and full points come from PickupWaypointRegistry, and
+/// characters from CharacterRegistry, so this works on a prefab spawned at
+/// runtime. Pods and full points are optional.
 ///
 /// If the heart is destroyed mid-flight (for example by a despawn zone), it
 /// still releases its pod, so a pod can never get stuck raised.
@@ -40,10 +47,21 @@ public class HeartPickup : MonoBehaviour, IZoneInteractable
     [Tooltip("Easing for each leg. Left to right is progress through the leg, bottom to top is how far along the path it is.")]
     [SerializeField] private AnimationCurve easeCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
+    [Header("Full Health Divert")]
+    [Tooltip("Seconds the heart takes to reach the Full point when its character is at max health. Applies to both Full Up and Full Down.")]
+    [SerializeField] private float divertSeconds = 0.3f;
+    [Tooltip("Easing for the trip to the Full point.")]
+    [SerializeField] private AnimationCurve divertCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+
     private Rigidbody rb;
     private ScrollingMover mover;
     private bool hasBeenUsed;
     private PodLift heldPod;
+
+    // State of the current flight.
+    private CharacterHealth flightTarget;
+    private Transform fullStop;
+    private bool diverted;
 
     private void Awake()
     {
@@ -65,6 +83,7 @@ public class HeartPickup : MonoBehaviour, IZoneInteractable
         StartFlight(
             waypoints != null ? waypoints.PointB : null,
             waypoints != null ? waypoints.PointA : null,
+            waypoints != null ? waypoints.FullUp : null,
             waypoints != null ? waypoints.PodUp : null,
             target);
     }
@@ -77,6 +96,7 @@ public class HeartPickup : MonoBehaviour, IZoneInteractable
         StartFlight(
             waypoints != null ? waypoints.PointD : null,
             waypoints != null ? waypoints.PointC : null,
+            waypoints != null ? waypoints.FullDown : null,
             waypoints != null ? waypoints.PodDown : null,
             target);
     }
@@ -93,7 +113,7 @@ public class HeartPickup : MonoBehaviour, IZoneInteractable
         Destroy(gameObject);
     }
 
-    private void StartFlight(Transform firstStop, Transform finalStop, PodLift pod, CharacterHealth target)
+    private void StartFlight(Transform firstStop, Transform finalStop, Transform fullPoint, PodLift pod, CharacterHealth target)
     {
         if (hasBeenUsed) return;
         hasBeenUsed = true;
@@ -105,6 +125,9 @@ public class HeartPickup : MonoBehaviour, IZoneInteractable
             Destroy(gameObject);
             return;
         }
+
+        flightTarget = target;
+        fullStop = fullPoint;
 
         // Stop ScrollingMover from dragging the heart left while it flies.
         if (mover != null)
@@ -126,14 +149,16 @@ public class HeartPickup : MonoBehaviour, IZoneInteractable
             rb.isKinematic = true;
         }
 
-        // Raise the pod for as long as this heart is in flight.
-        if (pod != null)
+        // Raise the pod for as long as this heart is heading to its final
+        // stop. If the character is already full, this heart is about to be
+        // diverted straight away and will never get there, so don't bother.
+        if (pod != null && !ShouldDivert())
         {
             heldPod = pod;
             heldPod.Lift();
         }
 
-        StartCoroutine(FlightRoutine(firstStop, finalStop, target));
+        StartCoroutine(FlightRoutine(firstStop, finalStop));
 
         // Disabling this component makes HitZone stop treating the heart as
         // a target, so later inputs go to whatever is behind it instead of
@@ -141,26 +166,56 @@ public class HeartPickup : MonoBehaviour, IZoneInteractable
         enabled = false;
     }
 
-    private IEnumerator FlightRoutine(Transform firstStop, Transform finalStop, CharacterHealth target)
+    private IEnumerator FlightRoutine(Transform firstStop, Transform finalStop)
     {
-        yield return StartCoroutine(FlyTo(firstStop));
-        yield return StartCoroutine(FlyTo(finalStop));
+        yield return StartCoroutine(FlyTo(firstStop, secondsPerLeg, easeCurve, true));
 
-        Heal(target);
+        if (!diverted)
+        {
+            yield return StartCoroutine(FlyTo(finalStop, secondsPerLeg, easeCurve, true));
+        }
+
+        // One last check right at the end, so a heal is never wasted on a
+        // character who reached max health during the final frame.
+        if (!diverted && ShouldDivert())
+        {
+            diverted = true;
+        }
+
+        if (diverted)
+        {
+            // The pod was only held for a heart heading to its final stop,
+            // and this one isn't going to make it, so let the pod go now.
+            ReleasePod();
+
+            yield return StartCoroutine(FlyTo(fullStop, divertSeconds, divertCurve, false));
+            ReleaseToPhysics();
+            yield break;
+        }
+
+        Heal(flightTarget);
         ReleasePod();
         ReleaseToPhysics();
     }
 
-    private IEnumerator FlyTo(Transform destination)
+    private IEnumerator FlyTo(Transform destination, float seconds, AnimationCurve curve, bool canDivert)
     {
         Vector3 start = transform.position;
-        float duration = Mathf.Max(0.01f, secondsPerLeg);
+        float duration = Mathf.Max(0.01f, seconds);
         float elapsed = 0f;
 
         while (elapsed < duration)
         {
+            // Checked before moving each frame, so the cancel takes effect
+            // the instant the character reaches max health, even mid-leg.
+            if (canDivert && ShouldDivert())
+            {
+                diverted = true;
+                yield break;
+            }
+
             elapsed += Time.deltaTime;
-            float progress = easeCurve.Evaluate(Mathf.Clamp01(elapsed / duration));
+            float progress = curve.Evaluate(Mathf.Clamp01(elapsed / duration));
 
             // Reads the destination every frame, so if the waypoint moves
             // (for example it's parented to an animated object), the heart
@@ -170,6 +225,16 @@ public class HeartPickup : MonoBehaviour, IZoneInteractable
         }
 
         transform.position = destination.position;
+    }
+
+    private bool ShouldDivert()
+    {
+        // Diverting needs both a Full point to go to and a character who is
+        // at max health. With no Full point assigned, hearts behave exactly
+        // as they did before this feature existed.
+        return fullStop != null
+            && flightTarget != null
+            && flightTarget.CurrentHearts >= flightTarget.MaxHearts;
     }
 
     private void Heal(CharacterHealth target)

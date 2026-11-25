@@ -39,11 +39,11 @@ MonoBehaviour:
     bottomPrefab: {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
   - beat: 20
     topPrefab: {fileID: 0}
-    middlePrefab: {fileID: 8731475555280379874, guid: 428cb0a5531c4c0468e7a5e0420830e8, type: 3}
+    middlePrefab: {fileID: 1778477674210153887, guid: 7bcea7669932362459d11e17c0d4c742, type: 3}
     bottomPrefab: {fileID: 0}
   - beat: 24
     topPrefab: {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
-    middlePrefab: {fileID: 8731475555280379874, guid: 428cb0a5531c4c0468e7a5e0420830e8, type: 3}
+    middlePrefab: {fileID: 1778477674210153887, guid: 7bcea7669932362459d11e17c0d4c742, type: 3}
     bottomPrefab: {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
   - beat: 26
     topPrefab: {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
@@ -51,7 +51,7 @@ MonoBehaviour:
     bottomPrefab: {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
   - beat: 28
     topPrefab: {fileID: 0}
-    middlePrefab: {fileID: 8731475555280379874, guid: 428cb0a5531c4c0468e7a5e0420830e8, type: 3}
+    middlePrefab: {fileID: 1778477674210153887, guid: 7bcea7669932362459d11e17c0d4c742, type: 3}
     bottomPrefab: {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
   - beat: 30
     topPrefab: {fileID: 0}

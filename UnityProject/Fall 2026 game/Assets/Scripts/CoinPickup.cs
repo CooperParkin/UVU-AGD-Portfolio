@@ -1,13 +1,22 @@
 using UnityEngine;
 
 /// <summary>
-/// Coin pickup prefab. Left adds 1 coin to the universal total. All other
-/// directions just destroy it with no effect.
+/// Coin pickup prefab. Left adds 1 coin to the universal total. The other
+/// directions have no effect.
+///
+/// Every input makes the coin fly to the matching Coin point in
+/// PickupWaypointRegistry and despawn when it arrives (see
+/// FlyAndDespawnPickup). The coin is collected instantly on Left; only the
+/// despawn is delayed.
 /// </summary>
-public class CoinPickup : MonoBehaviour, IZoneInteractable
+public class CoinPickup : FlyAndDespawnPickup, IZoneInteractable
 {
+    private static PickupWaypointRegistry Waypoints => PickupWaypointRegistry.Instance;
+
     public void OnLeftAction()
     {
+        if (!TryBeginUse()) return;
+
         if (CoinManager.Instance != null)
         {
             CoinManager.Instance.AddCoins(1);
@@ -17,21 +26,27 @@ public class CoinPickup : MonoBehaviour, IZoneInteractable
             Debug.LogWarning("CoinPickup: No CoinManager found in scene.");
         }
 
-        Destroy(gameObject);
+        ExitTo(Waypoints != null ? Waypoints.CoinLeftPoint : null);
     }
 
     public void OnUpAction()
     {
-        Destroy(gameObject);
+        if (!TryBeginUse()) return;
+
+        ExitTo(Waypoints != null ? Waypoints.CoinUpPoint : null);
     }
 
     public void OnDownAction()
     {
-        Destroy(gameObject);
+        if (!TryBeginUse()) return;
+
+        ExitTo(Waypoints != null ? Waypoints.CoinDownPoint : null);
     }
 
     public void OnRightAction()
     {
-        Destroy(gameObject);
+        if (!TryBeginUse()) return;
+
+        ExitTo(Waypoints != null ? Waypoints.CoinRightPoint : null);
     }
 }

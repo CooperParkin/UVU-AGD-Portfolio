@@ -65,7 +65,10 @@ public class CharacterZone : MonoBehaviour
     private void HandleHazardCollision(Collider other)
     {
         HazardPickup hazard = other.GetComponent<HazardPickup>();
-        if (hazard == null) return;
+
+        // A hazard the player already acted on is just flying to its exit
+        // point, so it shouldn't count as one that slipped through.
+        if (hazard == null || hazard.HasBeenUsed) return;
 
         if (GameOverManager.Instance != null)
         {
