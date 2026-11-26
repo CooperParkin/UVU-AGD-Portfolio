@@ -11,6 +11,12 @@ using UnityEngine;
 /// </summary>
 public class CoinPickup : FlyAndDespawnPickup, IZoneInteractable
 {
+    [Header("Flight Per Destination")]
+    [SerializeField] private ExitFlight leftFlight = new ExitFlight();
+    [SerializeField] private ExitFlight upFlight = new ExitFlight();
+    [SerializeField] private ExitFlight downFlight = new ExitFlight();
+    [SerializeField] private ExitFlight rightFlight = new ExitFlight();
+
     private static PickupWaypointRegistry Waypoints => PickupWaypointRegistry.Instance;
 
     public void OnLeftAction()
@@ -26,27 +32,27 @@ public class CoinPickup : FlyAndDespawnPickup, IZoneInteractable
             Debug.LogWarning("CoinPickup: No CoinManager found in scene.");
         }
 
-        ExitTo(Waypoints != null ? Waypoints.CoinLeftPoint : null);
+        ExitTo(Waypoints != null ? Waypoints.CoinLeftPoint : null, leftFlight);
     }
 
     public void OnUpAction()
     {
         if (!TryBeginUse()) return;
 
-        ExitTo(Waypoints != null ? Waypoints.CoinUpPoint : null);
+        ExitTo(Waypoints != null ? Waypoints.CoinUpPoint : null, upFlight);
     }
 
     public void OnDownAction()
     {
         if (!TryBeginUse()) return;
 
-        ExitTo(Waypoints != null ? Waypoints.CoinDownPoint : null);
+        ExitTo(Waypoints != null ? Waypoints.CoinDownPoint : null, downFlight);
     }
 
     public void OnRightAction()
     {
         if (!TryBeginUse()) return;
 
-        ExitTo(Waypoints != null ? Waypoints.CoinRightPoint : null);
+        ExitTo(Waypoints != null ? Waypoints.CoinRightPoint : null, rightFlight);
     }
 }

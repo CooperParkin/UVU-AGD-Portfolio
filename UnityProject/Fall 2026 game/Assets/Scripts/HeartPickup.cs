@@ -12,8 +12,8 @@ using UnityEngine;
 ///             under gravity.
 /// Left/Right: no heal and no pod. The heart flies to the matching Heart
 ///             exit point in PickupWaypointRegistry and despawns when it
-///             arrives (see FlyAndDespawnPickup). Timing is set by that
-///             class's Exit Seconds and Exit Curve fields.
+///             arrives (see FlyAndDespawnPickup). Each side has its own
+///             seconds and curve (Left Flight / Right Flight).
 ///
 /// Full health divert: if the character this heart is heading for reaches
 /// max health at any point (including already being full when the input
@@ -21,6 +21,9 @@ using UnityEngine;
 /// wherever it is to the Full Up / Full Down point instead, with no heal.
 /// After arriving there it drops under gravity like normal. This only
 /// applies if the matching Full point is assigned in the registry.
+/// The same divert happens if the character's waypoints no longer exist
+/// (they're destroyed along with a dead character), whether that's already
+/// true when the input happens or becomes true mid-flight.
 ///
 /// Waypoints, pods, and full points come from PickupWaypointRegistry, and
 /// characters from CharacterRegistry, so this works on a prefab spawned at
@@ -55,6 +58,10 @@ public class HeartPickup : FlyAndDespawnPickup, IZoneInteractable
     [SerializeField] private float divertSeconds = 0.3f;
     [Tooltip("Easing for the trip to the Full point.")]
     [SerializeField] private AnimationCurve divertCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+
+    [Header("Left / Right Exit Flights")]
+    [SerializeField] private ExitFlight leftFlight = new ExitFlight();
+    [SerializeField] private ExitFlight rightFlight = new ExitFlight();
 
     // rb and mover come from FlyAndDespawnPickup.
     private PodLift heldPod;
@@ -107,7 +114,7 @@ public class HeartPickup : FlyAndDespawnPickup, IZoneInteractable
         if (!TryBeginUse()) return;
 
         PickupWaypointRegistry waypoints = PickupWaypointRegistry.Instance;
-        ExitTo(waypoints != null ? waypoints.HeartLeftPoint : null);
+        ExitTo(waypoints != null ? waypoints.HeartLeftPoint : null, leftFlight);
     }
 
     public void OnRightAction()
@@ -115,16 +122,21 @@ public class HeartPickup : FlyAndDespawnPickup, IZoneInteractable
         if (!TryBeginUse()) return;
 
         PickupWaypointRegistry waypoints = PickupWaypointRegistry.Instance;
-        ExitTo(waypoints != null ? waypoints.HeartRightPoint : null);
+        ExitTo(waypoints != null ? waypoints.HeartRightPoint : null, rightFlight);
     }
 
     private void StartFlight(Transform firstStop, Transform finalStop, Transform fullPoint, PodLift pod, CharacterHealth target)
     {
         if (!TryBeginUse()) return;
 
-        if (firstStop == null || finalStop == null)
+        // Waypoints that belong to a dead character are destroyed with them.
+        // If that's the case and there's a Full point to go to, the heart
+        // just diverts there as if the character were at full health.
+        bool waypointsMissing = firstStop == null || finalStop == null;
+
+        if (waypointsMissing && fullPoint == null)
         {
-            Debug.LogWarning("HeartPickup: waypoints are missing (is there a PickupWaypointRegistry in the scene with all four points assigned?). Healing immediately and destroying instead.");
+            Debug.LogWarning("HeartPickup: waypoints are missing and there is no Full point to divert to (is there a PickupWaypointRegistry in the scene with its points assigned?). Healing immediately and destroying instead.");
             Heal(target);
             Destroy(gameObject);
             return;
@@ -156,7 +168,7 @@ public class HeartPickup : FlyAndDespawnPickup, IZoneInteractable
         // Raise the pod for as long as this heart is heading to its final
         // stop. If the character is already full, this heart is about to be
         // diverted straight away and will never get there, so don't bother.
-        if (pod != null && !ShouldDivert())
+        if (pod != null && !waypointsMissing && !ShouldDivert())
         {
             heldPod = pod;
             heldPod.Lift();
@@ -172,7 +184,20 @@ public class HeartPickup : FlyAndDespawnPickup, IZoneInteractable
 
     private IEnumerator FlightRoutine(Transform firstStop, Transform finalStop)
     {
-        yield return StartCoroutine(FlyTo(firstStop, secondsPerLeg, easeCurve, true));
+        // A missing waypoint (its character died) means divert straight away.
+        if (firstStop == null)
+        {
+            diverted = true;
+        }
+        else
+        {
+            yield return StartCoroutine(FlyTo(firstStop, secondsPerLeg, easeCurve, true));
+        }
+
+        if (!diverted && finalStop == null)
+        {
+            diverted = true;
+        }
 
         if (!diverted)
         {
@@ -210,6 +235,18 @@ public class HeartPickup : FlyAndDespawnPickup, IZoneInteractable
 
         while (elapsed < duration)
         {
+            // The destination was destroyed mid-flight (for example its
+            // character died). Divert if there's a Full point; otherwise
+            // just stop flying.
+            if (destination == null)
+            {
+                if (canDivert && fullStop != null)
+                {
+                    diverted = true;
+                }
+                yield break;
+            }
+
             // Checked before moving each frame, so the cancel takes effect
             // the instant the character reaches max health, even mid-leg.
             if (canDivert && ShouldDivert())
@@ -228,7 +265,10 @@ public class HeartPickup : FlyAndDespawnPickup, IZoneInteractable
             yield return null;
         }
 
-        transform.position = destination.position;
+        if (destination != null)
+        {
+            transform.position = destination.position;
+        }
     }
 
     private bool ShouldDivert()

@@ -56,6 +56,18 @@ public class PickupWaypointRegistry : MonoBehaviour
     [SerializeField] private Transform hazardLeftPoint;
     [SerializeField] private Transform hazardRightPoint;
 
+    [Header("Hazard despawners (pulsed on at the moment a hazard deals its damage; leave them INACTIVE in the scene)")]
+    [Tooltip("Activated briefly when a hazard damages the top character (Up input). Needs a DespawnZone and an AutoDeactivate on it.")]
+    [SerializeField] private GameObject hazardDespawnerUp;
+    [Tooltip("Activated briefly when a hazard damages the bottom character (Down input).")]
+    [SerializeField] private GameObject hazardDespawnerDown;
+
+    [Header("Hazard capsules (deactivated instead of pulsing the despawner when a hazard hits a character on 1 heart)")]
+    [Tooltip("Deactivated when a hazard hits the top character while they have exactly 1 heart.")]
+    [SerializeField] private GameObject upperCapsule;
+    [Tooltip("Deactivated when a hazard hits the bottom character while they have exactly 1 heart.")]
+    [SerializeField] private GameObject lowerCapsule;
+
     [Header("Heart exit points (Left and Right inputs only; Up and Down use the A-D paths above)")]
     [SerializeField] private Transform heartLeftPoint;
     [SerializeField] private Transform heartRightPoint;
@@ -78,6 +90,12 @@ public class PickupWaypointRegistry : MonoBehaviour
     public Transform HazardDownPoint => hazardDownPoint;
     public Transform HazardLeftPoint => hazardLeftPoint;
     public Transform HazardRightPoint => hazardRightPoint;
+
+    public GameObject HazardDespawnerUp => hazardDespawnerUp;
+    public GameObject HazardDespawnerDown => hazardDespawnerDown;
+
+    public GameObject UpperCapsule => upperCapsule;
+    public GameObject LowerCapsule => lowerCapsule;
 
     public Transform HeartLeftPoint => heartLeftPoint;
     public Transform HeartRightPoint => heartRightPoint;

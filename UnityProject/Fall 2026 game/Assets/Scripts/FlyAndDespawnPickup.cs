@@ -21,13 +21,17 @@ using UnityEngine;
 /// </summary>
 public abstract class FlyAndDespawnPickup : MonoBehaviour
 {
-    private static bool warnedMissingPoint;
+    /// <summary>Timing and easing for one exit flight. Pickups hold one of these per destination so each path can feel different.</summary>
+    [System.Serializable]
+    public class ExitFlight
+    {
+        [Tooltip("Seconds the flight to this destination takes.")]
+        public float seconds = 0.3f;
+        [Tooltip("Easing for this flight. Left to right is progress through the flight, bottom to top is how far along the path it is.")]
+        public AnimationCurve curve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+    }
 
-    [Header("Exit Flight")]
-    [Tooltip("Seconds the pickup takes to fly to its destination point before despawning.")]
-    [SerializeField] private float exitSeconds = 0.3f;
-    [Tooltip("Easing for the flight. Left to right is progress through the flight, bottom to top is how far along the path it is.")]
-    [SerializeField] private AnimationCurve exitCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+    private static bool warnedMissingPoint;
 
     // Protected so derived pickups can use them directly. Declaring fields
     // with these same names in a derived class makes Unity report a
@@ -54,8 +58,19 @@ public abstract class FlyAndDespawnPickup : MonoBehaviour
         return true;
     }
 
-    /// <summary>Flies to the destination and despawns on arrival. With no destination, despawns immediately.</summary>
-    protected void ExitTo(Transform destination)
+    /// <summary>
+    /// Flies to the destination and despawns on arrival. With no destination, despawns immediately.
+    /// Optional: onMidpoint is called exactly once when the flight's eased progress first reaches
+    /// midpointProgress (0.5 = halfway there). If the flight ends or is cut short before that, it
+    /// is called at the end instead, so it always runs.
+    /// </summary>
+    protected void ExitTo(Transform destination, ExitFlight flight, System.Action onMidpoint = null, float midpointProgress = 0.5f)
+    {
+        // A missing flight (shouldn't happen) uses plain defaults.
+        ExitTo(destination, flight != null ? flight.seconds : 0.3f, flight != null ? flight.curve : null, onMidpoint, midpointProgress);
+    }
+
+    private void ExitTo(Transform destination, float seconds, AnimationCurve curve, System.Action onMidpoint, float midpointProgress)
     {
         if (destination == null)
         {
@@ -65,6 +80,8 @@ public abstract class FlyAndDespawnPickup : MonoBehaviour
                 Debug.LogWarning("FlyAndDespawnPickup: no exit point is assigned for this input (check PickupWaypointRegistry). Despawning immediately instead.");
             }
 
+            // No flight, so there's no midpoint to wait for.
+            onMidpoint?.Invoke();
             Destroy(gameObject);
             return;
         }
@@ -88,18 +105,19 @@ public abstract class FlyAndDespawnPickup : MonoBehaviour
             rb.isKinematic = true;
         }
 
-        StartCoroutine(ExitRoutine(destination));
+        StartCoroutine(ExitRoutine(destination, seconds, curve, onMidpoint, midpointProgress));
 
         // Disabling this component makes HitZone skip the pickup from now on.
         // The coroutine above keeps running regardless.
         enabled = false;
     }
 
-    private IEnumerator ExitRoutine(Transform destination)
+    private IEnumerator ExitRoutine(Transform destination, float seconds, AnimationCurve curve, System.Action onMidpoint, float midpointProgress)
     {
         Vector3 start = transform.position;
-        float duration = Mathf.Max(0.01f, exitSeconds);
+        float duration = Mathf.Max(0.01f, seconds);
         float elapsed = 0f;
+        bool midpointFired = onMidpoint == null;
 
         while (elapsed < duration)
         {
@@ -108,13 +126,26 @@ public abstract class FlyAndDespawnPickup : MonoBehaviour
 
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
-            float progress = (exitCurve != null && exitCurve.length > 0) ? exitCurve.Evaluate(t) : t;
+            float progress = (curve != null && curve.length > 0) ? curve.Evaluate(t) : t;
 
             // Reads the destination every frame, so if the point moves (for
             // example it's parented to an animated object), the pickup
             // follows it and still arrives exactly on it.
             transform.position = Vector3.LerpUnclamped(start, destination.position, progress);
+
+            if (!midpointFired && progress >= midpointProgress)
+            {
+                midpointFired = true;
+                onMidpoint();
+            }
+
             yield return null;
+        }
+
+        // Flight ended (or was cut short) before the midpoint was reached.
+        if (!midpointFired)
+        {
+            onMidpoint();
         }
 
         Destroy(gameObject);

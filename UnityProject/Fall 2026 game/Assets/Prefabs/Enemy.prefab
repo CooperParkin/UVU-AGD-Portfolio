@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7391590636579432756}
   - component: {fileID: -6819181807308889382}
   - component: {fileID: 3754670555461249821}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,6 +124,26 @@ PrefabInstance:
     - target: {fileID: 117143322671662840, guid: 6b729c882e94fb4459cf38f842b16c1a, type: 3}
       propertyPath: m_Name
       value: enemy 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 117143322671662840, guid: 6b729c882e94fb4459cf38f842b16c1a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 805270167980467176, guid: 6b729c882e94fb4459cf38f842b16c1a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1241376898833447218, guid: 6b729c882e94fb4459cf38f842b16c1a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981703751384128433, guid: 6b729c882e94fb4459cf38f842b16c1a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7978246275849256608, guid: 6b729c882e94fb4459cf38f842b16c1a, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8004774207536093521, guid: 6b729c882e94fb4459cf38f842b16c1a, type: 3}
       propertyPath: m_LocalPosition.x
