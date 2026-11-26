@@ -24,6 +24,10 @@ public class BeatManager : MonoBehaviour
     [Tooltip("Beats per minute of the song.")]
     [SerializeField] private float bpm = 120f;
 
+    [Header("Song Selection")]
+    [Tooltip("If a song was chosen in the main menu (see SongSelector), use its BPM and audio clip instead of the BPM and the Music Source's clip set here. When nothing was chosen, for example when you press Play directly in this scene, the values here are used as normal.")]
+    [SerializeField] private bool useSelectedSong = true;
+
     [Header("Audio Sync (optional but recommended)")]
     [Tooltip("If assigned, this AudioSource is scheduled to start precisely with the beat grid, and the beat clock is driven by the audio hardware clock instead of frame time.")]
     [SerializeField] private AudioSource musicSource;
@@ -55,7 +59,24 @@ public class BeatManager : MonoBehaviour
         }
         Instance = this;
 
+        // Done here in Awake (this script runs first) so everything else
+        // sees the chosen song's BPM from its very first read.
+        ApplySelectedSong();
+
         RecalculateSecPerBeat();
+    }
+
+    private void ApplySelectedSong()
+    {
+        SongLibrary.SongEntry song = SongSelection.Current;
+        if (!useSelectedSong || song == null) return;
+
+        bpm = Mathf.Max(1f, song.bpm);
+
+        if (musicSource != null && song.clip != null)
+        {
+            musicSource.clip = song.clip;
+        }
     }
 
     [Header("Startup Stabilization")]

@@ -5,9 +5,11 @@ using UnityEngine;
 /// - Up damages the top character
 /// - Down damages the bottom character
 /// - Right does nothing (successfully avoided)
-/// - Left triggers game over immediately
+/// - Left starts the princess moving toward the hazard's Left point, then
+///   triggers game over (with its slowdown), both partway through the flight
+///   (see Left Hit Sequence)
 ///
-/// Left and Right apply their effect instantly. Up and Down wait: the hazard
+/// Right applies instantly (it does nothing). Up and Down wait: the hazard
 /// flies to its Hazard point first, and the damage lands when the flight is
 /// "Impact Progress" of the way there (0.5 = halfway, measured after the
 /// flight's curve is applied). At that same moment, the matching hazard
@@ -34,6 +36,16 @@ public class HazardPickup : FlyAndDespawnPickup, IZoneInteractable
     [Tooltip("How far along the Up/Down flight the damage lands and the despawner switches on. 0.5 is halfway. Measured on the eased path, so a curve that starts slow reaches it later in time.")]
     [SerializeField, Range(0.01f, 1f)] private float impactProgress = 0.5f;
 
+    [Header("Left Hit Sequence")]
+    [Tooltip("How far along the Left flight the princess starts moving toward the hazard's Left point. 0.125 is one eighth of the way. Measured on the eased path.")]
+    [SerializeField, Range(0.01f, 1f)] private float princessStartProgress = 0.125f;
+    [Tooltip("How far along the Left flight game over triggers (with the usual slowdown). 0.25 is a quarter of the way.")]
+    [SerializeField, Range(0.01f, 1f)] private float gameOverProgress = 0.25f;
+    [Tooltip("Seconds the princess takes to reach the hazard's Left point.")]
+    [SerializeField, Min(0.01f)] private float princessSeconds = 0.5f;
+    [Tooltip("Easing for the princess's movement. Left to right is progress through the movement, bottom to top is how far along the path she is.")]
+    [SerializeField] private AnimationCurve princessCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+
     [Header("Flight Per Destination")]
     [SerializeField] private ExitFlight upFlight = new ExitFlight();
     [SerializeField] private ExitFlight downFlight = new ExitFlight();
@@ -54,8 +66,7 @@ public class HazardPickup : FlyAndDespawnPickup, IZoneInteractable
         ExitTo(
             Waypoints != null ? Waypoints.HazardUpPoint : null,
             upFlight,
-            () => Impact(1, despawner, capsule),
-            impactProgress);
+            new FlightEvent(impactProgress, () => Impact(1, despawner, capsule)));
     }
 
     public void OnDownAction()
@@ -68,24 +79,28 @@ public class HazardPickup : FlyAndDespawnPickup, IZoneInteractable
         ExitTo(
             Waypoints != null ? Waypoints.HazardDownPoint : null,
             downFlight,
-            () => Impact(2, despawner, capsule),
-            impactProgress);
+            new FlightEvent(impactProgress, () => Impact(2, despawner, capsule)));
     }
 
     public void OnLeftAction()
     {
         if (!TryBeginUse()) return;
 
-        if (GameOverManager.Instance != null)
-        {
-            GameOverManager.Instance.TriggerGameOver("Hit a hazard's Left action.");
-        }
-        else
-        {
-            Debug.LogWarning("HazardPickup: No GameOverManager found in scene.");
-        }
-
-        ExitTo(Waypoints != null ? Waypoints.HazardLeftPoint : null, leftFlight);
+        ExitTo(
+            Waypoints != null ? Waypoints.HazardLeftPoint : null,
+            leftFlight,
+            new FlightEvent(princessStartProgress, StartPrincessMove),
+            new FlightEvent(gameOverProgress, () =>
+            {
+                if (GameOverManager.Instance != null)
+                {
+                    GameOverManager.Instance.TriggerGameOver("Hit a hazard's Left action.");
+                }
+                else
+                {
+                    Debug.LogWarning("HazardPickup: No GameOverManager found in scene.");
+                }
+            }));
     }
 
     public void OnRightAction()
@@ -94,6 +109,19 @@ public class HazardPickup : FlyAndDespawnPickup, IZoneInteractable
 
         // Successfully avoided: no damage, no effect.
         ExitTo(Waypoints != null ? Waypoints.HazardRightPoint : null, rightFlight);
+    }
+
+    /// <summary>
+    /// Starts the princess moving toward the hazard Left point, with this
+    /// hazard's Princess Seconds and Curve. Used by the Left hit sequence, and
+    /// by the middle CharacterZone when a hazard reaches the end of the lane.
+    /// </summary>
+    public void StartPrincessMove()
+    {
+        PickupWaypointRegistry waypoints = Waypoints;
+        if (waypoints == null) return;
+
+        waypoints.FlyPrincessTo(waypoints.HazardLeftPoint, princessSeconds, princessCurve);
     }
 
     // The moment of impact: damage the character, then either switch on the

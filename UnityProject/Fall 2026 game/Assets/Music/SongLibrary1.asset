@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b91d6baf230b6418e69d7dc64c075b, type: 3}
+  m_Name: SongLibrary1
+  m_EditorClassIdentifier: Assembly-CSharp::SongLibrary
+  songs:
+  - title: Hustling
+    clip: {fileID: 8300000, guid: 3fbec0dc7f17e9b41b2810fdd069e3b0, type: 3}
+    bpm: 74
+    difficulty: 0
+    previewStartSeconds: 20
+  - title: Vampire Waker
+    clip: {fileID: 8300000, guid: e55e9208012134947aec2f527d5f6a70, type: 3}
+    bpm: 74
+    difficulty: 0
+    previewStartSeconds: 20
+  - title: Seekers
+    clip: {fileID: 8300000, guid: 4e4d65496ce4677438441778d1f8b6ec, type: 3}
+    bpm: 75
+    difficulty: 0
+    previewStartSeconds: 20
+  - title: Don't Go
+    clip: {fileID: 8300000, guid: 6d8138960e039e34cb1673500cedadaf, type: 3}
+    bpm: 75
+    difficulty: 0
+    previewStartSeconds: 20
+  - title: Get Up
+    clip: {fileID: 8300000, guid: 7aa809c5e6b07554a8ea993b4a31ebd4, type: 3}
+    bpm: 101
+    difficulty: 1
+    previewStartSeconds: 20
+  - title: Snowcone
+    clip: {fileID: 8300000, guid: 56762d8881412b040876f5ab8567cc8b, type: 3}
+    bpm: 101
+    difficulty: 1
+    previewStartSeconds: 20
+  - title: Fleet Fighter
+    clip: {fileID: 8300000, guid: 6b8cb1bae46bdcb40817cbf1657a3770, type: 3}
+    bpm: 144
+    difficulty: 2
+    previewStartSeconds: 20
+  - title: Float Simulator
+    clip: {fileID: 8300000, guid: cb43edbb92bfd11458c4e6b36aac94cf, type: 3}
+    bpm: 142
+    difficulty: 2
+    previewStartSeconds: 20
+  - title: Lemonade
+    clip: {fileID: 8300000, guid: 6b03fe051b2774e43bd58109e953f772, type: 3}
+    bpm: 143
+    difficulty: 2
+    previewStartSeconds: 20

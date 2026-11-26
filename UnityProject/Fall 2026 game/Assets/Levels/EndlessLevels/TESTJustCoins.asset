@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: TESTJustCoins
   m_EditorClassIdentifier: Assembly-CSharp::EndlessLevelData
   topLane:
-    prefabPool:
-    - prefab: {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
-      weight: 1
+    prefabPool: []
     spawnChance: 0.15
   middleLane:
     prefabPool:
@@ -23,8 +21,6 @@ MonoBehaviour:
       weight: 1
     spawnChance: 0.5
   bottomLane:
-    prefabPool:
-    - prefab: {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
-      weight: 1
+    prefabPool: []
     spawnChance: 0.15
   beatsPerSpawnCheck: 1

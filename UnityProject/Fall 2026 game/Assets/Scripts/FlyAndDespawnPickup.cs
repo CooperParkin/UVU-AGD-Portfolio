@@ -58,20 +58,40 @@ public abstract class FlyAndDespawnPickup : MonoBehaviour
         return true;
     }
 
-    /// <summary>
-    /// Flies to the destination and despawns on arrival. With no destination, despawns immediately.
-    /// Optional: onMidpoint is called exactly once when the flight's eased progress first reaches
-    /// midpointProgress (0.5 = halfway there). If the flight ends or is cut short before that, it
-    /// is called at the end instead, so it always runs.
-    /// </summary>
-    protected void ExitTo(Transform destination, ExitFlight flight, System.Action onMidpoint = null, float midpointProgress = 0.5f)
+    /// <summary>An action to run once when a flight's eased progress first reaches a point (0.5 = halfway there).</summary>
+    protected class FlightEvent
     {
-        // A missing flight (shouldn't happen) uses plain defaults.
-        ExitTo(destination, flight != null ? flight.seconds : 0.3f, flight != null ? flight.curve : null, onMidpoint, midpointProgress);
+        public readonly float progress;
+        public readonly System.Action action;
+        public bool fired;
+
+        public FlightEvent(float progress, System.Action action)
+        {
+            this.progress = progress;
+            this.action = action;
+        }
     }
 
-    private void ExitTo(Transform destination, float seconds, AnimationCurve curve, System.Action onMidpoint, float midpointProgress)
+    /// <summary>
+    /// Flies to the destination and despawns on arrival. With no destination, despawns immediately.
+    /// Optional events each run exactly once, when the flight's eased progress first reaches their
+    /// progress value, in order of progress. Any that haven't run by the time the flight ends (or
+    /// is cut short, or never starts) run at the end instead, so they always happen.
+    /// </summary>
+    protected void ExitTo(Transform destination, ExitFlight flight, params FlightEvent[] events)
     {
+        // A missing flight (shouldn't happen) uses plain defaults.
+        ExitTo(destination, flight != null ? flight.seconds : 0.3f, flight != null ? flight.curve : null, events);
+    }
+
+    private void ExitTo(Transform destination, float seconds, AnimationCurve curve, FlightEvent[] events)
+    {
+        // Lowest progress first, so events always run in the order they happen.
+        if (events != null && events.Length > 1)
+        {
+            System.Array.Sort(events, (a, b) => a.progress.CompareTo(b.progress));
+        }
+
         if (destination == null)
         {
             if (!warnedMissingPoint)
@@ -80,8 +100,8 @@ public abstract class FlyAndDespawnPickup : MonoBehaviour
                 Debug.LogWarning("FlyAndDespawnPickup: no exit point is assigned for this input (check PickupWaypointRegistry). Despawning immediately instead.");
             }
 
-            // No flight, so there's no midpoint to wait for.
-            onMidpoint?.Invoke();
+            // No flight, so there's nothing to wait for.
+            RunRemaining(events);
             Destroy(gameObject);
             return;
         }
@@ -105,19 +125,31 @@ public abstract class FlyAndDespawnPickup : MonoBehaviour
             rb.isKinematic = true;
         }
 
-        StartCoroutine(ExitRoutine(destination, seconds, curve, onMidpoint, midpointProgress));
+        StartCoroutine(ExitRoutine(destination, seconds, curve, events));
 
         // Disabling this component makes HitZone skip the pickup from now on.
         // The coroutine above keeps running regardless.
         enabled = false;
     }
 
-    private IEnumerator ExitRoutine(Transform destination, float seconds, AnimationCurve curve, System.Action onMidpoint, float midpointProgress)
+    private static void RunRemaining(FlightEvent[] events)
+    {
+        if (events == null) return;
+
+        foreach (FlightEvent e in events)
+        {
+            if (e.fired) continue;
+
+            e.fired = true;
+            e.action?.Invoke();
+        }
+    }
+
+    private IEnumerator ExitRoutine(Transform destination, float seconds, AnimationCurve curve, FlightEvent[] events)
     {
         Vector3 start = transform.position;
         float duration = Mathf.Max(0.01f, seconds);
         float elapsed = 0f;
-        bool midpointFired = onMidpoint == null;
 
         while (elapsed < duration)
         {
@@ -133,20 +165,23 @@ public abstract class FlyAndDespawnPickup : MonoBehaviour
             // follows it and still arrives exactly on it.
             transform.position = Vector3.LerpUnclamped(start, destination.position, progress);
 
-            if (!midpointFired && progress >= midpointProgress)
+            if (events != null)
             {
-                midpointFired = true;
-                onMidpoint();
+                foreach (FlightEvent e in events)
+                {
+                    if (!e.fired && progress >= e.progress)
+                    {
+                        e.fired = true;
+                        e.action?.Invoke();
+                    }
+                }
             }
 
             yield return null;
         }
 
-        // Flight ended (or was cut short) before the midpoint was reached.
-        if (!midpointFired)
-        {
-            onMidpoint();
-        }
+        // Flight ended (or was cut short) before every event was reached.
+        RunRemaining(events);
 
         Destroy(gameObject);
     }

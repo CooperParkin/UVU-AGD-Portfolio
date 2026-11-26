@@ -6,8 +6,10 @@ using UnityEngine;
 /// place a DespawnZone further along the lane to remove it). For Middle,
 /// triggers game over when
 /// a HazardPickup reaches it (i.e. the player let a hazard get all the way
-/// through without hitting it). Automatic on contact — no player input
-/// involved, unlike HitZone.
+/// through without hitting it), and starts the princess moving, using the
+/// hazard's princess settings. The hazard keeps moving (it isn't
+/// destroyed). Automatic on contact — no player input involved, unlike
+/// HitZone.
 ///
 /// Setup: put this on a GameObject with a 3D Collider set to "Is Trigger",
 /// positioned at the far end of the lane. Set Target Character to match
@@ -70,16 +72,25 @@ public class CharacterZone : MonoBehaviour
         // point, so it shouldn't count as one that slipped through.
         if (hazard == null || hazard.HasBeenUsed) return;
 
-        if (GameOverManager.Instance != null)
-        {
-            GameOverManager.Instance.TriggerGameOver("A hazard reached the end of the middle lane.");
-        }
-        else
+        if (GameOverManager.Instance == null)
         {
             Debug.LogWarning("CharacterZone: No GameOverManager found in scene.");
+            return;
         }
 
-        Destroy(other.gameObject);
+        // A second hazard arriving during the slowdown shouldn't restart the
+        // princess.
+        bool alreadyGameOver = GameOverManager.Instance.IsGameOver;
+
+        GameOverManager.Instance.TriggerGameOver("A hazard reached the end of the middle lane.");
+
+        if (!alreadyGameOver)
+        {
+            hazard.StartPrincessMove();
+        }
+
+        // The hazard is NOT destroyed here. It keeps moving and is slowed
+        // down along with everything else by the game over slowdown.
     }
 
     private CharacterHealth GetTargetCharacter()

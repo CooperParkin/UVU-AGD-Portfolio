@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -68,6 +69,9 @@ public class PickupWaypointRegistry : MonoBehaviour
     [Tooltip("Deactivated when a hazard hits the bottom character while they have exactly 1 heart.")]
     [SerializeField] private GameObject lowerCapsule;
 
+    [Header("Princess (moves toward the hazard's Left point when a hazard is hit with Left)")]
+    [SerializeField] private Transform princess;
+
     [Header("Heart exit points (Left and Right inputs only; Up and Down use the A-D paths above)")]
     [SerializeField] private Transform heartLeftPoint;
     [SerializeField] private Transform heartRightPoint;
@@ -100,6 +104,8 @@ public class PickupWaypointRegistry : MonoBehaviour
     public Transform HeartLeftPoint => heartLeftPoint;
     public Transform HeartRightPoint => heartRightPoint;
 
+    private Coroutine princessRoutine;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -108,5 +114,51 @@ public class PickupWaypointRegistry : MonoBehaviour
             return;
         }
         Instance = this;
+    }
+
+    /// <summary>
+    /// Moves the princess from where she is to the destination over the given
+    /// time and curve. Runs here (not on the hazard) so it carries on after
+    /// the hazard despawns. Uses scaled time, so it slows down with the game
+    /// over slowdown. A new call replaces one that's still running.
+    /// </summary>
+    public void FlyPrincessTo(Transform destination, float seconds, AnimationCurve curve)
+    {
+        if (princess == null || destination == null) return;
+
+        if (princessRoutine != null)
+        {
+            StopCoroutine(princessRoutine);
+        }
+
+        princessRoutine = StartCoroutine(PrincessRoutine(destination, seconds, curve));
+    }
+
+    private IEnumerator PrincessRoutine(Transform destination, float seconds, AnimationCurve curve)
+    {
+        Vector3 start = princess.position;
+        float duration = Mathf.Max(0.01f, seconds);
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            // Stops quietly if either end disappears.
+            if (princess == null || destination == null) break;
+
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            float progress = (curve != null && curve.length > 0) ? curve.Evaluate(t) : t;
+
+            // Reads the destination every frame, like the pickup flights.
+            princess.position = Vector3.LerpUnclamped(start, destination.position, progress);
+            yield return null;
+        }
+
+        if (princess != null && destination != null)
+        {
+            princess.position = destination.position;
+        }
+
+        princessRoutine = null;
     }
 }
