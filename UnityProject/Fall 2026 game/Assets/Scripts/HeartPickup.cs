@@ -10,7 +10,10 @@ using UnityEngine;
 /// Down input: raises podDown, flies to waypoint D then C, heals the bottom
 ///             character on arrival at C, releases podDown, then drops
 ///             under gravity.
-/// Left/Right: destroyed with no heal, as before.
+/// Left/Right: no heal and no pod. The heart flies to the matching Heart
+///             exit point in PickupWaypointRegistry and despawns when it
+///             arrives (see FlyAndDespawnPickup). Timing is set by that
+///             class's Exit Seconds and Exit Curve fields.
 ///
 /// Full health divert: if the character this heart is heading for reaches
 /// max health at any point (including already being full when the input
@@ -35,7 +38,7 @@ using UnityEngine;
 /// The collider should NOT be a trigger, or the heart will fall through
 /// whatever it's meant to land on.
 /// </summary>
-public class HeartPickup : MonoBehaviour, IZoneInteractable
+public class HeartPickup : FlyAndDespawnPickup, IZoneInteractable
 {
     [Header("Healing")]
     [Tooltip("How many hearts are restored when the heart reaches its final stop.")]
@@ -53,9 +56,7 @@ public class HeartPickup : MonoBehaviour, IZoneInteractable
     [Tooltip("Easing for the trip to the Full point.")]
     [SerializeField] private AnimationCurve divertCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
-    private Rigidbody rb;
-    private ScrollingMover mover;
-    private bool hasBeenUsed;
+    // rb and mover come from FlyAndDespawnPickup.
     private PodLift heldPod;
 
     // State of the current flight.
@@ -63,10 +64,10 @@ public class HeartPickup : MonoBehaviour, IZoneInteractable
     private Transform fullStop;
     private bool diverted;
 
-    private void Awake()
+    protected override void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-        mover = GetComponent<ScrollingMover>();
+        // Sets rb and mover.
+        base.Awake();
     }
 
     private void OnDestroy()
@@ -103,20 +104,23 @@ public class HeartPickup : MonoBehaviour, IZoneInteractable
 
     public void OnLeftAction()
     {
-        if (hasBeenUsed) return;
-        Destroy(gameObject);
+        if (!TryBeginUse()) return;
+
+        PickupWaypointRegistry waypoints = PickupWaypointRegistry.Instance;
+        ExitTo(waypoints != null ? waypoints.HeartLeftPoint : null);
     }
 
     public void OnRightAction()
     {
-        if (hasBeenUsed) return;
-        Destroy(gameObject);
+        if (!TryBeginUse()) return;
+
+        PickupWaypointRegistry waypoints = PickupWaypointRegistry.Instance;
+        ExitTo(waypoints != null ? waypoints.HeartRightPoint : null);
     }
 
     private void StartFlight(Transform firstStop, Transform finalStop, Transform fullPoint, PodLift pod, CharacterHealth target)
     {
-        if (hasBeenUsed) return;
-        hasBeenUsed = true;
+        if (!TryBeginUse()) return;
 
         if (firstStop == null || finalStop == null)
         {

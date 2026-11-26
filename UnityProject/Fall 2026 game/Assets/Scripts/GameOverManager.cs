@@ -116,11 +116,20 @@ public class GameOverManager : MonoBehaviour
 
     /// <summary>
     /// Reloads the current scene from scratch, e.g. bound to a restart
-    /// input like spacebar. Unpauses time first in case game over had
-    /// frozen it, so the reloaded scene isn't paused on entry.
+    /// input like spacebar. If the scene has a SceneTransition, it fades to
+    /// black first; time stays frozen during that fade and is restored just
+    /// before the reload. Without one, it unpauses and reloads immediately.
     /// </summary>
     public void RestartScene()
     {
+        if (SceneTransition.Instance != null)
+        {
+            SceneTransition.Instance.ReloadCurrentScene();
+            return;
+        }
+
+        // Unpause first in case game over had frozen time, so the reloaded
+        // scene isn't paused on entry.
         Time.timeScale = 1f;
         Scene activeScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(activeScene.buildIndex);

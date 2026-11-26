@@ -14,7 +14,11 @@ public class HeartsUI : MonoBehaviour
     [SerializeField] private Image[] heartImages;
 
     [Header("Sprites")]
+    [Tooltip("Full sprite used by every element except element 0.")]
     [SerializeField] private Sprite fullHeartSprite;
+    [Tooltip("Full sprite used only by element 0 (the character's own icon). If left empty, element 0 uses the regular full heart sprite instead.")]
+    [SerializeField] private Sprite characterSprite;
+    [Tooltip("Empty sprite used by every element, including element 0.")]
     [SerializeField] private Sprite emptyHeartSprite;
 
     private void OnEnable()
@@ -54,8 +58,20 @@ public class HeartsUI : MonoBehaviour
 
             if (slotExists)
             {
-                heartImages[i].sprite = i < current ? fullHeartSprite : emptyHeartSprite;
+                heartImages[i].sprite = i < current ? GetFullSprite(i) : emptyHeartSprite;
             }
         }
+    }
+
+    // Element 0 gets the character sprite when one is assigned; every other
+    // element (and element 0 with no character sprite) gets the regular one.
+    private Sprite GetFullSprite(int index)
+    {
+        if (index == 0 && characterSprite != null)
+        {
+            return characterSprite;
+        }
+
+        return fullHeartSprite;
     }
 }

@@ -29,8 +29,11 @@ public abstract class FlyAndDespawnPickup : MonoBehaviour
     [Tooltip("Easing for the flight. Left to right is progress through the flight, bottom to top is how far along the path it is.")]
     [SerializeField] private AnimationCurve exitCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
-    private Rigidbody rb;
-    private ScrollingMover mover;
+    // Protected so derived pickups can use them directly. Declaring fields
+    // with these same names in a derived class makes Unity report a
+    // duplicate serialized field.
+    protected Rigidbody rb;
+    protected ScrollingMover mover;
     private bool hasBeenUsed;
 
     /// <summary>True once the player has acted on this pickup. Other systems can use this to ignore a pickup that is mid-flight.</summary>

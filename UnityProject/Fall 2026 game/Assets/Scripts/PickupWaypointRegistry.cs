@@ -9,6 +9,7 @@ using UnityEngine;
 ///   Up input path:   first stop B, final stop A
 ///   Down input path: first stop D, final stop C
 ///   Plus optional pods and full-health points.
+///   Left and Right inputs use one exit point each (like coins and hazards).
 /// Coins and hazards:
 ///   One exit point per input (up, down, left, right). A used coin or
 ///   hazard flies to the point matching the input, then despawns.
@@ -55,6 +56,10 @@ public class PickupWaypointRegistry : MonoBehaviour
     [SerializeField] private Transform hazardLeftPoint;
     [SerializeField] private Transform hazardRightPoint;
 
+    [Header("Heart exit points (Left and Right inputs only; Up and Down use the A-D paths above)")]
+    [SerializeField] private Transform heartLeftPoint;
+    [SerializeField] private Transform heartRightPoint;
+
     public Transform PointA => pointA;
     public Transform PointB => pointB;
     public Transform PointC => pointC;
@@ -73,6 +78,9 @@ public class PickupWaypointRegistry : MonoBehaviour
     public Transform HazardDownPoint => hazardDownPoint;
     public Transform HazardLeftPoint => hazardLeftPoint;
     public Transform HazardRightPoint => hazardRightPoint;
+
+    public Transform HeartLeftPoint => heartLeftPoint;
+    public Transform HeartRightPoint => heartRightPoint;
 
     private void Awake()
     {
