@@ -9,6 +9,11 @@ using UnityEngine.Events;
 /// instead of the raw audio clock. Since dspTime keeps advancing in real
 /// time no matter what, without this adjustment those scripts would keep
 /// scheduling/firing while "paused."
+///
+/// The adjusted clock can also run at a reduced speed (SetClockScale), which
+/// is how slow-motion effects keep the beat clock in step with the game
+/// world instead of letting spawns run ahead of it. Pausing is simply a
+/// clock speed of 0.
 /// </summary>
 [DefaultExecutionOrder(-1000)]
 public class PauseManager : MonoBehaviour
@@ -21,8 +26,23 @@ public class PauseManager : MonoBehaviour
 
     public bool IsPaused { get; private set; }
 
-    private double totalPausedDuration;
-    private double pauseStartDspTime;
+    /// <summary>
+    /// The Time.timeScale restored when the game is un-paused. 1 normally.
+    /// A slow-motion effect that's in progress sets this to its current
+    /// scale, so pausing and un-pausing in the middle of it doesn't jump
+    /// the game back to full speed.
+    /// </summary>
+    public float ResumeTimeScale { get; set; } = 1f;
+
+    /// <summary>The speed the beat clock is currently running at, 1 = real time.</summary>
+    public float ClockScale => clockScale;
+
+    // Total real dsp time that has NOT been counted by the adjusted clock
+    // (time spent paused, plus the lost part of any slow-motion), as of
+    // lastFoldDspTime. Time since then is accounted for on demand.
+    private double lostTime;
+    private double lastFoldDspTime;
+    private float clockScale = 1f;
 
     /// <summary>
     /// The current pause-aware dsp time. Falls back to raw
@@ -40,18 +60,42 @@ public class PauseManager : MonoBehaviour
         }
         Instance = this;
 
+        lastFoldDspTime = AudioSettings.dspTime;
+
         // A freshly loaded scene should never start paused. This is a
         // safety net in case some other scene-transition path (now or
         // added later) navigates away without calling Resume() first.
         Time.timeScale = 1f;
     }
 
+    // While paused the clock doesn't move at all. Otherwise it moves at
+    // clockScale times real time.
+    private double EffectiveClockScale => IsPaused ? 0.0 : clockScale;
+
     private double GetAdjustedDspTime()
     {
-        // While paused, freeze at the adjusted moment we paused at, rather
-        // than letting it keep advancing with the real audio clock.
-        double reference = IsPaused ? pauseStartDspTime : AudioSettings.dspTime;
-        return reference - totalPausedDuration;
+        double now = AudioSettings.dspTime;
+        return now - lostTime - (now - lastFoldDspTime) * (1.0 - EffectiveClockScale);
+    }
+
+    // Settles the time since the last fold into lostTime at the speed that
+    // has been in effect. Called just before that speed changes.
+    private void FoldClock()
+    {
+        double now = AudioSettings.dspTime;
+        lostTime += (now - lastFoldDspTime) * (1.0 - EffectiveClockScale);
+        lastFoldDspTime = now;
+    }
+
+    /// <summary>
+    /// Sets the beat clock's speed (0 to 1, where 1 is real time). Use it
+    /// alongside Time.timeScale and the music's pitch for a slow-motion that
+    /// keeps everything in sync. Has no visible effect while paused.
+    /// </summary>
+    public void SetClockScale(float scale)
+    {
+        FoldClock();
+        clockScale = Mathf.Clamp01(scale);
     }
 
     public void TogglePause()
@@ -63,9 +107,9 @@ public class PauseManager : MonoBehaviour
     public void Pause()
     {
         if (IsPaused) return;
-        IsPaused = true;
 
-        pauseStartDspTime = AudioSettings.dspTime;
+        FoldClock();
+        IsPaused = true;
         Time.timeScale = 0f;
 
         if (BeatManager.Instance != null)
@@ -80,11 +124,9 @@ public class PauseManager : MonoBehaviour
     {
         if (!IsPaused) return;
 
-        double pausedDuration = AudioSettings.dspTime - pauseStartDspTime;
-        totalPausedDuration += pausedDuration;
-
+        FoldClock();
         IsPaused = false;
-        Time.timeScale = 1f;
+        Time.timeScale = ResumeTimeScale;
 
         if (BeatManager.Instance != null)
         {

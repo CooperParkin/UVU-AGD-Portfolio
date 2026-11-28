@@ -4,7 +4,9 @@ using UnityEngine.Events;
 /// <summary>
 /// Endless mode scoring: adds 1 point per beat until game over, then saves
 /// the final score as "last session" and updates the persistent high score
-/// if beaten. Persists across scene reloads and app restarts via
+/// if beaten. When a song picked in the main menu is playing, the high score
+/// is that song's own (see SongHighScores); otherwise it's the single
+/// general high score. Persists across scene reloads and app restarts via
 /// PlayerPrefs.
 ///
 /// To use this only on endless levels, either leave Scoring Enabled
@@ -38,6 +40,14 @@ public class ScoreManager : MonoBehaviour
 
     private bool hasSavedThisRun;
 
+    // The song being played, whose own high score is tracked. Empty when the
+    // scene isn't playing a song picked in the menu (for example when you
+    // press Play directly in a level scene), in which case the single
+    // general high score is used instead, as before.
+    private string songTitle;
+
+    private bool HasSong => !string.IsNullOrEmpty(songTitle);
+
     public int CurrentScore { get; private set; }
     public int LastSessionScore { get; private set; }
     public int HighScore { get; private set; }
@@ -51,7 +61,11 @@ public class ScoreManager : MonoBehaviour
         }
         Instance = this;
 
-        HighScore = PlayerPrefs.GetInt(HighScoreKey, 0);
+        // BeatManager runs first (it has an earlier execution order), so its
+        // song is already decided by now.
+        songTitle = BeatManager.Instance != null ? BeatManager.Instance.ActiveSongTitle : null;
+
+        HighScore = HasSong ? SongHighScores.Get(songTitle) : PlayerPrefs.GetInt(HighScoreKey, 0);
         LastSessionScore = PlayerPrefs.GetInt(LastSessionScoreKey, 0);
     }
 
@@ -100,7 +114,17 @@ public class ScoreManager : MonoBehaviour
         if (CurrentScore > HighScore)
         {
             HighScore = CurrentScore;
-            PlayerPrefs.SetInt(HighScoreKey, HighScore);
+
+            if (HasSong)
+            {
+                // This song's own high score.
+                SongHighScores.TrySet(songTitle, HighScore);
+            }
+            else
+            {
+                PlayerPrefs.SetInt(HighScoreKey, HighScore);
+            }
+
             OnHighScoreChanged?.Invoke(HighScore);
         }
 

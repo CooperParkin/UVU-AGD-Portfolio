@@ -31,6 +31,8 @@ public class SongSelector : MonoBehaviour
     [SerializeField] private TMP_Text bpmText;
     [Tooltip("Optional. Shows the difficulty of the current song (Easy, Medium or Hard).")]
     [SerializeField] private TMP_Text difficultyText;
+    [Tooltip("Optional. Shows the saved high score of the current song.")]
+    [SerializeField] private TMP_Text highScoreText;
 
     [Header("Preview")]
     [Tooltip("Optional. An AudioSource in the menu scene (Play On Awake off) used to preview songs as you scroll. Leave empty for no preview.")]
@@ -234,6 +236,11 @@ public class SongSelector : MonoBehaviour
         if (difficultyText != null)
         {
             difficultyText.text = song != null ? song.difficulty.ToString() : "";
+        }
+
+        if (highScoreText != null)
+        {
+            highScoreText.text = song != null ? $"HIGHSCORE: {SongHighScores.Get(song.title)}" : "";
         }
     }
 }

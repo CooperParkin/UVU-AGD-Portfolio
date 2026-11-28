@@ -66,11 +66,19 @@ public class BeatManager : MonoBehaviour
         RecalculateSecPerBeat();
     }
 
+    /// <summary>
+    /// The title of the song chosen in the main menu that this BeatManager is
+    /// actually playing. Null when the scene is playing its own Inspector song
+    /// (nothing was chosen, or Use Selected Song is off).
+    /// </summary>
+    public string ActiveSongTitle { get; private set; }
+
     private void ApplySelectedSong()
     {
         SongLibrary.SongEntry song = SongSelection.Current;
         if (!useSelectedSong || song == null) return;
 
+        ActiveSongTitle = song.title;
         bpm = Mathf.Max(1f, song.bpm);
 
         if (musicSource != null && song.clip != null)
@@ -159,6 +167,15 @@ public class BeatManager : MonoBehaviour
         if (musicSource != null)
         {
             musicSource.UnPause();
+        }
+    }
+
+    /// <summary>Sets the music's playback speed/pitch (1 = normal). Used by slow-motion effects. Does nothing without a Music Source.</summary>
+    public void SetMusicPitch(float pitch)
+    {
+        if (musicSource != null)
+        {
+            musicSource.pitch = pitch;
         }
     }
 

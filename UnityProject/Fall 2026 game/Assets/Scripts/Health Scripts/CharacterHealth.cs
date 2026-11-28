@@ -10,7 +10,8 @@ public class CharacterHealth : MonoBehaviour
 {
     [Header("Health Settings")]
     [SerializeField] private int maxHearts = 3;
-    [SerializeField] private int currentHearts;
+    [Tooltip("Hearts the character starts with. Always honored, including 0 (starts dead). Clamped to 0 through Max Hearts.")]
+    [SerializeField] private int currentHearts = 3;
 
     [Header("Events")]
     [Tooltip("Invoked whenever health changes. Params: (currentHearts, maxHearts)")]
@@ -25,7 +26,15 @@ public class CharacterHealth : MonoBehaviour
 
     private void Awake()
     {
-        currentHearts = maxHearts;
+        // Starts with exactly what the Inspector says, kept within bounds.
+        currentHearts = Mathf.Clamp(currentHearts, 0, maxHearts);
+    }
+
+    private void OnValidate()
+    {
+        // Keeps the Inspector values sensible while editing.
+        maxHearts = Mathf.Max(1, maxHearts);
+        currentHearts = Mathf.Clamp(currentHearts, 0, maxHearts);
     }
 
     private void Start()

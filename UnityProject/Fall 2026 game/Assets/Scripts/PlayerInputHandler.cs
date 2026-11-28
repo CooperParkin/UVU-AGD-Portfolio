@@ -55,6 +55,30 @@ public class PlayerInputHandler : MonoBehaviour
     private bool leftRequested;
     private bool rightRequested;
 
+    // Per-direction filter. A direction that isn't allowed is ignored
+    // completely: it never counts as a request, so it can't fire events,
+    // reach the HitZone, or cancel out an allowed input pressed at the same
+    // time. All allowed unless something (like the tutorial) restricts them.
+    private bool upAllowed = true;
+    private bool downAllowed = true;
+    private bool leftAllowed = true;
+    private bool rightAllowed = true;
+
+    /// <summary>Restricts which directions are accepted. Any direction passed false is ignored completely until ClearInputRestrictions() is called.</summary>
+    public void SetAllowedInputs(bool up, bool down, bool left, bool right)
+    {
+        upAllowed = up;
+        downAllowed = down;
+        leftAllowed = left;
+        rightAllowed = right;
+    }
+
+    /// <summary>Allows all four directions again.</summary>
+    public void ClearInputRestrictions()
+    {
+        SetAllowedInputs(true, true, true, true);
+    }
+
     private void OnEnable()
     {
         EnhancedTouchSupport.Enable();
@@ -123,10 +147,10 @@ public class PlayerInputHandler : MonoBehaviour
 
         if (!isGameOver && !isPaused)
         {
-            if (Keyboard.current.upArrowKey.wasPressedThisFrame) upRequested = true;
-            if (Keyboard.current.downArrowKey.wasPressedThisFrame) downRequested = true;
-            if (Keyboard.current.leftArrowKey.wasPressedThisFrame) leftRequested = true;
-            if (Keyboard.current.rightArrowKey.wasPressedThisFrame) rightRequested = true;
+            if (upAllowed && Keyboard.current.upArrowKey.wasPressedThisFrame) upRequested = true;
+            if (downAllowed && Keyboard.current.downArrowKey.wasPressedThisFrame) downRequested = true;
+            if (leftAllowed && Keyboard.current.leftArrowKey.wasPressedThisFrame) leftRequested = true;
+            if (rightAllowed && Keyboard.current.rightArrowKey.wasPressedThisFrame) rightRequested = true;
         }
 
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
@@ -168,10 +192,10 @@ public class PlayerInputHandler : MonoBehaviour
 
         switch (direction)
         {
-            case SwipeDirection.Up: upRequested = true; break;
-            case SwipeDirection.Down: downRequested = true; break;
-            case SwipeDirection.Left: leftRequested = true; break;
-            case SwipeDirection.Right: rightRequested = true; break;
+            case SwipeDirection.Up: if (upAllowed) upRequested = true; break;
+            case SwipeDirection.Down: if (downAllowed) downRequested = true; break;
+            case SwipeDirection.Left: if (leftAllowed) leftRequested = true; break;
+            case SwipeDirection.Right: if (rightAllowed) rightRequested = true; break;
         }
     }
 

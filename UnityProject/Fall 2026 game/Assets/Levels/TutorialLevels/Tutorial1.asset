@@ -1,0 +1,334 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89971f719607c97449f81f6f7a87c5a6, type: 3}
+  m_Name: Tutorial1
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialData
+  entries:
+  - beat: 8
+    topPrefab: {fileID: 0}
+    middlePrefab: {fileID: 1778477674210153887, guid: 7bcea7669932362459d11e17c0d4c742, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 1
+      down: 0
+      left: 0
+      right: 0
+    promptText: SWIPE UP (HEAL)
+    promptImage: {fileID: 21300000, guid: 38a3056e7c681de4bb1b7f9b504449ea, type: 3}
+  - beat: 12
+    topPrefab: {fileID: 0}
+    middlePrefab: {fileID: 1778477674210153887, guid: 7bcea7669932362459d11e17c0d4c742, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 1
+      down: 0
+      left: 0
+      right: 0
+    promptText: SWIPE UP (HEAL)
+    promptImage: {fileID: 21300000, guid: 38a3056e7c681de4bb1b7f9b504449ea, type: 3}
+  - beat: 16
+    topPrefab: {fileID: 0}
+    middlePrefab: {fileID: 1778477674210153887, guid: 7bcea7669932362459d11e17c0d4c742, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 0
+      down: 1
+      left: 0
+      right: 0
+    promptText: SWIPE DOWN (HEAL)
+    promptImage: {fileID: 21300000, guid: 8ff594ef3dccd324197bef2d0bd79cf9, type: 3}
+  - beat: 20
+    topPrefab: {fileID: 0}
+    middlePrefab: {fileID: 1778477674210153887, guid: 7bcea7669932362459d11e17c0d4c742, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 0
+      down: 1
+      left: 0
+      right: 0
+    promptText: SWIPE DOWN (HEAL)
+    promptImage: {fileID: 21300000, guid: 8ff594ef3dccd324197bef2d0bd79cf9, type: 3}
+  - beat: 24
+    topPrefab: {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
+    middlePrefab: {fileID: 0}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 1
+      down: 1
+      left: 1
+      right: 1
+    promptText: 
+    promptImage: {fileID: 0}
+  - beat: 28
+    topPrefab: {fileID: 0}
+    middlePrefab: {fileID: 1778477674210153887, guid: 7bcea7669932362459d11e17c0d4c742, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 1
+      down: 0
+      left: 0
+      right: 0
+    promptText: SWIPE UP (HEAL)
+    promptImage: {fileID: 21300000, guid: 38a3056e7c681de4bb1b7f9b504449ea, type: 3}
+  - beat: 30
+    topPrefab: {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
+    middlePrefab: {fileID: 0}
+    bottomPrefab: {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
+    allowedInputs:
+      up: 1
+      down: 1
+      left: 1
+      right: 1
+    promptText: 
+    promptImage: {fileID: 0}
+  - beat: 32
+    topPrefab: {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
+    middlePrefab: {fileID: 1778477674210153887, guid: 7bcea7669932362459d11e17c0d4c742, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 1
+      down: 1
+      left: 0
+      right: 0
+    promptText: CHOOSE (HEAL)
+    promptImage: {fileID: 21300000, guid: 4ee58b922cb775d41b5aa29b62730b7b, type: 3}
+  - beat: 36
+    topPrefab: {fileID: 0}
+    middlePrefab: {fileID: 8731475555280379874, guid: 5025dc124b32b8f47a7132018dbd3572, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 0
+      down: 0
+      left: 1
+      right: 0
+    promptText: SWIPE LEFT (COLLECT)
+    promptImage: {fileID: 21300000, guid: d4bf8e549e3796249a2361f02470a963, type: 3}
+  - beat: 38
+    topPrefab: {fileID: 0}
+    middlePrefab: {fileID: 8731475555280379874, guid: 5025dc124b32b8f47a7132018dbd3572, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 0
+      down: 0
+      left: 1
+      right: 0
+    promptText: SWIPE LEFT (COLLECT)
+    promptImage: {fileID: 21300000, guid: d4bf8e549e3796249a2361f02470a963, type: 3}
+  - beat: 42
+    topPrefab: {fileID: 0}
+    middlePrefab: {fileID: 1778477674210153887, guid: 7bcea7669932362459d11e17c0d4c742, type: 3}
+    bottomPrefab: {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
+    allowedInputs:
+      up: 1
+      down: 1
+      left: 1
+      right: 1
+    promptText: 
+    promptImage: {fileID: 0}
+  - beat: 46
+    topPrefab: {fileID: 0}
+    middlePrefab: {fileID: 1778477674210153887, guid: 7bcea7669932362459d11e17c0d4c742, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 1
+      down: 1
+      left: 1
+      right: 1
+    promptText: 
+    promptImage: {fileID: 0}
+  - beat: 50
+    topPrefab: {fileID: 0}
+    middlePrefab: {fileID: 1778477674210153887, guid: 7bcea7669932362459d11e17c0d4c742, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 1
+      down: 1
+      left: 1
+      right: 1
+    promptText: 
+    promptImage: {fileID: 0}
+  - beat: 52
+    topPrefab: {fileID: 0}
+    middlePrefab: {fileID: 1778477674210153887, guid: 7bcea7669932362459d11e17c0d4c742, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 1
+      down: 1
+      left: 1
+      right: 1
+    promptText: 
+    promptImage: {fileID: 0}
+  - beat: 54
+    topPrefab: {fileID: 0}
+    middlePrefab: {fileID: 1778477674210153887, guid: 7bcea7669932362459d11e17c0d4c742, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 1
+      down: 1
+      left: 1
+      right: 1
+    promptText: 
+    promptImage: {fileID: 0}
+  - beat: 56
+    topPrefab: {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
+    middlePrefab: {fileID: 1778477674210153887, guid: 7bcea7669932362459d11e17c0d4c742, type: 3}
+    bottomPrefab: {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
+    allowedInputs:
+      up: 1
+      down: 1
+      left: 1
+      right: 1
+    promptText: 
+    promptImage: {fileID: 0}
+  - beat: 58
+    topPrefab: {fileID: 0}
+    middlePrefab: {fileID: 8731475555280379874, guid: dac0ee958be4b364e88aeb6ce873e454, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 0
+      down: 0
+      left: 0
+      right: 1
+    promptText: SWIPE RIGHT (DEFLECT)
+    promptImage: {fileID: 21300000, guid: 2761faef615af384280f28a50686dbcd, type: 3}
+  - beat: 62
+    topPrefab: {fileID: 0}
+    middlePrefab: {fileID: 8731475555280379874, guid: dac0ee958be4b364e88aeb6ce873e454, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 0
+      down: 0
+      left: 0
+      right: 1
+    promptText: SWIPE RIGHT (DEFLECT)
+    promptImage: {fileID: 21300000, guid: 2761faef615af384280f28a50686dbcd, type: 3}
+  - beat: 64
+    topPrefab: {fileID: 0}
+    middlePrefab: {fileID: 8731475555280379874, guid: dac0ee958be4b364e88aeb6ce873e454, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 0
+      down: 0
+      left: 0
+      right: 1
+    promptText: SWIPE RIGHT (DEFLECT)
+    promptImage: {fileID: 21300000, guid: 2761faef615af384280f28a50686dbcd, type: 3}
+  - beat: 66
+    topPrefab: {fileID: 0}
+    middlePrefab: {fileID: 8731475555280379874, guid: 5025dc124b32b8f47a7132018dbd3572, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 0
+      down: 0
+      left: 1
+      right: 0
+    promptText: SWIPE LEFT (COLLECT)
+    promptImage: {fileID: 21300000, guid: d4bf8e549e3796249a2361f02470a963, type: 3}
+  - beat: 68
+    topPrefab: {fileID: 0}
+    middlePrefab: {fileID: 8731475555280379874, guid: 5025dc124b32b8f47a7132018dbd3572, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 0
+      down: 0
+      left: 1
+      right: 0
+    promptText: SWIPE LEFT (COLLECT)
+    promptImage: {fileID: 21300000, guid: d4bf8e549e3796249a2361f02470a963, type: 3}
+  - beat: 70
+    topPrefab: {fileID: 0}
+    middlePrefab: {fileID: 1778477674210153887, guid: 7bcea7669932362459d11e17c0d4c742, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 0
+      down: 0
+      left: 1
+      right: 1
+    promptText: WRONG SWIPE? (LOSE ITEM)
+    promptImage: {fileID: 21300000, guid: ccfdb6f04d2eca144a3afcd56bccd4d3, type: 3}
+  - beat: 72
+    topPrefab: {fileID: 0}
+    middlePrefab: {fileID: 8731475555280379874, guid: 5025dc124b32b8f47a7132018dbd3572, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 1
+      down: 1
+      left: 0
+      right: 1
+    promptText: WRONG SWIPE? (LOSE ITEM)
+    promptImage: {fileID: 21300000, guid: 4ee58b922cb775d41b5aa29b62730b7b, type: 3}
+  - beat: 74
+    topPrefab: {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
+    middlePrefab: {fileID: 1778477674210153887, guid: 7bcea7669932362459d11e17c0d4c742, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 0
+      down: 1
+      left: 0
+      right: 0
+    promptText: SWIPE DOWN (NEGLECT)
+    promptImage: {fileID: 21300000, guid: 8ff594ef3dccd324197bef2d0bd79cf9, type: 3}
+  - beat: 76
+    topPrefab: {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
+    middlePrefab: {fileID: 1778477674210153887, guid: 7bcea7669932362459d11e17c0d4c742, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 0
+      down: 1
+      left: 0
+      right: 0
+    promptText: SWIPE DOWN (NEGLECT)
+    promptImage: {fileID: 21300000, guid: 8ff594ef3dccd324197bef2d0bd79cf9, type: 3}
+  - beat: 78
+    topPrefab: {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
+    middlePrefab: {fileID: 0}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 1
+      down: 1
+      left: 1
+      right: 1
+    promptText: 
+    promptImage: {fileID: 0}
+  - beat: 80
+    topPrefab: {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
+    middlePrefab: {fileID: 0}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 1
+      down: 1
+      left: 1
+      right: 1
+    promptText: 
+    promptImage: {fileID: 0}
+  - beat: 82
+    topPrefab: {fileID: 8731475555280379874, guid: ad772c7dcb368b04992f5f83472b5af9, type: 3}
+    middlePrefab: {fileID: 0}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 1
+      down: 1
+      left: 1
+      right: 1
+    promptText: 
+    promptImage: {fileID: 0}
+  - beat: 88
+    topPrefab: {fileID: 0}
+    middlePrefab: {fileID: 2143150929111694879, guid: 8bef75c78b1c0f24b9b6d20a082d9823, type: 3}
+    bottomPrefab: {fileID: 0}
+    allowedInputs:
+      up: 1
+      down: 1
+      left: 1
+      right: 1
+    promptText: 
+    promptImage: {fileID: 0}

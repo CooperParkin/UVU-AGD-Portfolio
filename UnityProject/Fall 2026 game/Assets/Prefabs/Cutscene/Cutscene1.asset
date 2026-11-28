@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560b0fb4a74945148ab49053f8ef640f, type: 3}
+  m_Name: Cutscene1
+  m_EditorClassIdentifier: Assembly-CSharp::CutsceneData
+  elements:
+  - content: {fileID: 4040860854264659363, guid: 7a716be591f41084c9fbf091f2f12478, type: 3}
+    seconds: 4
+  - content: {fileID: 6550947529449078507, guid: 96d4554d1d21dee41a0def1f8a74e49c, type: 3}
+    seconds: 4
+  - content: {fileID: 7621962573311337409, guid: 7288df55646a1d64188cfd5f2fc0ef01, type: 3}
+    seconds: 4
+  - content: {fileID: 3366697554286062585, guid: 2d008e37cc11ebe4185132e923d9e338, type: 3}
+    seconds: 4
+  - content: {fileID: 1005945669712970231, guid: 19a49326559ac2548a810923d3ae2e4c, type: 3}
+    seconds: 4
+  - content: {fileID: 390694930844729926, guid: 4398c945133412a42a9fb2c0e06a0a11, type: 3}
+    seconds: 4
